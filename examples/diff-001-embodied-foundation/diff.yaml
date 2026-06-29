@@ -1,0 +1,121 @@
+# SYNTHETIC EXAMPLE — diff-2026-07-15-001.yaml
+# This diff was constructed to demonstrate the CIP-KGE format.
+# It is not derived from a real interview session.
+
+knowledge_diff:
+  # ─── Identity ──────────────────────────────────────────────────────────────
+  id: "diff-2026-07-15-001"
+  protocol_version: "CIP-KGE-v0.2"
+  session_id: "session-2026-07-15-001"
+  generated_at: "2026-07-15T16:00:00Z"
+
+  # ─── Target node ────────────────────────────────────────────────────────────
+  target_node:
+    path: "02_ontogeny/embodied_foundation"
+    url: "https://syllabus.pyragogy.org/02_ontogeny/embodied_foundation"
+    operation: "modify"
+
+  # ─── Section changes ────────────────────────────────────────────────────────
+  section_changes:
+
+    - section: "definition"
+      operation: "modify"
+      current_text: |
+        The Embodied Foundation is the developmental anchor that grounds early cognition
+        in physical, sensory-motor inquiry rather than screen-mediated abstraction.
+        It establishes the baseline expectation that learning requires physical manipulation
+        and friction.
+      proposed_text: |
+        The Embodied Foundation is the developmental anchor that grounds early cognition
+        in physical, sensory-motor inquiry rather than screen-mediated abstraction.
+        It establishes the baseline expectation that learning requires physical manipulation
+        and friction. This foundation is not a developmental milestone to be reached and
+        left behind — it is a precondition for the learner's capacity to engage
+        AI-mediated friction productively. A learner who has not developed it cannot
+        reliably distinguish between an AI that is correctly resistant and one that is
+        malfunctioning.
+      rationale: |
+        The current definition describes the embodied foundation as a terminal milestone.
+        It does not state why the foundation matters in the context of the rest of the
+        Pyragogy framework — specifically, in the context of AI interaction. The expert
+        argued (exchanges 03–04) that learners without this foundation cannot engage
+        critically with AI-generated resistance: they either accept or reject AI output
+        on the wrong grounds, without the capacity to evaluate it. Making this downstream
+        function explicit in the Definition strengthens the node's connection to the graph
+        and clarifies the cost of bypassing this phase.
+      proposed_wikilinks: []
+
+    - section: "risk"
+      operation: "append"
+      current_text: |
+        If the learner bypasses this foundation and is exposed prematurely to frictionless
+        generative interfaces, the framework treats this as a risk condition: attention,
+        spatial reasoning, frustration tolerance, and embodied problem-solving may become
+        under-practiced rather than actively strengthened.
+      proposed_text: |
+        If the learner bypasses this foundation and is exposed prematurely to frictionless
+        generative interfaces, the framework treats this as a risk condition: attention,
+        spatial reasoning, frustration tolerance, and embodied problem-solving may become
+        under-practiced rather than actively strengthened.
+
+        In the context of AI-mediated learning specifically, the absence of this foundation
+        produces a more specific failure mode: the learner cannot evaluate AI-generated
+        resistance critically. Unlike [[automation_bias]] — which describes over-trust in
+        automation among adults who once had critical capacity — this failure mode is
+        constitutive: the evaluative capacity was never built. The learner does not
+        gradually defer to the AI; they have no internal reference against which to test
+        AI output in the first place.
+      rationale: |
+        The current Risk section describes the risk in isolation — as a developmental gap
+        with no specific connection to AI interaction. The expert argued (exchanges 06–08)
+        that the downstream risk in the Pyragogy context is specific: learners lack the
+        capacity to distinguish correct AI resistance from AI malfunction. The expert
+        also noted a mechanism difference from [[automation_bias]] (exchange-08): the
+        issue is not over-trust in automation, but the absence of a reference model for
+        what legitimate resistance feels like. This distinction is worth making explicit
+        in the Risk section to prevent the node from being read as simply a duplicate
+        of the automation_bias concept.
+      proposed_wikilinks:
+        - "05_systemic_risks/automation_bias"  # already in the node; mention is explicit now
+
+  # ─── Evidence ───────────────────────────────────────────────────────────────
+  evidence:
+    session_exchange_ref: "session-2026-07-15-001/exchange-03,exchange-04,exchange-06,exchange-07,exchange-08"
+    summary: |
+      The expert (anonymized, domain: early childhood development + AI-mediated learning)
+      argued in exchanges 03–04 that the current Definition does not state the downstream
+      function of the embodied foundation — specifically, its role as a prerequisite for
+      productive engagement with AI-generated friction. In exchanges 06–08, the expert
+      argued that the current Risk section describes only the isolated developmental deficit,
+      missing the specific failure mode in AI-mediated contexts: the learner's inability to
+      evaluate AI resistance critically. The expert distinguished this from automation_bias
+      on mechanistic grounds.
+    confidence: "medium"
+    confidence_rationale: |
+      The expert was consistent and clear across multiple exchanges. The downstream function
+      claim (Definition change) is stated directly in exchange-03 and supported in exchange-04,
+      but the expert qualified it as a working hypothesis rather than a verified causal
+      claim (exchange-05). The Risk section additions are supported by exchange-06 and
+      elaborated in 07–08, but the mechanism distinction from automation_bias is the
+      expert's interpretation and has not been verified against the published automation_bias
+      node definition.
+
+  # ─── Pre-review quality check ───────────────────────────────────────────────
+  pre_review_check:
+    passes_minimum_quality: true
+    failure_reason: null
+
+  # ─── Review ─────────────────────────────────────────────────────────────────
+  review_status: "proposed"
+  review_notes:
+    - reviewer: "[EXAMPLE — no real reviewer assigned]"
+      date: "2026-07-15"
+      status_set: "proposed"
+      note: |
+        This is a synthetic example. In a real pipeline, a reviewer would be assigned
+        here and would verify the evidence mapping against the transcript before
+        accepting or rejecting the proposed changes.
+
+  # ─── Merge ──────────────────────────────────────────────────────────────────
+  merge_ready: false
+  pr_url: null

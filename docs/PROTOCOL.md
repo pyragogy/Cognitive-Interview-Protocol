@@ -1,131 +1,102 @@
-# Protocol Specification
+# Protocol Specification — CIP-KGE v0.2
 
-> **Status: Research Draft — v0.1**
+> **Status: Research Draft — v0.2**
 >
-> This document describes the Cognitive Interview Protocol as currently understood.
-> It is a living document. Gaps, open questions, and known limitations are marked explicitly.
-> Do not read this as a stable specification; read it as a record of the current state of thinking.
+> CIP-KGE: Cognitive Interview Protocol for Knowledge Graph Evolution.
+>
+> This version supersedes the generic v0.1 specification. The key difference:
+> v0.1 described a generic methodology for producing knowledge diffs against any knowledge graph.
+> v0.2 is anchored to the Pyragogy Syllabus — a specific graph with a defined node schema —
+> and specifies how diffs produced by this protocol become pull requests on that graph's repository.
+>
+> Gaps and open questions are marked explicitly. Do not read this as a stable specification;
+> read it as the current state of thinking.
+
+---
+
+## System context
+
+CIP-KGE exists to serve one system:
+
+**[Pyragogy Syllabus](https://syllabus.pyragogy.org)** — a living knowledge graph for human-AI learning, cognitive friction, and peer-like co-creation. Source repository: [pyragogy/ai-pedagogy](https://github.com/pyragogy/ai-pedagogy).
+
+The protocol has no purpose outside of producing improvements to that graph. A Knowledge Diff that cannot be merged into `ai-pedagogy` is not within the scope of this protocol.
+
+For the formal structure of a syllabus node, see [`SYLLABUS_SCHEMA.md`](./SYLLABUS_SCHEMA.md).
 
 ---
 
 ## What the protocol is
 
-The Cognitive Interview Protocol (CIP) is a structured methodology for conducting AI-assisted interviews that produce *knowledge diffs* — structured, reviewable proposals for the evolution of a knowledge graph.
+CIP-KGE is a structured methodology for conducting AI-assisted interviews that produce *Knowledge Diffs* — structured, reviewable proposals for the evolution of nodes in the Pyragogy Syllabus knowledge graph.
 
 The protocol has three components:
 
-1. **The interview structure** — how the interview is organized, how questions are sequenced, and what techniques are used to elicit tacit knowledge.
-2. **The output format** — how the results of an interview session are represented as a *knowledge diff*.
-3. **The review process** — how a *knowledge diff* is evaluated, challenged, and either accepted or rejected.
-
-These three components are described below in their current, incomplete form.
+1. **The interview structure** — how a session is organized, which question types are used for which sections, and how evidence is extracted from the transcript.
+2. **The Knowledge Diff format** — how the results of a session are represented as a machine-readable, human-reviewable artifact.
+3. **The pipeline** — how a Knowledge Diff moves from generation to merge, including review criteria and failure conditions at each stage.
 
 ---
 
-## Component 1: The Interview Structure
+## Component 1 — Interview Structure
 
-### Session framing
+See [`INTERVIEW_GUIDE.md`](./INTERVIEW_GUIDE.md) for the full specification.
 
-A CIP session begins with an explicit framing. The interviewee is told:
-
-- The purpose of the session is to produce a *knowledge diff* — a proposal for a change to a specific knowledge graph.
-- The AI system is conducting the interview according to a defined protocol; it is not a free-form conversation.
-- The interviewee may challenge, correct, or refuse any question.
-- Nothing said in the session is automatically incorporated into the knowledge graph; all output is subject to human review.
-
-This framing is not merely procedural. It establishes the epistemic status of the session: the interviewee is a source of evidence, not a passive subject.
-
-### Question types
-
-The following question types are currently under investigation. Their relative effectiveness is an open research question.
-
-**Elicitation questions.** Open questions designed to surface what the interviewee knows, without presupposing the structure of the answer. Example: *"Can you describe how you approach this decision?"*
-
-**Clarification questions.** Questions that ask the interviewee to make a statement more precise. Example: *"When you say 'usually,' what conditions determine the exception?"*
-
-**Socratic questions.** Questions that probe the reasoning behind a claim. Example: *"What would have to be true for that not to hold?"*
-
-**Contrastive questions.** Questions that ask the interviewee to compare the stated claim to an alternative. Example: *"How does this differ from [X]?"*
-
-**Boundary questions.** Questions that ask the interviewee to identify the limits of a claim. Example: *"In what contexts would this not apply?"*
-
-The sequence and balance of question types within a session is not yet specified. This is one of the central open questions of the project.
-
-### Session termination
-
-A session ends when one of the following conditions is met:
-
-- The interviewee indicates that they have nothing more to add.
-- The AI system determines (according to criteria not yet fully defined) that the exchange has produced sufficient evidence for a well-grounded *knowledge diff*.
-- A predefined time or exchange limit is reached.
-
-`[OPEN QUESTION: How should the AI system determine that sufficient evidence has been collected? What criteria apply?]`
+Summary:
+- Every session targets a specific node in the Pyragogy Syllabus, identified by its path (e.g., `02_ontogeny/embodied_foundation`).
+- Every session targets one or more specific sections of that node (e.g., `definition`, `risk`).
+- Five question types are defined (elicitation, clarification, Socratic challenge, contrastive, mapping), each mapped to the sections it primarily serves.
+- The session produces a transcript with numbered exchanges, stored in `interviews/{session_id}/`.
 
 ---
 
-## Component 2: The Output Format
+## Component 2 — Knowledge Diff Format
 
-A *knowledge diff* produced by a CIP session must be a structured document. The following fields are required in v0.1. The format is provisional.
+See [`KNOWLEDGE_DIFF_SPEC.md`](./KNOWLEDGE_DIFF_SPEC.md) for the full specification.
+
+Summary:
+- A Knowledge Diff is a YAML file stored in `diffs/`.
+- It operates at the level of **sections** of a node — not at the level of the node as a whole.
+- It carries provenance (session ID, exchange reference), a proposed change, a rationale, an evidence summary, a confidence level, and a review status.
+- It must pass a pre-review quality check before entering human review.
+
+---
+
+## Component 3 — Pipeline
+
+See [`PIPELINE.md`](./PIPELINE.md) for the full specification.
+
+The pipeline has 10 stages:
 
 ```
-knowledge_diff:
-  id: [unique identifier]
-  session_id: [reference to the source interview session]
-  generated_at: [ISO 8601 timestamp]
-  
-  proposed_change:
-    type: [add | modify | remove | deprecate]
-    target: [identifier of the node or edge in the knowledge graph]
-    description: [human-readable description of the proposed change]
-    
-  evidence:
-    source_exchange: [reference to the specific exchange in the session transcript]
-    summary: [brief description of the evidence for the proposed change]
-    
-  review_status: proposed
-  review_notes: []
+Session Preparation → Interview Session → Evidence Extraction →
+Knowledge Diff Generation → Pre-Review Quality Check →
+Human Review → Markdown Transformation →
+Pull Request (pyragogy/ai-pedagogy) → Syllabus Update → Diff Archival
 ```
 
-This format is a starting point. Known limitations:
-
-- It does not represent changes that span multiple nodes or edges.
-- It does not represent conditional changes (changes that depend on other changes being accepted).
-- It does not represent uncertainty gradients — situations where the evidence supports the change but with varying degrees of confidence.
-
-`[OPEN QUESTION: How should the format represent compound changes? How should it represent uncertainty?]`
+Each stage has defined inputs, outputs, and failure conditions. A stage that does not produce its specified output does not pass to the next stage.
 
 ---
 
-## Component 3: The Review Process
+## Known limitations of v0.2
 
-A *knowledge diff* in `proposed` status must be assigned to a reviewer — a human who was not present in the interview session that generated it. The reviewer has access to:
+### L1 — One session, one diff
+A diff must originate from a single interview session. Synthesizing evidence across sessions is not yet defined. This limits the protocol's ability to produce changes that require multiple expert perspectives.
 
-- The *knowledge diff* itself.
-- The full transcript of the source interview session.
-- The current state of the knowledge graph.
+### L2 — No automated quality validation
+The pre-review quality check (Stage 5) is performed manually by the session author. There is no automated validator. A schema-level validator for the YAML format is a v0.3 candidate.
 
-The reviewer may:
+### L3 — Markdown transformation is manual
+Stage 7 (converting an accepted diff into a Markdown file) is fully manual. The mapping is deterministic but requires a human to execute it. This is intentional in v0.2; it will be a candidate for automation once the format is stable.
 
-- **Accept** the proposed change, with or without modification.
-- **Reject** the proposed change, with a recorded rationale.
-- **Defer** the proposed change, requesting additional evidence or a follow-up interview session.
-- **Escalate** the proposed change for review by a second reviewer.
+### L4 — New section proposal not yet defined
+The protocol handles modification of existing nodes and addition of new nodes, but does not yet define the process for proposing a new *section* of the graph (e.g., adding a `06_institutional_contexts/` directory). This is a structural change at a level above the node.
 
-The criteria by which a reviewer evaluates a *knowledge diff* are not yet formally specified. This is a significant gap.
+### L5 — Review criteria are partially specified
+The criteria by which a reviewer accepts or rejects a diff are defined at a general level in [`KNOWLEDGE_DIFF_SPEC.md`](./KNOWLEDGE_DIFF_SPEC.md) but have not been tested against real review disagreements. Calibration will require pilot sessions.
 
-`[OPEN QUESTION: What are the formal criteria for accepting or rejecting a knowledge diff? How should disagreement between reviewers be resolved?]`
-
----
-
-## Known Limitations of v0.1
-
-This version of the protocol has the following known limitations, which are research priorities for v0.2:
-
-1. The review criteria are unspecified.
-2. The session termination criteria are unspecified.
-3. The output format does not handle compound or conditional changes.
-4. The protocol has not been tested with real interview sessions.
-5. The connection to existing literature on structured knowledge elicitation is incomplete. [VERIFY SOURCE: knowledge elicitation methods in knowledge engineering; expert systems literature]
+`[OPEN QUESTION: How should disagreement between two reviewers on the same diff be resolved?]`
 
 ---
 
@@ -133,4 +104,5 @@ This version of the protocol has the following known limitations, which are rese
 
 | Version | Date | Summary |
 |---|---|---|
-| v0.1 | 2026-06 | Initial draft. Three-component structure established. Format and review process identified as primary open questions. |
+| v0.1 | 2026-06 | Initial draft. Generic protocol for knowledge diff generation. Three-component structure established. |
+| v0.2 | 2026-06 | Anchored to Pyragogy Syllabus. Node schema formalized. Knowledge Diff format redesigned to operate at section level. Full pipeline defined in 10 stages. Interview guide linked to node sections. |

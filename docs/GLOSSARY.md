@@ -1,6 +1,8 @@
 # Glossary
 
-> Defined terms used in the Cognitive Interview Protocol.
+> **CIP-KGE v0.2**
+>
+> Defined terms used in the Cognitive Interview Protocol for Knowledge Graph Evolution.
 >
 > This glossary distinguishes, for each entry, between:
 > - **Project coinage**: terms introduced or defined in a specific sense by this project.
@@ -90,3 +92,61 @@ These states are provisional. The review workflow is an open research question.
 Knowledge that a practitioner possesses but cannot fully articulate — skills, intuitions, and judgments that are acquired through experience and are difficult to transfer through explicit instruction. [VERIFY SOURCE: Polanyi 1966 "The Tacit Dimension" is the canonical reference; Nonaka & Takeuchi 1995 on explicit/tacit knowledge transfer is also relevant]
 
 Surfacing tacit knowledge is one of the primary motivations for using structured interviews rather than direct elicitation methods such as questionnaires or documentation review.
+
+---
+
+## Node
+
+*Project coinage (in this specific sense).*
+
+A node in the Pyragogy Syllabus knowledge graph. Concretely: a single Markdown file in the `content/` directory of [pyragogy/ai-pedagogy](https://github.com/pyragogy/ai-pedagogy), following the seven-section schema defined in [`SYLLABUS_SCHEMA.md`](./SYLLABUS_SCHEMA.md). A node is identified by its path relative to `content/`, without the `.md` extension (e.g., `02_ontogeny/embodied_foundation`).
+
+The term *node* is standard in graph theory and in knowledge graph literature; we use it here in that general sense, with the specific meaning grounded in the Pyragogy Syllabus's Quartz-based structure.
+
+---
+
+## Section
+
+*Project coinage (in this specific sense).*
+
+One of the seven fixed divisions of a syllabus node: `definition`, `use_case`, `human_role`, `ai_role`, `friction`, `risk`, `observable_markers`. A Knowledge Diff operates at the level of a section — not at the level of the node as a whole. A change to a node that does not specify which section it modifies is not a valid Knowledge Diff in CIP-KGE v0.2.
+
+The term *section* is not specific to knowledge graphs; we use it here in the document-structure sense, applied to the node's internal organization.
+
+---
+
+## Backlink
+
+*Established field (in the Quartz/wiki sense).*
+
+A link from a node B to node A that is automatically computed from the presence of a wikilink (`[[A]]`) in node B's content. Quartz computes and displays backlinks automatically. In CIP-KGE, a Knowledge Diff that proposes adding a wikilink to a section must verify that the target node exists — otherwise it creates a dangling reference. A diff that removes a wikilink must consider whether the source node's argument depends on that link.
+
+---
+
+## Merge
+
+*Established field (version control), applied here.*
+
+The act of incorporating an accepted Knowledge Diff into the `pyragogy/ai-pedagogy` repository by merging a pull request into the `main` branch. After merge, Quartz rebuilds the syllabus automatically and the change becomes visible at `syllabus.pyragogy.org`. In CIP-KGE, *merge* is the terminal event of the pipeline — the point at which a Knowledge Diff has produced an observable improvement in the graph.
+
+The term is borrowed from Git and GitHub practice without modification.
+
+---
+
+## Pipeline
+
+*Project coinage.*
+
+The ten-stage process defined in [`PIPELINE.md`](./PIPELINE.md) that transforms an interview session into a syllabus update. The stages are: Session Preparation, Interview Session, Evidence Extraction, Knowledge Diff Generation, Pre-Review Quality Check, Human Review, Markdown Transformation, Pull Request, Syllabus Update, Diff Archival.
+
+The term *pipeline* is common in software engineering and data processing; we use it here in the general sense of a sequential, stage-gated process. The specific ten-stage structure is project coinage.
+
+---
+
+## Evidence Bundle
+
+*Project coinage.*
+
+An intermediate artifact produced in Stage 3 of the pipeline (Evidence Extraction). It maps specific numbered exchanges from a session transcript to specific sections of the target node. The evidence bundle is the input to Knowledge Diff generation; without it, a diff has no traceable connection to the session that produced it.
+
+Stored at `interviews/{session_id}/evidence.md`.

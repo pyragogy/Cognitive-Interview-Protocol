@@ -1,6 +1,6 @@
 # Roadmap
 
-> This document tracks the research milestones and open questions of the Cognitive Interview Protocol.
+> This document tracks the research milestones and open questions of CIP-KGE.
 >
 > A roadmap in a research project is different from a roadmap in a software project.
 > It describes what questions we are trying to answer and in what order — not what features we plan to ship.
@@ -8,79 +8,80 @@
 
 ---
 
-## Current Phase: Protocol Design (v0.1)
+## Phase 1 — Protocol Design (v0.2) ✓ COMPLETE
 
 **Goal.** Establish the basic structure of the protocol — the interview framework, the output format, and the review process — at a level of detail sufficient to conduct the first pilot sessions.
 
-**Status.** In progress.
+**What was built:**
+- [x] Syllabus node schema formalized ([`SYLLABUS_SCHEMA.md`](./SYLLABUS_SCHEMA.md))
+- [x] Knowledge Diff specification, anchored to node sections ([`KNOWLEDGE_DIFF_SPEC.md`](./KNOWLEDGE_DIFF_SPEC.md))
+- [x] Complete 10-stage pipeline with failure conditions ([`PIPELINE.md`](./PIPELINE.md))
+- [x] Interview guide mapping question types to node sections ([`INTERVIEW_GUIDE.md`](./INTERVIEW_GUIDE.md))
+- [x] Annotated synthetic example: `diff-001-embodied-foundation/`
 
-**Open questions this phase must close:**
-
-- [ ] What is the minimum viable specification of the output format (*knowledge diff*) for a pilot session?
-- [ ] What session termination criteria are operationalizable in a first implementation?
-- [ ] What review criteria are sufficient for a first reviewer, even if not yet formally specified?
-
-**Deliverables:**
-- [ ] `PROTOCOL.md` at a level of detail sufficient for a pilot session (in progress)
-- [ ] `GLOSSARY.md` with all terms used in the protocol defined (in progress)
-- [ ] At least one annotated example of a *knowledge diff* in `examples/`
+**Known limitations carried into Phase 2:**
+- Review criteria are partially specified; calibration requires real review disagreements
+- Markdown transformation (Stage 7) is fully manual; no tooling yet
+- The process for proposing new *graph sections* is not yet defined
 
 ---
 
-## Next Phase: Pilot Sessions (v0.2)
+## Phase 2 — Pilot Sessions (v0.2 validation)
 
-**Goal.** Conduct a small number of real interview sessions using the v0.1 protocol and evaluate the results.
+**Goal.** Conduct a small number of real interview sessions using the v0.2 protocol and evaluate whether the pipeline produces Knowledge Diffs that are:
+1. Independently reviewable by someone who was not in the session
+2. Mergeable into `pyragogy/ai-pedagogy` without requiring the reviewer to rewrite the proposal
+3. Descriptive of actual knowledge that improves the node's precision or coverage
 
 **What we are looking for:**
 
-- Does the protocol produce *knowledge diffs* that a reviewer can evaluate independently?
-- Do the question types surface tacit knowledge, or do they produce outputs that could have been obtained through simpler methods?
-- Where does the protocol break down? What situations does it not handle?
+- Do the question types in the Interview Guide surface evidence that maps to specific sections?
+- Where does the pre-review quality check fail most often, and why?
+- Do reviewers disagree? If so, on what grounds?
+- What does the first real PR on `pyragogy/ai-pedagogy` look like?
 
-**Open questions this phase will address:**
+**Milestone targets:**
 
-- What is the actual quality of *knowledge diffs* produced under the protocol?
-- What do reviewers need that the format does not provide?
-- Which question types produce the most useful evidence?
-
-**Deliverables:**
-- [ ] Transcripts of pilot sessions (anonymized where necessary) in `interviews/`
-- [ ] Analysis of pilot session outcomes
-- [ ] Revised `PROTOCOL.md` incorporating findings
+- [ ] First real interview session (with transcript and evidence bundle)
+- [ ] First real Knowledge Diff (passes pre-review quality check)
+- [ ] First real review decision (accepted or rejected, with rationale)
+- [ ] First real PR on `pyragogy/ai-pedagogy` (or first rejection at this stage, with reason)
+- [ ] Post-session analysis: what did the protocol fail to capture?
 
 ---
 
-## Later Phase: Formalization (v0.3+)
+## Phase 3 — Formalization (v0.3)
 
-**Goal.** Move from a descriptive protocol to a formal one — with specified review criteria, a formal output schema, and sufficient documentation to allow independent implementation.
+**Goal.** Move from a descriptive protocol to a formal one — with calibrated review criteria, a validated output schema, and sufficient documentation to allow independent implementation.
 
-**Precondition.** This phase depends on findings from pilot sessions. We do not yet know what a formal specification will look like.
+**Precondition.** This phase depends on findings from Phase 2. We do not yet know what a formal specification will look like.
 
-**Open questions for this phase:**
+**Candidate work items (not yet committed):**
 
-- What are the formal criteria for accepting or rejecting a *knowledge diff*?
-- How should disagreement between reviewers be resolved?
-- Can the protocol be formally specified in a way that allows automated validation of *knowledge diffs*?
-- What does reproducibility mean in this context — and how is it measured? [VERIFY SOURCE: reproducibility criteria in qualitative research; structured elicitation literature]
+- YAML schema validator for Knowledge Diffs
+- Formal review criteria derived from real review disagreements
+- Protocol for proposing new graph sections (not just new nodes)
+- Assessment of whether the Interview Guide question types need revision
+- First working paper: protocol design rationale and Phase 2 findings
 
 ---
 
-## Standing Open Questions
+## Standing open questions
 
-These questions are not assigned to a specific phase. They are ongoing research questions that may be addressed in parallel with the milestones above, or may be deferred to later work.
+These are not assigned to a specific phase. They are ongoing research questions.
 
 - Can AI-assisted interviews surface tacit knowledge that structured questionnaires miss? What evidence would settle this question?
-- What is the relationship between interview technique and knowledge diff quality? Is this measurable?
-- How does the protocol interact with different knowledge graph formats? Are there formats it cannot handle?
-- What is the appropriate scope of a single *knowledge diff*? How do we prevent scope creep (changes that are too broad to be reviewable)?
-- Is there a connection between CIP and existing work on knowledge elicitation in expert systems? [VERIFY SOURCE: systematic review of knowledge elicitation methods needed]
+- What is the appropriate scope of a single Knowledge Diff? The current `scope_too_broad` pre-review check (>3 section changes) is arbitrary — what should it actually be?
+- Is the mechanism distinction between automation_bias and the embodied foundation risk (as described in `diff-001-embodied-foundation`) empirically supportable? [VERIFY SOURCE: automation bias literature; embodied cognition literature]
+- Can the pipeline be partially automated without sacrificing the accountability properties that make the review meaningful?
+- What does it mean for a Knowledge Diff to fail the review — and how do rejected diffs improve the protocol?
 
 ---
 
 ## What is not on this roadmap
 
-- A production implementation of the protocol in any specific software system.
-- Integration with any specific knowledge graph platform.
-- Automated review of *knowledge diffs*.
+- A production implementation of the pipeline in any specific software system
+- Integration with any specific AI platform
+- Automated review of Knowledge Diffs
 
-These are not excluded because they are uninteresting. They are excluded because they are downstream of the methodological questions this project is trying to answer. Building a system before the methodology is stable would be premature.
+These are downstream of the methodological questions this project is trying to answer. Building systems before the methodology is stable would be premature.

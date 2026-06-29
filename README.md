@@ -5,7 +5,7 @@
 **An open research initiative by [Pyragogy](https://pyragogy.org)**
 
 [![Status](https://img.shields.io/badge/status-research%20draft-orange?style=flat-square)](./docs/ROADMAP.md)
-[![Version](https://img.shields.io/badge/version-v0.1-blue?style=flat-square)](./docs/PROTOCOL.md)
+[![Version](https://img.shields.io/badge/version-v0.2-blue?style=flat-square)](./docs/PROTOCOL.md)
 [![License](https://img.shields.io/badge/license-Apache%202.0-green?style=flat-square)](./LICENSE)
 [![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen?style=flat-square)](./CONTRIBUTING.md)
 
@@ -33,6 +33,35 @@ Neither pattern is adequate for environments where the quality of knowledge matt
 **CIP proposes a third path.** Every interview session is treated not as a conversation, but as an evidence-gathering event. Its output is not a corrected document — it is a structured, versioned, human-reviewable proposal for a knowledge change.
 
 We coin the term *knowledge diff* for this output, in a project-specific sense: a bounded, traceable proposal for modifying a knowledge graph, with explicit provenance and review status. The term borrows from version control, not from established knowledge engineering literature.
+
+---
+
+## System target
+
+CIP-KGE exists to serve one specific knowledge graph:
+
+**[Pyragogy Syllabus](https://syllabus.pyragogy.org)** — a living framework for human-AI learning, cognitive friction, and peer-like co-creation. Each node in the graph represents a concept with a defined structure: Definition, Use Case, Human Role, AI Role, Friction, Risk, Observable Markers. The graph's source is in [pyragogy/ai-pedagogy](https://github.com/pyragogy/ai-pedagogy).
+
+A Knowledge Diff produced by this protocol, when accepted, becomes a pull request on that repository. When merged, the graph updates automatically.
+
+> The protocol exists only if it produces observable improvements in the structure of the Pyragogy Syllabus.
+> If it does not improve the syllabus, it is not part of the system.
+
+---
+
+## The pipeline
+
+```
+Interview Session → Evidence Extraction → Knowledge Diff
+        ↓
+Pre-Review Quality Check → Human Review
+        ↓ accepted
+Markdown Transformation → Pull Request (pyragogy/ai-pedagogy)
+        ↓ merged
+Syllabus Update → Diff Archival
+```
+
+Full specification: [`docs/PIPELINE.md`](./docs/PIPELINE.md)
 
 ---
 
@@ -66,20 +95,26 @@ These questions are not rhetorical. The project exists partly because we do not 
 ## Current status
 
 > [!NOTE]
-> **Research Draft — v0.1.** This repository documents the evolution of the protocol itself.
+> **Research Draft — v0.2.** This repository documents the evolution of the protocol itself.
 > The protocol is the *subject* of research, not just its instrument.
 > Everything here is open to discussion, experimentation, and revision.
 > Version numbers mark the history of thinking, not releases of software.
 
-**Phase 1 · Protocol Design** (current)
+**Phase 1 · Protocol Design** (complete)
 - [x] Problem statement
 - [x] Principles with rationale
-- [x] Protocol specification (draft)
+- [x] Syllabus node schema formalized
+- [x] Protocol specification anchored to graph
+- [x] Knowledge Diff spec (section-level format)
+- [x] Complete pipeline (10 stages)
+- [x] Interview guide mapped to node sections
 - [x] Glossary with coinage flagged
-- [ ] First annotated example (*knowledge diff*)
-- [ ] Pilot interview session
+- [x] Annotated synthetic example (`diff-001-embodied-foundation`)
 
 **Phase 2 · Pilot Sessions** — see [`docs/ROADMAP.md`](./docs/ROADMAP.md)
+- [ ] First real interview session
+- [ ] First real Knowledge Diff
+- [ ] First PR on `pyragogy/ai-pedagogy`
 
 ---
 
@@ -94,12 +129,22 @@ These questions are not rhetorical. The project exists partly because we do not 
 │   ├── PROBLEM.md          ← the precise problem this protocol addresses
 │   ├── VISION.md           ← long-term direction and scope
 │   ├── PRINCIPLES.md       ← core commitments, with rationale
-│   ├── PROTOCOL.md         ← the protocol specification (living document)
+│   ├── SYLLABUS_SCHEMA.md  ← formal schema of the syllabus node (7 sections)
+│   ├── PROTOCOL.md         ← protocol specification CIP-KGE v0.2
+│   ├── PIPELINE.md         ← complete 10-stage pipeline
+│   ├── KNOWLEDGE_DIFF_SPEC.md ← Knowledge Diff format (section-level)
+│   ├── INTERVIEW_GUIDE.md  ← question types mapped to node sections
 │   ├── GLOSSARY.md         ← defined terms; coinage flagged explicitly
 │   └── ROADMAP.md          ← research milestones and open questions
 │
-├── interviews/             ← session transcripts and structured outputs
-├── examples/               ← annotated worked examples of knowledge diffs
+├── interviews/             ← session transcripts and evidence bundles
+├── diffs/                  ← Knowledge Diff YAML files (audit trail)
+├── examples/
+│   └── diff-001-embodied-foundation/  ← annotated synthetic example
+│       ├── README.md
+│       ├── transcript.md
+│       ├── evidence.md
+│       └── diff.yaml
 ├── diagrams/               ← visual representations of the protocol flow
 └── papers/                 ← preprints, working papers, submissions
 ```
