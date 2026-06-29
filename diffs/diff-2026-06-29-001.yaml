@@ -1,0 +1,85 @@
+knowledge_diff:
+  id: "diff-2026-06-29-001"
+  protocol_version: "CIP-KGE-v0.2"
+  session_id: "session-2026-06-29-001"
+  generated_at: "2026-06-29T10:45:00Z"
+
+  target_node:
+    path: "05_systemic_risks/automation_bias"
+    url: "https://syllabus.pyragogy.org/05_systemic_risks/automation_bias"
+    operation: "modify"
+
+  section_changes:
+    - section: "observable_markers"
+      operation: "modify"
+      current_text: |
+        Recovery is signaled when the user explicitly queries the AI's logic
+        (e.g., "What are the sources for this claim?"), runs independent tests
+        on the output, or rejects a plausible-sounding but flawed suggestion.
+      proposed_text: |
+        **Onset markers** (bias is active): The learner produces no behavioral
+        artifact of deliberation — no clarifying question, no partial reformulation
+        in their own words, no explicit comparison to prior knowledge — within the
+        session window following delivery of a complex AI output. In logged sessions,
+        an additional onset marker is the learner revising their own pre-AI independent
+        judgment to match the AI's output without documenting a reason for the revision.
+
+        **Recovery markers** (bias has been interrupted): The user explicitly queries
+        the AI's logic (e.g., "What are the sources for this claim?"), runs independent
+        tests on the output, or rejects a plausible-sounding but flawed suggestion.
+      rationale: |
+        The current Observable Markers section contains only recovery markers.
+        It cannot be used to detect automation bias while it is active — only to
+        confirm it was present after the learner has already corrected it.
+
+        This gap is operationally inconsistent with the Risk section, which describes
+        automation bias as potentially producing irreversible outcomes ("incapable of
+        spotting dangerous hallucinations," "severe domain knowledge erosion"). A
+        diagnostic node for an irreversible-outcome risk must provide onset markers,
+        not only recovery markers — otherwise the practitioner always intervenes too
+        late.
+
+        The proposed onset marker is derived from the node's own Human Role section,
+        which defines the bias as the failure of "active verification." A verification
+        behavior that is absent is observable without inference about internal states.
+        The specific operationalization (no clarifying question, no partial reformulation,
+        no explicit comparison) is a hypothesis requiring pilot testing. It is offered
+        as a minimum viable marker, not a validated instrument.
+      proposed_wikilinks: []
+
+  evidence:
+    session_exchange_ref: "session-2026-06-29-001/exchange-01,exchange-02,exchange-03,exchange-04"
+    summary: |
+      Structural analysis of the node identified that the Observable Markers section
+      contains only recovery markers, creating an operational gap for a node whose
+      Risk section describes potentially irreversible outcomes. Onset markers were
+      derived from the node's own Human Role framing ("active verification" -> absence
+      of verification behaviors as onset signal). The derivation is internally
+      consistent with the node. The specific operationalization is a hypothesis,
+      not validated against session data.
+    confidence: "medium"
+    confidence_rationale: |
+      The structural gap is HIGH confidence: verifiable from the node text alone by
+      reading. The proposed onset marker formulation is MEDIUM confidence: internally
+      consistent with the node's own framing but not empirically validated against
+      real sessions. The diff as a whole is rated MEDIUM.
+
+  pre_review_check:
+    passes_minimum_quality: true
+    failure_reason: null
+
+  review_status: "proposed"
+  review_notes:
+    - reviewer: "CIP-KGE validation run 001 (solo-agent)"
+      date: "2026-06-29"
+      status_set: "proposed"
+      note: |
+        Produced by a solo-agent validation run with no external interviewee.
+        Structural gap claim is self-evident from node text.
+        Primary review focus: is the onset marker operationalization
+        ("no behavioral artifact of deliberation within the session window")
+        sufficiently precise for consistent application by different practitioners?
+        If not, the proposed text requires a clarifying qualifier before merge.
+
+  merge_ready: false
+  pr_url: null
