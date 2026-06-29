@@ -19,6 +19,39 @@ A Knowledge Diff that cannot be merged into `ai-pedagogy` is outside the scope o
 
 ---
 
+## Epistemic Invariants (Non-Negotiable Constraints)
+
+These constraints define the minimum conditions under which the Cognitive Interview Protocol (CIP-KGE) remains valid. If any of these are violated, the system ceases to produce reliable knowledge evolution.
+
+### 1. Traceability Constraint
+Every proposed change to the knowledge graph MUST be traceable to a specific evidence fragment from an interview session. No modification is allowed without explicit linkage to observed or stated data.
+
+### 2. Locality of Change
+Knowledge updates MUST operate at the level of individual node sections. Global or cross-node modifications are only allowed as a set of decomposed local patches.
+
+### 3. Separation of Evidence and Interpretation
+Evidence collected during interviews MUST remain distinct from interpretative transformations. The system MUST never conflate raw statements with derived conclusions.
+
+### 4. Bounded Modification Principle
+Each Knowledge Patch MUST modify only one conceptual dimension at a time. If multiple dimensions are affected, the change MUST be split into separate patches.
+
+### 5. Explicit Uncertainty Requirement
+No Knowledge Patch is valid without an explicit confidence level and justification. Uncertainty is a structural component of the system, not optional metadata.
+
+### 6. Failure Visibility Principle
+Failures in the protocol (rejected patches, invalid evidence, weak interviews) MUST be preserved and documented. System learning includes both successful and failed transformations.
+
+#### Purpose of these invariants
+These constraints ensure that CIP-KGE remains:
+- Falsifiable
+- Auditable
+- Decomposable
+- Extensible without loss of rigor
+
+They define the boundary between a structured epistemic system and an unbounded generative process.
+
+---
+
 ## The flow
 
 ```
