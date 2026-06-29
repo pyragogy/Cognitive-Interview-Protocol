@@ -7,7 +7,7 @@
 
 ## What kinds of contribution are useful at this stage
 
-The protocol is at v0.1. It has not been tested in real interview sessions. At this stage, the most valuable contributions are analytical, not implementational.
+The protocol is at v0.2. It has not been tested in real interview sessions. At this stage, the most valuable contributions are analytical, not implementational.
 
 **Critique of the protocol design.** If the interview structure, output format, or review process has a structural flaw, we want to know. A well-reasoned critique — one that identifies a specific problem and explains why it matters — is more useful than a proposed fix.
 

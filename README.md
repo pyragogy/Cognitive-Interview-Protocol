@@ -61,7 +61,7 @@ Markdown Transformation → Pull Request (pyragogy/ai-pedagogy)
 Syllabus Update → Diff Archival
 ```
 
-Full specification: [`docs/PIPELINE.md`](./docs/PIPELINE.md)
+Full specification: [`docs/PROTOCOL.md`](./docs/PROTOCOL.md)
 
 ---
 
@@ -75,7 +75,7 @@ Full specification: [`docs/PIPELINE.md`](./docs/PIPELINE.md)
 | **4** | Interviews generate *knowledge diffs*, not automatic edits | Direct write access for the AI system |
 | **5** | The protocol is model-agnostic | Dependency on any specific platform or API |
 
-Full rationale for each principle: [`docs/PRINCIPLES.md`](./docs/PRINCIPLES.md)
+Full rationale for each principle: [`docs/archive/PRINCIPLES.md`](./docs/archive/PRINCIPLES.md)
 
 ---
 
@@ -126,16 +126,11 @@ These questions are not rhetorical. The project exists partly because we do not 
 ├── CONTRIBUTING.md         ← how to participate
 │
 ├── docs/
-│   ├── PROBLEM.md          ← the precise problem this protocol addresses
-│   ├── VISION.md           ← long-term direction and scope
-│   ├── PRINCIPLES.md       ← core commitments, with rationale
+│   ├── PROTOCOL.md         ← consolidated protocol specification (CIP-KGE v0.2)
 │   ├── SYLLABUS_SCHEMA.md  ← formal schema of the syllabus node (7 sections)
-│   ├── PROTOCOL.md         ← protocol specification CIP-KGE v0.2
-│   ├── PIPELINE.md         ← complete 10-stage pipeline
-│   ├── KNOWLEDGE_DIFF_SPEC.md ← Knowledge Diff format (section-level)
-│   ├── INTERVIEW_GUIDE.md  ← question types mapped to node sections
 │   ├── GLOSSARY.md         ← defined terms; coinage flagged explicitly
-│   └── ROADMAP.md          ← research milestones and open questions
+│   ├── ROADMAP.md          ← research milestones and open questions
+│   └── archive/            ← early designs and design-rationale documents (PROBLEM, PRINCIPLES, etc.)
 │
 ├── interviews/             ← session transcripts and evidence bundles
 ├── diffs/                  ← Knowledge Diff YAML files (audit trail)
