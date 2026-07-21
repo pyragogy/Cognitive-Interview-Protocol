@@ -1,269 +1,248 @@
+# <img src="https://pyragogy.org/images/logo.svg" alt="Pyragogy" width="32"/> Cognitive Interview Protocol v0.2.1
+
 <div align="center">
 
-# Cognitive Interview Protocol
-
-**An open research initiative by [Pyragogy](https://pyragogy.org)**
-
-[![Status](https://img.shields.io/badge/status-research%20draft-orange?style=flat-square)](./docs/ROADMAP.md)
-[![Version](https://img.shields.io/badge/version-v0.2-blue?style=flat-square)](./docs/PROTOCOL.md)
-[![License](https://img.shields.io/badge/license-Apache%202.0-green?style=flat-square)](./LICENSE)
-[![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen?style=flat-square)](./CONTRIBUTING.md)
-
-<br/>
-
-> *How can AI-assisted interviews produce reliable, reviewable proposals*
-> *for the evolution of a knowledge graph?*
-
-<br/>
+[![Status](https://img.shields.io/badge/status-Standby%20%2F%20Open%20Reference%20Architecture-purple?style=flat-square)](docs/ROADMAP.md)
+[![Version](https://img.shields.io/badge/version-v0.2.1-blue?style=flat-square)](docs/PROTOCOL.md)
+[![License](https://img.shields.io/badge/license-MIT-007bff?style=flat-square)](LICENSE)
+[![Contributions](https://img.shields.io/badge/contributions-welcome-28a745?style=flat-square)](CONTRIBUTING.md)
 
 </div>
 
 ---
 
-## The problem
+## 🎯 Elevator Pitch
 
-In most AI-augmented knowledge systems, there are two dominant patterns for how knowledge gets updated.
+The **Cognitive Interview Protocol (CIP)** is a methodology for conducting structured AI-assisted interviews that produce *knowledge diffs* — bounded, human-reviewable proposals for modifying knowledge graphs.
 
-**The model edits directly.** The reasoning behind the change is lost or buried in a log that no human review process is structured to examine.
+**Traditional AI tutoring** treats the AI as an authoritative source of knowledge, either editing the graph directly (losing reasoning) or producing free-form output (lacking structure).
 
-**The model produces free-form output.** A human decides, informally, whether anything in that response is worth keeping. There is no structured artifact. There is no audit trail.
+**CIP flips the paradigm**: The AI acts as a *co-learner facilitator*, using cognitive interview techniques (originally from forensic psychology) to elicit tacit expertise through 4 evidence-gathering phases. Every interview produces a traceable, reviewable knowledge change proposal.
 
-Neither pattern is adequate for environments where the quality of knowledge matters — clinical guidelines, educational curricula, legal interpretation, domain-specific expert systems.
-
-**CIP proposes a third path.** Every interview session is treated not as a conversation, but as an evidence-gathering event. Its output is not a corrected document — it is a structured, versioned, human-reviewable proposal for a knowledge change.
-
-We coin the term *knowledge diff* for this output, in a project-specific sense: a bounded, traceable proposal for modifying a knowledge graph, with explicit provenance and review status. The term borrows from version control, not from established knowledge engineering literature.
+The result isn't an automatic edit — it's a **reviewable proposal** that can be validated, accepted, or rejected by human reviewers. Knowledge evolves through evidence, not authority.
 
 ---
 
-## System target
-
-CIP-KGE exists to serve one specific knowledge graph:
-
-**[Pyragogy Syllabus](https://syllabus.pyragogy.org)** — a living framework for human-AI learning, cognitive friction, and peer-like co-creation. Each node in the graph represents a concept with a defined structure: Definition, Use Case, Human Role, AI Role, Friction, Risk, Observable Markers. The graph's source is in [pyragogy/ai-pedagogy](https://github.com/pyragogy/ai-pedagogy).
-
-A Knowledge Diff produced by this protocol, when accepted, becomes a pull request on that repository. When merged, the graph updates automatically.
-
-> The protocol exists only if it produces observable improvements in the structure of the Pyragogy Syllabus.
-> If it does not improve the syllabus, it is not part of the system.
-
----
-
-## The pipeline
+## 📋 Repository Structure
 
 ```
-Interview Session → Evidence Extraction → Knowledge Diff
-        ↓
-Pre-Review Quality Check → Human Review
-        ↓ accepted
-Markdown Transformation → Pull Request (pyragogy/ai-pedagogy)
-        ↓ merged
-Syllabus Update → Diff Archival
+Cognitive-Interview-Protocol/
+├── README.md                          ← This file — quick start guide
+├── CONTRIBUTING.md                    ← How to contribute (analytical > implementational)
+├── LICENSE                            ← MIT License
+│
+├── 🌐 DOCS (Protocol & Specifications)
+│   ├── PROTOCOL.md                    ← Main protocol spec (10-stage pipeline)
+│   ├── SYLLABUS_SCHEMA.md             ← 7-section node structure
+│   ├── GLOSSARY.md                    ← Terminology with coinage flags
+│   ├── ROADMAP.md                     ← Research milestones & open questions
+│   └── archive/
+│       ├── V0.1/                      ← Early design documents
+│       ├── YAML_SCHEMA.md             ← Knowledge Diff YAML schema (v0.2)
+│       ├── PIPELINE.md                ← 10-stage pipeline details
+│       ├── KNOWLEDGE_DIFF_SPEC.md     ← Diff format specification
+│       ├── INTERVIEW_GUIDE.md         ← 5 question types mapping
+│       ├── PRINCIPLES.md              ← 6 epistemic invariants
+│       ├── PROBLEM.md                 ← Problem statement
+│       └── VISION.md                  ← Long-term direction
+│
+├── 🧪 EXAMPLES (Worked Demonstrations)
+│   └── diff-001-embodied-foundation/  ← Complete annotated example
+│       ├── README.md                  ← Example overview
+│       ├── context.md                 ← Interview flow documentation
+│       ├── review-notes.md            ← Simulated reviewer response
+│       ├── transcript.md              ← Synthetic interview transcript
+│       ├── evidence.md                ← Evidence bundle (exchanges → sections)
+│       └── diff.yaml                  ← Knowledge Diff in spec format
+│
+├── 🔧 WORKFLOWS (n8n Automation)
+│   └── syllabus_co_creation_agent.json
+│       └── AI-assisted interview orchestrator with graph validation
+│
+├── 📝 PROTOCOL (Quick Reference)
+│   └── cognitive_interview_spec.md    ← 4-phase protocol + validation
+│
+├── 📊 ARCHIVES (Audit Trail)
+│   ├── interviews/                    ← Session transcripts & evidence bundles
+│   └── diffs/                         ← Knowledge Diff YAML files (audit trail)
+│
+├── 📈 DIAGRAMS (Visual representations)
+└── 📚 PAPERS (Preprints & working papers)
 ```
-
-Full specification: [`docs/PROTOCOL.md`](./docs/PROTOCOL.md)
 
 ---
 
-## Core principles
+## ⚡ Quick Start for Implementers
 
-| | Principle | What it rules out |
-|---|---|---|
+### 1️⃣ Import the n8n Workflow
+
+```bash
+# Install n8n (if not already)
+npm install --global n8n
+
+# Start n8n server
+n8n start
+```
+
+Then in the n8n UI:
+- Go to **Settings** → **Import**
+- Upload `workflows/syllabus_co_creation_agent.json`
+- Or use CLI: `n8n import:workflow --input=workflows/syllabus_co_creation_agent.json`
+
+### 2️⃣ Configure Credentials
+
+In n8n credentials store:
+- **Add OpenAI API key** (required for GPT-4o-mini interview analysis)
+- **Update credentials reference** in workflow node "Analyze Co-creation & Update Syllabus"
+
+### 3️⃣ Test the Workflow
+
+```bash
+# Send a test session to the webhook
+curl -X POST http://localhost:5678/webhook/test-session \
+  -H "Content-Type: application/json" \
+  -d '{
+    "session_id": "test-001",
+    "topic": "networking_fundamentals",
+    "transcript": "[exchange-01] User explains their experience with networking..."
+  }'
+```
+
+---
+
+## 🔍 Technical Highlights
+
+### 4-Phase Cognitive Interview Protocol
+
+| Phase | Goal | Agent Strategy |
+|-------|------|----------------|
+| **1. Context Reinstatement** | Ground in real-world experience | Ask user to describe practical contexts |
+| **2. Free Recall / Mapping** | Unconstrained mental mapping | Present graph as incomplete; prompt identification of gaps |
+| **3. Perspective Shift** | Test resiliency & edge cases | Ask "what if" and counterfactual questions |
+| **4. Reverse Trace** | Audit prerequisites & directionality | Walk backwards from terminal to root node |
+
+### Graph Consistency Validation (n8n Workflow)
+
+The workflow performs **automated validation** before human review:
+
+| Check | Description | Failure Reason |
+|-------|-------------|----------------|
+| **JSON Schema Compliance** | YAML structure matches schema | `yaml_schema_invalid` |
+| **Required Fields** | All mandatory fields present | `missing_required_fields` |
+| **Status Tags** | Only `existing`, `added`, `modified`, `removed` allowed | `invalid_status` |
+| **Section Changes ≤ 3** | Bounded Modification Principle | `scope_too_broad` |
+| **Circular References** | No dependency cycles in connections | `circular_dependency_detected` |
+| **Orphan Nodes** | All nodes must have connections | `orphan_nodes_detected` |
+| **Prerequisite Validity** | Connection references must exist | `prerequisite_invalid` |
+
+### Knowledge Diff Format
+
+A `Knowledge Diff` is a structured proposal for modifying a knowledge graph node section:
+
+```yaml
+id: "diff-2026-06-29-001"
+protocol_version: "CIP-KGE-v0.2"
+session_id: "session-2026-06-29-001"
+
+target_node:
+  path: "05_systemic_risks/automation_bias"
+  operation: "modify"
+
+section_changes:
+  - section: "observable_markers"
+    operation: "modify"
+    current_text: "Current text..."
+    proposed_text: "New text..."
+    rationale: "Why this change..."
+
+evidence:
+  session_exchange_ref: "session-2026-06-29-001/exchange-01"
+  summary: "What user said..."
+  confidence: "medium"
+  confidence_rationale: "Justification..."
+
+pre_review_check:
+  passes_minimum_quality: true
+```
+
+---
+
+## 📚 Core Principles
+
+| # | Principle | What it rules out |
+|---|-----------|-------------------|
 | **1** | Knowledge evolves through evidence | Model confidence as grounds for change |
-| **2** | Every modification must be independently reviewable | Changes that require access to the original session |
+| **2** | Every modification must be independently reviewable | Changes requiring original session access |
 | **3** | AI proposes; humans validate | Automated incorporation of AI output |
-| **4** | Interviews generate *knowledge diffs*, not automatic edits | Direct write access for the AI system |
-| **5** | The protocol is model-agnostic | Dependency on any specific platform or API |
+| **4** | Interviews generate *knowledge diffs*, not automatic edits | Direct write access for AI system |
+| **5** | Protocol is model-agnostic | Dependency on any specific platform/API |
 
-Full rationale for each principle: [`docs/archive/PRINCIPLES.md`](./docs/archive/PRINCIPLES.md)
+Full rationale: [`docs/archive/PRINCIPLES.md`](docs/archive/PRINCIPLES.md)
 
 ---
 
-## Research questions
+## 🎓 Research Questions
 
-These questions are not rhetorical. The project exists partly because we do not yet have satisfying answers to most of them.
+CIP is an **open research initiative** — these questions drive ongoing development:
 
 - Can AI-assisted interviews surface **tacit expert knowledge** that structured questionnaires miss?
 - How should a *knowledge diff* be represented to remain both **machine-readable** and **human-auditable**?
 - What role should **human review** play — final gate, continuous process, or something else?
-- Which interview techniques (structured, Socratic, contrastive, reflective) produce the **highest-quality proposals**?
+- Which interview techniques produce the **highest-quality proposals**?
 - What does it mean for a knowledge update to be ***reliable*** in this setting?
-- How can the process remain **reproducible** across different AI platforms and knowledge graph formats?
+- How can the process remain **reproducible** across different AI platforms?
+
+Full discussion: [`docs/ROADMAP.md`](docs/ROADMAP.md)
 
 ---
 
-## Current status
+## 📖 Protocol Specification
 
-> [!NOTE]
-> **Research Draft — v0.2.1.** This repository documents the evolution of the protocol itself.
-> The protocol is the *subject* of research, not just its instrument.
-> Everything here is open to discussion, experimentation, and revision.
-> Version numbers mark the history of thinking, not releases of software.
+**Current Version:** v0.2.1  
+**Status:** Standby / Open Reference Architecture  
+**Next Phase:** Pilot Sessions (v0.2 validation)
 
-**Phase 1 · Protocol Design** (complete)
-- [x] Problem statement
-- [x] Principles with rationale
-- [x] Syllabus node schema formalized
-- [x] Protocol specification anchored to graph
-- [x] Knowledge Diff spec (section-level format)
-- [x] Complete pipeline (10 stages)
-- [x] Interview guide mapped to node sections
-- [x] Glossary with coinage flagged
-- [x] Annotated synthetic example (`diff-001-embodied-foundation`)
+The protocol is implemented in two complementary artifacts:
 
-**Phase 1.1 · v0.2.1 Enhancements** (complete)
-- [x] Add v0.1 archive (docs/archive/V0.1/SEED.md)
-- [x] Create YAML schema validator (docs/archive/YAML_SCHEMA.md)
-- [x] Clarify automated vs. manual validation (protocol/cognitive_interview_spec.md)
-- [x] Complete example artifacts (context.md, review-notes.md)
-- [x] Add graph consistency validation to n8n workflow
+1. **[docs/PROTOCOL.md](docs/PROTOCOL.md)** — The 10-stage pipeline specification
+2. **[protocol/cognitive_interview_spec.md](protocol/cognitive_interview_spec.md)** — Quick reference for 4-phase protocol
 
-**Phase 2 · Pilot Sessions** — see [`docs/ROADMAP.md`](./docs/ROADMAP.md)
-- [ ] First real interview session
-- [ ] First real Knowledge Diff
-- [ ] First PR on `pyragogy/ai-pedagogy`
+See also:
+- [docs/SYLLABUS_SCHEMA.md](docs/SYLLABUS_SCHEMA.md) — Node structure (7 sections)
+- [docs/GLOSSARY.md](docs/GLOSSARY.md) — Terminology & definitions
 
 ---
 
-## Repository map
+## 🤝 How to Participate
 
-```
-/
-├── README.md               ← this document
-├── CONTRIBUTING.md         ← how to participate
-│
-├── docs/
-│   ├── PROTOCOL.md         ← consolidated protocol specification (CIP-KGE v0.2)
-│   ├── SYLLABUS_SCHEMA.md  ← formal schema of the syllabus node (7 sections)
-│   ├── GLOSSARY.md         ← defined terms; coinage flagged explicitly
-│   ├── ROADMAP.md          ← research milestones and open questions
-│   └── archive/
-│       ├── V0.1/           ← v0.1 archive (SEED.md)
-│       ├── YAML_SCHEMA.md  ← Knowledge Diff YAML schema (v0.2)
-│       ├── PIPELINE.md     ← 10-stage pipeline specification
-│       ├── KNOWLEDGE_DIFF_SPEC.md ← Knowledge Diff format spec
-│       ├── INTERVIEW_GUIDE.md ← Question types mapping
-│       ├── PRINCIPLES.md   ← 6 epistemic invariants
-│       ├── PROBLEM.md      ← Problem statement
-│       ├── VISION.md       ← Long-term direction
-│       └── README.md       ← Archive overview
-│
-├── interviews/             ← session transcripts and evidence bundles
-├── diffs/                  ← Knowledge Diff YAML files (audit trail)
-├── examples/
-│   └── diff-001-embodied-foundation/  ← annotated synthetic example
-│       ├── README.md       ← example overview
-│       ├── context.md      ← interview flow documentation
-│       ├── context.md      ← interview flow documentation
-│       ├── review-notes.md ← simulated reviewer response
-│       ├── transcript.md   ← interview transcript
-│       ├── evidence.md     ← evidence bundle
-│       └── diff.yaml       ← Knowledge Diff
-├── workflows/              ← n8n workflow definitions
-│   └── syllabus_co_creation_agent.json ← AI-assisted interview orchestrator
-├── diagrams/               ← visual representations of the protocol flow
-└── papers/                 ← preprints, working papers, submissions
-```
+> [!IMPORTANT]  
+> At this stage, the most valuable contributions are **analytical**, not implementational.
 
----
+This is a research project, not a software product. We need:
 
-## Quick Start for Implementers
-
-### Deploying the n8n Workflow
-
-1. Install n8n (https://docs.n8n.io/installation/)
-2. Import `workflows/syllabus_co_creation_agent.json` via n8n UI or CLI
-3. Configure OpenAI API credentials in n8n credentials store
-4. Set up webhook endpoint for session initiation
-5. Test with sample interview data
-
-### Validating Knowledge Diffs
-
-Use the YAML schema validator:
-
-```bash
-# Validate a Knowledge Diff YAML file
-npx json-schema-validator -s docs/archive/YAML_SCHEMA.md -f diffs/diff-YYYY-MM-DD-NNN.yaml
-```
-
-### Running Protocol Validation
-
-The n8n workflow performs automated validation:
-
-1. **JSON Schema Validation** - YAML/YAML structure compliance
-2. **Required Fields Check** - All mandatory fields present
-3. **Status Tag Validation** - `existing`, `added`, `modified`, `removed` only
-4. **Section Changes Limit** - Maximum 3 sections per diff (Bounded Modification)
-5. **Graph Consistency Check** - Circular references, orphan nodes, prerequisite validity
-
-Manual validation (required for review):
-
-1. **Evidence Quality** - Does the interview exchange support the change?
-2. **Section Fit** - Is the change in the correct section?
-3. **Graph Consistency** - Does the change affect wikilinks correctly?
-4. **Rationale Strength** - Can a future reader understand why the change was made?
-
----
-
-## Validation Report
-
-**Latest Automated Validation:** 2025-07-21
-**Validator Version:** CIP-KGE v0.2.1
-**Status:** ✅ PASS
-
-### Validation Summary
-
-| Check | Status | Details |
-|-------|--------|---------|
-| YAML Schema | ✅ PASS | Schema file created at `docs/archive/YAML_SCHEMA.md` |
-| Protocol Clarity | ✅ PASS | Automatic vs. manual validation distinguished |
-| Example Artifacts | ✅ PASS | context.md and review-notes.md added |
-| n8n Workflow | ✅ PASS | Graph consistency validation integrated |
-| README | ✅ PASS | Updated with deployment instructions |
-
-### Validation Commands
-
-```bash
-# Verify all artifacts exist
-test -f docs/archive/V0.1/SEED.md && echo "✅ v0.1 archive" || echo "❌ v0.1 archive"
-test -f docs/archive/YAML_SCHEMA.md && echo "✅ YAML schema" || echo "❌ YAML schema"
-test -f protocol/cognitive_interview_spec.md && echo "✅ Protocol spec" || echo "❌ Protocol spec"
-test -f examples/diff-001-embodied-foundation/context.md && echo "✅ Example context" || echo "❌ Example context"
-test -f examples/diff-001-embodied-foundation/review-notes.md && echo "✅ Example review" || echo "❌ Example review"
-test -f workflows/syllabus_co_creation_agent.json && echo "✅ n8n workflow" || echo "❌ n8n workflow"
-```
-
----
-
-## Long-term vision
-
-To establish an open, reproducible protocol for evidence-based knowledge evolution — one that can be implemented by any AI platform, knowledge graph, or learning ecosystem, and that produces outputs auditable by anyone, without access to the original system.
-
-This is a **methodology question**, not a technology question. The technology will change. The need for rigorous, traceable knowledge evolution will not.
-
----
-
-## How to participate
-
-> [!IMPORTANT]
-> At this stage of the project, the most valuable contributions are **analytical**, not implementational.
-
-This is a research project, not a software product. What we need most right now:
-
-- **🔍 Critique of the protocol design** — identify a specific structural flaw and explain why it matters
-- **📝 Alternative framings** — if you see a better way to pose the research questions, open an issue
-- **🎙️ Interview transcripts** — if you run a session (even a rough one), share the transcript
-- **📚 Literature connections** — point us to relevant work in knowledge engineering, structured elicitation, or epistemology
+- **🔍 Critique of the protocol design** — identify structural flaws and explain why they matter
+- **📝 Alternative framings** — better ways to pose the research questions
+- **🎙️ Interview transcripts** — share real or simulated sessions (even if they didn't go well)
+- **📚 Literature connections** — point to relevant work in knowledge engineering or epistemology
 - **⚠️ Counterexamples** — cases where the approach would not work
 
-The full contribution guide is in [`CONTRIBUTING.md`](./CONTRIBUTING.md).
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for full guidelines.
 
-To start: **[open an issue](../../issues/new)** and describe what you want to discuss, challenge, or contribute.
+**→ [Open an issue](../../issues/new) to start a discussion**
 
 ---
 
-<div align="center">
+## 🏛️ Credits
 
-Developed as part of the [Pyragogy](https://pyragogy.org) research initiative · [Apache 2.0](./LICENSE)
+**Author:** Fabrizio Terzi  
+**Affiliation:** Pyragogy ([https://pyragogy.org](https://pyragogy.org))  
+**License:** [MIT](LICENSE)
+
+---
+
+<div align="center" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e1e4e8;">
+
+**Cognitive Interview Protocol** — Evidence-based knowledge evolution for AI-augmented learning  
+© 2026 Pyragogy · [Apache 2.0](LICENSE)
 
 </div>
