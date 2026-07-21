@@ -1,0 +1,246 @@
+{
+  "name": "Syllabus Co-creation Agent (Cognitive Interview Edition)",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "start-session",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [-160, 400],
+      "id": "webhook-trigger-id",
+      "name": "Session Start Webhook"
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f1a2b3c4-1111-4a2b-9c3d-000000000001",
+              "name": "baseline_syllabus",
+              "value": "{\n  \"syllabus_id\": \"syl_intro_networking_101\",\n  \"version\": 1,\n  \"nodes\": [\n    { \"id\": \"osi_model\", \"label\": \"OSI Model\", \"description\": \"Seven-layer conceptual model for network communication.\", \"status\": \"existing\", \"tags\": [\"fundamentals\"] },\n    { \"id\": \"tcp_ip\", \"label\": \"TCP/IP Suite\", \"description\": \"Practical four-layer protocol suite used on the real internet.\", \"status\": \"existing\", \"tags\": [\"fundamentals\", \"protocols\"] },\n    { \"id\": \"subnetting\", \"label\": \"Subnetting\", \"description\": \"Dividing an IP network into smaller routable sub-networks.\", \"status\": \"existing\", \"tags\": [\"addressing\"] }\n  ],\n  \"connections\": [\n    { \"from\": \"osi_model\", \"to\": \"tcp_ip\", \"relationship\": \"related\", \"status\": \"existing\" },\n    { \"from\": \"tcp_ip\", \"to\": \"subnetting\", \"relationship\": \"prerequisite\", \"status\": \"existing\" }\n  ],\n  \"change_log\": [],\n  \"open_gaps\": []\n}",
+              "type": "object"
+            },
+            {
+              "id": "f1a2b3c4-1111-4a2b-9c3d-000000000002",
+              "name": "session_id",
+              "value": "={{ $json.session_id ?? $json.body?.session_id ?? $execution.id }}",
+              "type": "string"
+            },
+            {
+              "id": "f1a2b3c4-1111-4a2b-9c3d-000000000003",
+              "name": "topic",
+              "value": "={{ $json.topic ?? $json.body?.topic ?? 'untitled-topic' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [40, 400],
+      "id": "load-draft-syllabus-id",
+      "name": "Load Draft Syllabus"
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "duplicateItem": false,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "eb05da77-0001",
+              "name": "agentName",
+              "value": "Pyragogical Cognitive Interviewer",
+              "type": "string"
+            },
+            {
+              "id": "37cf0f28-0002",
+              "name": "welcomeMessage",
+              "value": "Hi, I'm your Pyragogical Co-learning Partner. I'm holding an incomplete knowledge map of this topic. I don't intend to lecture you; I'm here to conduct a cognitive interview so you can correct, expand, and restructure this map with me. Shall we begin with your experience on this topic?",
+              "type": "string"
+            },
+            {
+              "id": "dbe0d0dd-0003",
+              "name": "systemPrompt",
+              "value": "=You are the Pyragogical Cognitive Interviewer. Your objective is to collaborate with the user to map and restructure a knowledge graph (Syllabus) based on an initial baseline.\n\nUse the 4 adapted Cognitive Interview phases:\n1. REINSTATING CONTEXT: Ask the user to describe the real-world context where they apply or learned these concepts.\n2. FREE RECALL / MAPPING: Allow the user to explain what is missing or wrong without interrupting or lecturing.\n3. PERSPECTIVE SHIFT: Ask adversarial or alternative perspective questions ('If we drop X, what breaks in Y?').\n4. REVERSE ORDER: Trace concept dependencies backwards to verify prerequisites.\n\nRULES:\n- Do NOT lecture.\n- Accept user corrections and adopt their domain terminology.\n- Actively extract gaps ('open_gaps') when uncertainty arises.\n\nBaseline Syllabus: {{ JSON.stringify($json.baseline_syllabus) }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [260, 400],
+      "id": "prepare-syllabus-agent-id",
+      "name": "Prepare Syllabus Agent"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [480, 280],
+      "id": "respond-webhook-id",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "resume": "webhook",
+        "webhookId": "trugen-session-callback",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [700, 280],
+      "id": "wait-for-session-id",
+      "name": "Wait for TruGen Session Complete"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [940, 400],
+      "id": "merge-baseline-transcript-id",
+      "name": "Merge Baseline + Transcript"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "gpt-4o-mini"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are the syllabus co-creation analyst. Analyze the transcript between the Cognitive Interviewer agent and the user.\n\nRead the baseline Syllabus JSON:\n{{ JSON.stringify($json.baseline_syllabus) }}\n\nAnd the session transcript:\n{{ $json.transcript ?? $json.body?.transcript }}\n\nIdentify all structural updates proposed, agreed upon, or corrected. Output strictly ONE valid JSON matching the target schema. Use status tags: 'existing', 'added', 'removed', 'modified'.",
+              "role": "system"
+            },
+            {
+              "content": "=baseline_syllabus:\n{{ JSON.stringify($json.baseline_syllabus) }}\n\ntranscript:\n{{ $json.transcript ?? $json.body?.transcript }}",
+              "role": "user"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [1160, 400],
+      "id": "analyze-cocreation-id",
+      "name": "Analyze Co-creation & Update Syllabus",
+      "credentials": {
+        "openAiApi": {
+          "id": "REPLACE_WITH_CREDENTIAL_ID",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "let rawContent = $json.message?.content || $json.output || $json.text || '';\nif (typeof rawContent === 'object') {\n  rawContent = JSON.stringify(rawContent);\n}\n\nrawContent = rawContent.replace(/```json/g, '').replace(/```/g, '').trim();\n\nlet candidate;\nlet errors = [];\n\ntry {\n  candidate = JSON.parse(rawContent);\n} catch (e) {\n  errors.push('JSON Parsing failed: ' + e.message);\n}\n\nif (candidate) {\n  const REQUIRED_KEYS = ['syllabus_id', 'version', 'nodes', 'connections', 'change_log', 'open_gaps'];\n  REQUIRED_KEYS.forEach(k => {\n    if (!(k in candidate)) errors.push(`Missing top-level key: ${k}`);\n  });\n\n  if (Array.isArray(candidate.nodes)) {\n    candidate.nodes.forEach((n, idx) => {\n      if (!n.id) errors.push(`Node at index ${idx} is missing an id`);\n      if (!['existing', 'added', 'removed', 'modified'].includes(n.status)) {\n        errors.push(`Node ${n.id || idx} has invalid status: ${n.status}`);\n      }\n    });\n  } else {\n    errors.push('nodes field must be an array');\n  }\n}\n\nreturn {\n  json: {\n    ...$json,\n    updated_syllabus: candidate || null,\n    _validation: {\n      isValid: errors.length === 0,\n      errors: errors\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1380, 400],
+      "id": "validate-syllabus-json-id",
+      "name": "Validate Syllabus JSON"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Graph Consistency Validator\n// Checks for: circular references, orphan nodes, invalid prerequisite links\n\nconst syllabus = $json.updated_syllabus || $json;\nconst errors = [];\nconst warnings = [];\n\nif (!syllabus.nodes || !Array.isArray(syllabus.nodes)) {\n  errors.push('nodes field is required and must be an array');\n  return { json: { ...$json, graph_consistency: { isValid: false, errors, warnings } } };\n}\n\nif (!syllabus.connections || !Array.isArray(syllabus.connections)) {\n  errors.push('connections field is required and must be an array');\n  return { json: { ...$json, graph_consistency: { isValid: false, errors, warnings } } };\n}\n\nconst nodeIds = new Set(syllabus.nodes.map(n => n.id));\n\n// Check 1: Verify all connection references point to existing nodes\nsyllabus.connections.forEach((conn, idx) => {\n  if (!nodeIds.has(conn.from)) {\n    errors.push(`Connection[${idx}]: Reference to non-existent node: '${conn.from}' (from field)`);\n  }\n  if (!nodeIds.has(conn.to)) {\n    errors.push(`Connection[${idx}]: Reference to non-existent node: '${conn.to}' (to field)`);\n  }\n});\n\n// Check 2: Detect circular dependencies (simple cycle detection)\nconst adjacencyList = new Map();\nsyllabus.connections.forEach(conn => {\n  if (!adjacencyList.has(conn.from)) {\n    adjacencyList.set(conn.from, []);\n  }\n  adjacencyList.get(conn.from).push(conn.to);\n});\n\nconst visited = new Set();\nconst recursionStack = new Set();\nlet hasCircularRef = false;\n\nfunction detectCycle(nodeId) {\n  visited.add(nodeId);\n  recursionStack.add(nodeId);\n  \n  const neighbors = adjacencyList.get(nodeId) || [];\n  for (const neighbor of neighbors) {\n    if (!visited.has(neighbor)) {\n      if (detectCycle(neighbor)) {\n        hasCircularRef = true;\n        return true;\n      }\n    } else if (recursionStack.has(neighbor)) {\n      hasCircularRef = true;\n      return true;\n    }\n  }\n  \n  recursionStack.delete(nodeId);\n  return false;\n}\n\nfor (const nodeId of nodeIds) {\n  if (!visited.has(nodeId)) {\n    detectCycle(nodeId);\n  }\n}\n\nif (hasCircularRef) {\n  errors.push('Graph contains circular dependencies in connections');\n}\n\n// Check 3: Detect orphan nodes (nodes with no connections)\nconst connectedNodes = new Set();\nsyllabus.connections.forEach(conn => {\n  connectedNodes.add(conn.from);\n  connectedNodes.add(conn.to);\n});\n\nconst orphanNodes = [...nodeIds].filter(id => !connectedNodes.has(id));\nif (orphanNodes.length > 0) {\n  warnings.push(`Orphan nodes detected (no connections): ${orphanNodes.join(', ')}`);\n}\n\nreturn {\n  json: {\n    ...$json,\n    graph_consistency: {\n      isValid: errors.length === 0,\n      errors,\n      warnings,\n      nodeCount: nodeIds.size,\n      connectionCount: syllabus.connections.length,\n      orphanNodes\n    }\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1600, 400],
+      "id": "graph-consistency-validator-id",
+      "name": "Graph Consistency Validator"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "type": "mix"
+          },
+          "conditions": [
+            {
+              "id": "cond-graph-valid",
+              "leftValue": "={{ $json.graph_consistency.isValid }}",
+              "transitionProperty": "equal",
+              "rightValue": true,
+              "type": "boolean"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [1840, 400],
+      "id": "graph-valid-if-id",
+      "name": "Graph Consistency Check?"
+    },
+    {
+      "parameters": {
+        "jsCode": "const updatedSyllabus = $json.updated_syllabus;\nreturn {\n  json: {\n    status: 'success',\n    message: 'Syllabus updated and stored successfully.',\n    syllabus_id: updatedSyllabus.syllabus_id,\n    version: updatedSyllabus.version + 1,\n    nodesCount: updatedSyllabus.nodes.length,\n    connectionsCount: updatedSyllabus.connections.length,\n    persistedAt: new Date().toISOString(),\n    data: updatedSyllabus\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2080, 300],
+      "id": "persist-success-id",
+      "name": "Persist Updated Syllabus"
+    },
+    {
+      "parameters": {
+        "jsCode": "const graphConsistency = $json.graph_consistency;\nreturn {\n  json: {\n    status: 'error',\n    error_type: 'GRAPH_CONSISTENCY_FAILED',\n    details: {\n      errors: graphConsistency.errors,\n      warnings: graphConsistency.warnings,\n      nodeCount: graphConsistency.nodeCount,\n      connectionCount: graphConsistency.connectionCount,\n      orphanNodes: graphConsistency.orphanNodes\n    },\n    timestamp: new Date().toISOString()\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2080, 500],
+      "id": "graph-consistency-failed-id",
+      "name": "Graph Consistency Failed Log"
+    },
+    {
+      "parameters": {
+        "jsCode": "const validation = $json._validation;\nreturn {\n  json: {\n    status: 'error',\n    error_type: 'SCHEMA_VALIDATION_FAILED',\n    details: validation.errors,\n    timestamp: new Date().toISOString()\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2300, 600],
+      "id": "validation-failed-id",
+      "name": "Schema Validation Failed Log"
+    }
+  ],
+  "connections": {
+    "Session Start Webhook": { "main": [[{ "node": "Load Draft Syllabus", "type": "main", "index": 0 }]] },
+    "Load Draft Syllabus": { "main": [[{ "node": "Prepare Syllabus Agent", "type": "main", "index": 0 }]] },
+    "Prepare Syllabus Agent": { "main": [[{ "node": "Respond to Webhook", "type": "main", "index": 0 }, { "node": "Merge Baseline + Transcript", "type": "main", "index": 1 }]] },
+    "Respond to Webhook": { "main": [[{ "node": "Wait for TruGen Session Complete", "type": "main", "index": 0 }]] },
+    "Wait for TruGen Session Complete": { "main": [[{ "node": "Merge Baseline + Transcript", "type": "main", "index": 0 }]] },
+    "Merge Baseline + Transcript": { "main": [[{ "node": "Analyze Co-creation & Update Syllabus", "type": "main", "index": 0 }]] },
+    "Analyze Co-creation & Update Syllabus": { "main": [[{ "node": "Validate Syllabus JSON", "type": "main", "index": 0 }]] },
+    "Validate Syllabus JSON": { "main": [[{ "node": "Graph Consistency Validator", "type": "main", "index": 0 }]] },
+    "Graph Consistency Validator": { "main": [[{ "node": "Graph Consistency Check?", "type": "main", "index": 0 }]] },
+    "Graph Consistency Check?": { "main": [[{ "node": "Persist Updated Syllabus", "type": "main", "index": 0 }], [{ "node": "Graph Consistency Failed Log", "type": "main", "index": 0 }]] },
+    "Graph Consistency Failed Log": { "main": [[{ "node": "Schema Validation Failed Log", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" }
+}
