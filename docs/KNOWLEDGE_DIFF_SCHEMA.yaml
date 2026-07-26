@@ -1,0 +1,211 @@
+# CIP‑KGE Knowledge Diff Schema v0.2
+# Formal YAML schema for Knowledge Diffs, independent of implementation stack.
+# This schema enforces the 6 epistemic invariants through syntactic validation.
+
+# Root object: Knowledge Diff
+type: object
+required:
+  - id
+  - protocol_version
+  - session_id
+  - generated_at
+  - target_node
+  - section_changes
+  - evidence
+  - pre_review_check
+properties:
+  id:
+    type: string
+    pattern: "^diff-\\d{4}-\\d{2}-\\d{2}-\\d{3}$"
+    description: Unique identifier for the diff (diff-YYYY-MM-DD-NNN)
+
+  protocol_version:
+    type: string
+    enum:
+      - "CIP-KGE-v0.1"
+      - "CIP-KGE-v0.2"
+    description: Version of the CIP‑KGE protocol used to generate this diff
+
+  session_id:
+    type: string
+    pattern: "^session-\\d{4}-\\d{2}-\\d{2}-\\d{3}$"
+    description: Identifier of the interview session that produced the evidence
+
+  generated_at:
+    type: string
+    format: date-time
+    description: ISO 8601 timestamp of diff generation
+
+  target_node:
+    type: object
+    required:
+      - path
+      - operation
+    properties:
+      path:
+        type: string
+        description: Implementation‑specific path to the target node (e.g., section_prefix/node_id)
+      operation:
+        type: string
+        enum:
+          - add
+          - modify
+          - remove
+          - deprecate
+        description: Operation to perform on the target node
+
+  section_changes:
+    type: array
+    minItems: 1
+    maxItems: 3  # Bounded Modification Principle (Invariant 4)
+    items:
+      type: object
+      required:
+        - section
+        - operation
+        - current_text
+        - proposed_text
+        - rationale
+      properties:
+        section:
+          type: string
+          enum:
+            - definition
+            - use_case
+            - human_role
+            - ai_role
+            - friction
+            - risk
+            - observable_markers
+          description: Which of the seven node sections this change targets
+        operation:
+          type: string
+          enum:
+            - modify
+            - append
+            - remove_sentence
+          description: Type of change within the section
+        current_text:
+          type: string
+          description: Exact current text of the section (must match published version)
+        proposed_text:
+          type: string
+          description: Replacement or addition text
+        rationale:
+          type: string
+          minLength: 1
+          description: Explanation of why this change improves the node; must cite session exchange
+        proposed_wikilinks:
+          type: array
+          items:
+            type: string
+            pattern: "^\\[\\[[^\\]]+\\]\\]$"
+          description: Optional list of new wikilinks introduced by this change
+
+  evidence:
+    type: object
+    required:
+      - session_exchange_ref
+      - summary
+      - confidence
+      - confidence_rationale
+    properties:
+      session_exchange_ref:
+        type: string
+        pattern: "^session-\\d{4}-\\d{2}-\\d{2}-\\d{3}/exchange-\\d{2}$"
+        description: Reference to the specific exchange in the transcript (Traceability Constraint, Invariant 1)
+      summary:
+        type: string
+        description: Concise summary of what the interviewee said that grounds the change
+      confidence:
+        type: string
+        enum:
+          - high
+          - medium
+          - low
+        description: Confidence level in the evidence (Explicit Uncertainty Requirement, Invariant 5)
+      confidence_rationale:
+        type: string
+        description: Justification for the confidence level; required when confidence = low
+
+  pre_review_check:
+    type: object
+    required:
+      - passes_minimum_quality
+    properties:
+      passes_minimum_quality:
+        type: boolean
+        description: Result of automated syntactic validation
+      failure_reason:
+        type: string
+        enum:
+          - no_evidence
+          - low_confidence_only
+          - target_not_found
+          - wikilink_target_missing
+          - scope_too_broad
+          - yaml_schema_invalid
+          - missing_required_fields
+          - invalid_status
+          - circular_dependency_detected
+          - prerequisite_invalid
+        description: Reason for failure if passes_minimum_quality is false
+
+  review_status:
+    type: string
+    enum:
+      - proposed
+      - under_review
+      - accepted
+      - rejected
+      - deferred
+    default: proposed
+    description: Current status in the human‑review workflow
+
+  review_notes:
+    type: array
+    items:
+      type: object
+      required:
+        - reviewer
+        - date
+        - status_set
+        - note
+      properties:
+        reviewer:
+          type: string
+          description: Identifier of the reviewer
+        date:
+          type: string
+          format: date-time
+        status_set:
+          type: string
+          enum:
+            - proposed
+            - under_review
+            - accepted
+            - rejected
+            - deferred
+        note:
+          type: string
+          description: Reviewer's comment
+    description: Optional log of review activity
+
+  merge_ready:
+    type: boolean
+    default: false
+    description: Implementation‑specific flag indicating readiness for merge
+
+  pr_url:
+    type: string
+    format: uri
+    description: Optional URL of the pull request created from this diff
+
+# Additional constraints beyond YAML schema:
+# 1. If confidence = low, confidence_rationale must be non‑empty and describe corroboration source.
+# 2. session_exchange_ref must correspond to an existing exchange in the transcript.
+# 3. target_node.path must exist in the graph unless operation = add.
+# 4. proposed_wikilinks targets must exist in the graph (or be added in the same diff).
+# 5. No circular dependencies introduced by proposed changes (graph consistency).
+#
+# These constraints are enforced by automated validators (n8n workflow) and manual review.

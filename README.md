@@ -1,9 +1,9 @@
-# <img src="https://pyragogy.org/images/logo.svg" alt="Pyragogy" width="32"/> Cognitive Interview Protocol v0.2.1
+# Pyragogy Cognitive Interview Protocol (CIP‑KGE) v0.3‑draft
 
 <div align="center">
 
-[![Status](https://img.shields.io/badge/status-Standby%20%2F%20Open%20Reference%20Architecture-purple?style=flat-square)](docs/ROADMAP.md)
-[![Version](https://img.shields.io/badge/version-v0.2.1-blue?style=flat-square)](docs/PROTOCOL.md)
+[![Status](https://img.shields.io/badge/status-Open%20Reference%20Architecture-purple?style=flat-square)](docs/ROADMAP.md)
+[![Version](https://img.shields.io/badge/version-v0.3--draft-blue?style=flat-square)](docs/PROTOCOL.md)
 [![License](https://img.shields.io/badge/license-MIT-007bff?style=flat-square)](LICENSE)
 [![Contributions](https://img.shields.io/badge/contributions-welcome-28a745?style=flat-square)](CONTRIBUTING.md)
 
@@ -11,238 +11,217 @@
 
 ---
 
-## 🎯 Elevator Pitch
+## What this is
 
-The **Cognitive Interview Protocol (CIP)** is a methodology for conducting structured AI-assisted interviews that produce *knowledge diffs* — bounded, human-reviewable proposals for modifying knowledge graphs.
+**CIP‑KGE is an Epistemic Governance Protocol for Knowledge Graph Evolution.**
 
-**Traditional AI tutoring** treats the AI as an authoritative source of knowledge, either editing the graph directly (losing reasoning) or producing free-form output (lacking structure).
+It is **not** an “AI interview orchestrator.” Calling it that overstates what the system automates and understates what it actually is: a **human‑gated review process** with one automated sub‑stage.
 
-**CIP flips the paradigm**: The AI acts as a *co-learner facilitator*, using cognitive interview techniques (originally from forensic psychology) to elicit tacit expertise through 4 evidence-gathering phases. Every interview produces a traceable, reviewable knowledge change proposal.
+Read this before anything else:
 
-The result isn't an automatic edit — it's a **reviewable proposal** that can be validated, accepted, or rejected by human reviewers. Knowledge evolves through evidence, not authority.
+> **This is a human‑in‑the‑loop system.** Of the 10 pipeline stages, only Stage 3 (Evidence Extraction / classification) is machine‑assisted. Stages 2, 5, 6, 7, 8 are manual **by design**, not by current limitation. The LLM does **not** write to the knowledge graph. It never has write access. A human reads the transcript, a human validates the diff, a human opens the pull request.
+
+If you came here expecting an autonomous agent that ingests interviews and updates a graph — this is the wrong tool. If you need a **traceable, falsifiable process for turning tacit expert knowledge into reviewable, bounded proposals**, keep reading.
 
 ---
 
-## 📋 Repository Structure
+## The trade‑off, stated up front
+
+Cognitive interviewing (the technique, borrowed from forensic psychology) produces higher‑fidelity, more falsifiable evidence than a questionnaire or a free‑form chat. It also costs more human time per unit of knowledge captured:
+
+| | Cognitive Interview (CIP‑KGE) | Free‑form AI Q&A | Structured questionnaire |
+|---|--------------------------------|-------------------|---------------------------|
+| **Evidence traceability** | High — exchange‑level | None | Medium — field‑level |
+| **Tacit knowledge surfaced** | High | Variable | Low |
+| **Human review cost per update** | High (full transcript read) | Low/none | Low |
+| **Throughput (updates/hour)** | Low | High | Medium |
+| **Risk of unreviewed error entering the graph** | Near‑zero (gated) | High | Low‑medium |
+
+**This protocol is not a scaling solution.** It is a correctness solution. Do not deploy it where you need volume; deploy it where a single wrong node is more costly than a slow one. This is the honest trade‑off — the earlier README did not state it, and that was a gap.
+
+---
+
+## Repository structure
 
 ```
 Cognitive-Interview-Protocol/
-├── README.md                          ← This file — quick start guide
-├── CONTRIBUTING.md                    ← How to contribute (analytical > implementational)
-├── LICENSE                            ← MIT License
+├── README.md                          ← This file
+├── CONTRIBUTING.md
+├── LICENSE
 │
-├── 🌐 DOCS (Protocol & Specifications)
-│   ├── PROTOCOL.md                    ← Main protocol spec (10-stage pipeline)
-│   ├── SYLLABUS_SCHEMA.md             ← 7-section node structure
-│   ├── GLOSSARY.md                    ← Terminology with coinage flags
-│   ├── ROADMAP.md                     ← Research milestones & open questions
+├── docs/                             ← Protocol specifications
+│   ├── PROTOCOL.md                   ← 10‑stage pipeline + Epistemic Invariants
+│   ├── KNOWLEDGE_DIFF_SCHEMA.md       ← Formal, stack‑agnostic diff schema (conceptual)
+│   ├── KNOWLEDGE_DIFF_SCHEMA.yaml     ← Machine‑readable YAML schema for validation
+│   ├── ARBITRATION.md                 ← Conflict resolution between concurrent diffs (ex‑L5)
+│   ├── INTERVIEW_DECISION_TREE.md     ← Q1–Q5 termination rules (state machine)
+│   ├── SYLLABUS_SCHEMA.md             ← Pyragogy‑specific binding (optional layer)
+│   ├── GLOSSARY.md
+│   ├── ROADMAP.md
 │   └── archive/
-│       ├── V0.1/                      ← Early design documents
-│       ├── YAML_SCHEMA.md             ← Knowledge Diff YAML schema (v0.2)
-│       ├── PIPELINE.md                ← 10-stage pipeline details
-│       ├── KNOWLEDGE_DIFF_SPEC.md     ← Diff format specification
-│       ├── INTERVIEW_GUIDE.md         ← 5 question types mapping
-│       ├── PRINCIPLES.md              ← 6 epistemic invariants
-│       ├── PROBLEM.md                 ← Problem statement
-│       └── VISION.md                  ← Long-term direction
 │
-├── 🧪 EXAMPLES (Worked Demonstrations)
-│   └── diff-001-embodied-foundation/  ← Complete annotated example
-│       ├── README.md                  ← Example overview
-│       ├── context.md                 ← Interview flow documentation
-│       ├── review-notes.md            ← Simulated reviewer response
-│       ├── transcript.md              ← Synthetic interview transcript
-│       ├── evidence.md                ← Evidence bundle (exchanges → sections)
-│       └── diff.yaml                  ← Knowledge Diff in spec format
+├── examples/                         ← Worked demonstrations
+│   └── diff‑001‑embodied‑foundation/
 │
-├── 🔧 WORKFLOWS (n8n Automation)
-│   └── syllabus_co_creation_agent.json
-│       └── AI-assisted interview orchestrator with graph validation
+├── workflows/                        ← Reference implementation (n8n)
+│   └── syllabus_co_creation_agent.json  ← Stage 3 automation only. Not an “agent” in the autonomous sense.
 │
-├── 📝 PROTOCOL (Quick Reference)
-│   └── cognitive_interview_spec.md    ← 4-phase protocol + validation
+├── protocol/                         ← Quick reference
+│   └── cognitive_interview_spec.md   ← 4‑phase protocol + validation breakdown
 │
-├── 📊 ARCHIVES (Audit Trail)
-│   ├── interviews/                    ← Session transcripts & evidence bundles
-│   └── diffs/                         ← Knowledge Diff YAML files (audit trail)
-│
-├── 📈 DIAGRAMS (Visual representations)
-└── 📚 PAPERS (Preprints & working papers)
+├── interviews/   ← audit trail
+├── diffs/        ← Knowledge Diff YAML files
+├── diagrams/     ← visual representations
+└── papers/       ← preprints & working papers
 ```
 
 ---
 
-## ⚡ Quick Start for Implementers
+## What is model‑agnostic and stack‑agnostic (and what wasn’t, until now)
 
-### 1️⃣ Import the n8n Workflow
+The previous version of this protocol coupled the Knowledge Diff format directly to:
+- Quartz‑generated wikilinks (`[[node_id]]`)
+- GitHub PR mechanics on a specific repository (`pyragogy/ai‑pedagogy`)
+- File paths in a specific content‑directory structure
 
-```bash
-# Install n8n (if not already)
-npm install --global n8n
+This violated the protocol’s own **Principle 5 — “Protocol is model‑agnostic.”** A contract that hardcodes a publishing stack is not agnostic to anything except which LLM API you call. That was a real inconsistency between the stated principle and the shipped artifact.
 
-# Start n8n server
-n8n start
-```
-
-Then in the n8n UI:
-- Go to **Settings** → **Import**
-- Upload `workflows/syllabus_co_creation_agent.json`
-- Or use CLI: `n8n import:workflow --input=workflows/syllabus_co_creation_agent.json`
-
-### 2️⃣ Configure Credentials
-
-In n8n credentials store:
-- **Add OpenAI API key** (required for GPT-4o-mini interview analysis)
-- **Update credentials reference** in workflow node "Analyze Co-creation & Update Syllabus"
-
-### 3️⃣ Test the Workflow
-
-```bash
-# Send a test session to the webhook
-curl -X POST http://localhost:5678/webhook/test-session \
-  -H "Content-Type: application/json" \
-  -d '{
-    "session_id": "test-001",
-    "topic": "networking_fundamentals",
-    "transcript": "[exchange-01] User explains their experience with networking..."
-  }'
-```
+**Fixed in v0.3:** the Knowledge Diff core schema (`docs/KNOWLEDGE_DIFF_SCHEMA.md`) no longer references Quartz, wikilinks, or GitHub paths. Those become an **optional binding layer** — `SYLLABUS_SCHEMA.md` documents how to project the generic diff onto the Pyragogy Syllabus specifically. Anyone using CIP‑KGE against a different knowledge graph (Notion, a plain JSON store, a different wiki engine) implements their own binding layer against the same core contract.
 
 ---
 
-## 🔍 Technical Highlights
-
-### 4-Phase Cognitive Interview Protocol
-
-| Phase | Goal | Agent Strategy |
-|-------|------|----------------|
-| **1. Context Reinstatement** | Ground in real-world experience | Ask user to describe practical contexts |
-| **2. Free Recall / Mapping** | Unconstrained mental mapping | Present graph as incomplete; prompt identification of gaps |
-| **3. Perspective Shift** | Test resiliency & edge cases | Ask "what if" and counterfactual questions |
-| **4. Reverse Trace** | Audit prerequisites & directionality | Walk backwards from terminal to root node |
-
-### Graph Consistency Validation (n8n Workflow)
-
-The workflow performs **automated validation** before human review:
-
-| Check | Description | Failure Reason |
-|-------|-------------|----------------|
-| **JSON Schema Compliance** | YAML structure matches schema | `yaml_schema_invalid` |
-| **Required Fields** | All mandatory fields present | `missing_required_fields` |
-| **Status Tags** | Only `existing`, `added`, `modified`, `removed` allowed | `invalid_status` |
-| **Section Changes ≤ 3** | Bounded Modification Principle | `scope_too_broad` |
-| **Circular References** | No dependency cycles in connections | `circular_dependency_detected` |
-| **Orphan Nodes** | All nodes must have connections | `orphan_nodes_detected` |
-| **Prerequisite Validity** | Connection references must exist | `prerequisite_invalid` |
-
-### Knowledge Diff Format
-
-A `Knowledge Diff` is a structured proposal for modifying a knowledge graph node section:
-
-```yaml
-id: "diff-2026-06-29-001"
-protocol_version: "CIP-KGE-v0.2"
-session_id: "session-2026-06-29-001"
-
-target_node:
-  path: "05_systemic_risks/automation_bias"
-  operation: "modify"
-
-section_changes:
-  - section: "observable_markers"
-    operation: "modify"
-    current_text: "Current text..."
-    proposed_text: "New text..."
-    rationale: "Why this change..."
-
-evidence:
-  session_exchange_ref: "session-2026-06-29-001/exchange-01"
-  summary: "What user said..."
-  confidence: "medium"
-  confidence_rationale: "Justification..."
-
-pre_review_check:
-  passes_minimum_quality: true
-```
-
----
-
-## 📚 Core Principles
+## Core principles (unchanged, still non‑negotiable)
 
 | # | Principle | What it rules out |
 |---|-----------|-------------------|
-| **1** | Knowledge evolves through evidence | Model confidence as grounds for change |
-| **2** | Every modification must be independently reviewable | Changes requiring original session access |
-| **3** | AI proposes; humans validate | Automated incorporation of AI output |
-| **4** | Interviews generate *knowledge diffs*, not automatic edits | Direct write access for AI system |
-| **5** | Protocol is model-agnostic | Dependency on any specific platform/API |
+| 1 | Knowledge evolves through evidence | Model confidence as grounds for change |
+| 2 | Every modification is independently reviewable | Changes requiring original session access |
+| 3 | AI proposes; humans validate | Automated incorporation of AI output |
+| 4 | Interviews generate diffs, not edits | Direct write access for AI system |
+| 5 | Protocol is model‑ and stack‑agnostic | Dependency on any specific platform, publishing engine, or repo layout |
 
-Full rationale: [`docs/archive/PRINCIPLES.md`](docs/archive/PRINCIPLES.md)
-
----
-
-## 🎓 Research Questions
-
-CIP is an **open research initiative** — these questions drive ongoing development:
-
-- Can AI-assisted interviews surface **tacit expert knowledge** that structured questionnaires miss?
-- How should a *knowledge diff* be represented to remain both **machine-readable** and **human-auditable**?
-- What role should **human review** play — final gate, continuous process, or something else?
-- Which interview techniques produce the **highest-quality proposals**?
-- What does it mean for a knowledge update to be ***reliable*** in this setting?
-- How can the process remain **reproducible** across different AI platforms?
-
-Full discussion: [`docs/ROADMAP.md`](docs/ROADMAP.md)
+Full rationale: `docs/archive/PRINCIPLES.md`
 
 ---
 
-## 📖 Protocol Specification
+## Automated verification (CI / n8n / script)
 
-**Current Version:** v0.2.1  
-**Status:** Standby / Open Reference Architecture  
-**Next Phase:** Pilot Sessions (v0.2 validation)
+Before a Knowledge Diff reaches human review, it **must** pass **syntactic validation** against the formal YAML schema (`docs/KNOWLEDGE_DIFF_SCHEMA.yaml`). This ensures the diff is at least well‑formed and respects the epistemic invariants (e.g., ≤ 3 section changes).
 
-The protocol is implemented in two complementary artifacts:
+### Validating a single diff with Python
 
-1. **[docs/PROTOCOL.md](docs/PROTOCOL.md)** — The 10-stage pipeline specification
-2. **[protocol/cognitive_interview_spec.md](protocol/cognitive_interview_spec.md)** — Quick reference for 4-phase protocol
+```bash
+# Install jsonschema and PyYAML
+pip install jsonschema pyyaml
 
-See also:
-- [docs/SYLLABUS_SCHEMA.md](docs/SYLLABUS_SCHEMA.md) — Node structure (7 sections)
-- [docs/GLOSSARY.md](docs/GLOSSARY.md) — Terminology & definitions
+# Validate against the schema
+python -c "
+import yaml, jsonschema, sys
+schema = yaml.safe_load(open('docs/KNOWLEDGE_DIFF_SCHEMA.yaml'))
+diff = yaml.safe_load(open('diffs/diff‑2026‑07‑15‑001.yaml'))
+try:
+    jsonschema.validate(diff, schema)
+    print('✅ Schema valid')
+except jsonschema.ValidationError as e:
+    print('❌ Validation failed:', e.message)
+    sys.exit(1)
+"
+```
+
+### Integration with n8n workflows
+
+Add a **“Validate YAML Schema”** node after the LLM generates a draft diff. Use the `ajv` library (Node.js) or call a Python subprocess as above.
+
+### CI/CD pipeline (GitHub Actions example)
+
+```yaml
+name: Validate Knowledge Diffs
+on:
+  pull_request:
+    paths:
+      - 'diffs/*.yaml'
+
+jobs:
+  validate:
+    runs‑on: ubuntu‑latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Python dependencies
+        run: pip install jsonschema pyyaml
+      - name: Validate all diffs
+        run: |
+          for f in diffs/*.yaml; do
+            python scripts/validate_diff.py "$f" || exit 1
+          done
+```
+
+A reference validator script (`scripts/validate_diff.py`) is a **v0.3‑candidate contribution** — not yet provided, but trivial to write once the schema exists.
+
+**Why this matters:** Automated syntactic validation catches malformed diffs **before** they reach a human reviewer, reducing review burden and preventing epistemic errors (e.g., missing exchange references) from slipping through.
 
 ---
 
-## 🤝 How to Participate
+## Quick start for implementers
 
-> [!IMPORTANT]  
-> At this stage, the most valuable contributions are **analytical**, not implementational.
+### 1. Understand what gets automated
 
-This is a research project, not a software product. We need:
+Only this:
 
-- **🔍 Critique of the protocol design** — identify structural flaws and explain why they matter
-- **📝 Alternative framings** — better ways to pose the research questions
-- **🎙️ Interview transcripts** — share real or simulated sessions (even if they didn't go well)
-- **📚 Literature connections** — point to relevant work in knowledge engineering or epistemology
-- **⚠️ Counterexamples** — cases where the approach would not work
+```
+[Transcript] → [Stage 3: LLM classifies exchanges → candidate section_changes] → [Draft Diff]
+```
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) for full guidelines.
+Everything before and after is manual. The n8n workflow in `workflows/` implements Stage 3 only — evidence extraction and preliminary schema‑shape checking. It is **not** a substitute for human review at Stage 6.
 
-**→ [Open an issue](../../issues/new) to start a discussion**
+### 2. Import the workflow (Stage 3 automation)
+
+```bash
+npm install --global n8n
+n8n start
+```
+
+In the n8n UI: **Settings → Import → `workflows/syllabus_co_creation_agent.json`**
+
+### 3. Run a test extraction
+
+```bash
+curl -X POST http://localhost:5678/webhook/test‑session \
+  -H "Content‑Type: application/json" \
+  -d '{
+    "session_id": "test‑001",
+    "topic": "networking_fundamentals",
+    "transcript": "[exchange‑01] User explains their experience with networking..."
+  }'
+```
+
+This produces a **draft** Knowledge Diff. It does **not** touch any graph. A human still has to validate it against `docs/KNOWLEDGE_DIFF_SCHEMA.yaml` and run Stage 5–8 manually.
 
 ---
 
-## 🏛️ Credits
+## What changed from v0.2.1 → v0.3‑draft
 
-**Author:** Fabrizio Terzi  
-**Affiliation:** Pyragogy ([https://pyragogy.org](https://pyragogy.org))  
-**License:** [MIT](LICENSE)
+| Area | v0.2.1 | v0.3‑draft |
+|------|--------|-------------|
+| **Positioning** | “AI‑assisted interview orchestrator” | “Epistemic Governance Protocol” — human‑gated, LLM handles Stage 3 only |
+| **Diff schema** | Coupled to Quartz/GitHub/wikilinks | Stack‑agnostic core + optional binding layer |
+| **Multi‑expert corroboration** | Undefined — “high confidence” meant intra‑session only | Explicit distinction: intra‑session coherence ≠ inter‑session corroboration |
+| **Reviewer conflict** | Open question (L5) | Formal arbitration process (`ARBITRATION.md`) |
+| **Question‑type transitions (Q1–Q5)** | Qualitative heuristic | Formal decision tree with termination rules (`INTERVIEW_DECISION_TREE.md`) |
+| **Schema validation** | Manual, described in prose | Formal YAML Schema, machine‑checkable (`KNOWLEDGE_DIFF_SCHEMA.yaml`) |
 
 ---
 
-<div align="center" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e1e4e8;">
+## Contributing
 
-**Cognitive Interview Protocol** — Evidence-based knowledge evolution for AI-augmented learning  
-© 2026 Pyragogy · [Apache 2.0](LICENSE)
+This is a research project, not a software product. Valuable contributions are **analytical**: critique of protocol design, alternative framings, interview transcripts (real or simulated), literature connections, counterexamples.
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+---
+
+<div align="center" style="margin‑top: 2rem; padding‑top: 2rem; border‑top: 1px solid #e1e4e8;">
+
+**CIP‑KGE v0.3‑draft** — Epistemic governance protocol for evidence‑based knowledge‑graph evolution<br>
+© 2026 Pyragogy · [MIT License](LICENSE)
 
 </div>

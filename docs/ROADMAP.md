@@ -1,6 +1,6 @@
 # Roadmap
 
-> This document tracks the research milestones and open questions of CIP-KGE.
+> This document tracks the research milestones and open questions of CIP‑KGE.
 >
 > A roadmap in a research project is different from a roadmap in a software project.
 > It describes what questions we are trying to answer and in what order — not what features we plan to ship.
@@ -14,15 +14,18 @@
 
 **What was built:**
 - [x] Syllabus node schema formalized ([`SYLLABUS_SCHEMA.md`](./SYLLABUS_SCHEMA.md))
-- [x] Knowledge Diff specification, anchored to node sections ([`KNOWLEDGE_DIFF_SPEC.md`](./KNOWLEDGE_DIFF_SPEC.md))
-- [x] Complete 10-stage pipeline with failure conditions ([`PIPELINE.md`](./PIPELINE.md))
-- [x] Interview guide mapping question types to node sections ([`INTERVIEW_GUIDE.md`](./INTERVIEW_GUIDE.md))
-- [x] Annotated synthetic example: `diff-001-embodied-foundation/`
+- [x] Knowledge Diff specification, anchored to node sections ([`PROTOCOL.md`](./PROTOCOL.md))
+- [x] Complete 10‑stage pipeline with failure conditions (same)
+- [x] Interview guide mapping question types to node sections (same)
+- [x] Annotated synthetic example: `diff‑001‑embodied‑foundation/`
 
 **Known limitations carried into Phase 2:**
 - Review criteria are partially specified; calibration requires real review disagreements
-- Markdown transformation (Stage 7) is fully manual; no tooling yet
+- Markdown transformation (Stage 7) is fully manual; no tooling yet
 - The process for proposing new *graph sections* is not yet defined
+- **Conflict‑resolution undefined** (L5)
+- **Formal transition logic incomplete** (L4)
+- **Confidence‑corroboration gap** (L2)
 
 ---
 
@@ -30,23 +33,26 @@
 
 **Goal.** Conduct a small number of real interview sessions using the v0.2 protocol and evaluate whether the pipeline produces Knowledge Diffs that are:
 1. Independently reviewable by someone who was not in the session
-2. Mergeable into `pyragogy/ai-pedagogy` without requiring the reviewer to rewrite the proposal
+2. Mergeable into `pyragogy/ai‑pedagogy` without requiring the reviewer to rewrite the proposal
 3. Descriptive of actual knowledge that improves the node's precision or coverage
 
 **What we are looking for:**
 
 - Do the question types in the Interview Guide surface evidence that maps to specific sections?
-- Where does the pre-review quality check fail most often, and why?
+- Where does the pre‑review quality check fail most often, and why?
 - Do reviewers disagree? If so, on what grounds?
-- What does the first real PR on `pyragogy/ai-pedagogy` look like?
+- What does the first real PR on `pyragogy/ai‑pedagogy` look like?
+- **New:** Does the decision‑tree for question transitions work in practice, or does it lead to premature termination?
+- **New:** How often do `confidence: low` proposals appear, and do they have adequate corroboration?
 
 **Milestone targets:**
 
 - [ ] First real interview session (with transcript and evidence bundle)
-- [ ] First real Knowledge Diff (passes pre-review quality check)
+- [ ] First real Knowledge Diff (passes pre‑review quality check)
 - [ ] First real review decision (accepted or rejected, with rationale)
-- [ ] First real PR on `pyragogy/ai-pedagogy` (or first rejection at this stage, with reason)
-- [ ] Post-session analysis: what did the protocol fail to capture?
+- [ ] First real PR on `pyragogy/ai‑pedagogy` (or first rejection at this stage, with reason)
+- [ ] Post‑session analysis: what did the protocol fail to capture?
+- [ ] **New:** Document at least one instance of reviewer disagreement.
 
 ---
 
@@ -54,15 +60,30 @@
 
 **Goal.** Move from a descriptive protocol to a formal one — with calibrated review criteria, a validated output schema, and sufficient documentation to allow independent implementation.
 
-**Precondition.** This phase depends on findings from Phase 2. We do not yet know what a formal specification will look like.
+**Precondition.** This phase depends on findings from Phase 2. We do not yet know what a formal specification will look like.
 
 **Candidate work items (not yet committed):**
 
-- YAML schema validator for Knowledge Diffs
-- Formal review criteria derived from real review disagreements
-- Protocol for proposing new graph sections (not just new nodes)
-- Assessment of whether the Interview Guide question types need revision
-- First working paper: protocol design rationale and Phase 2 findings
+### Conflict‑resolution protocol (L5)
+- Define a **diff‑priority rule** (earlier `generated_at` reviewed first).
+- Define an **arbitration panel** of two new reviewers for incompatible diffs.
+- Implement **merge‑conflict detection** (textual overlap in `proposed_text`).
+- Specify a **structured‑debate session** as fallback when panel cannot reach consensus.
+
+### Formal transition logic (L4)
+- Produce a **state‑machine diagram** with guard conditions (evidence‑sufficiency, time‑remaining, section‑coverage).
+- Validate the diagram against Phase 2 session transcripts.
+
+### Confidence‑corroboration framework (L2)
+- Define **corroboration levels**: L1 (single‑expert explicit), L2 (single‑expert inferred), L3 (multi‑expert convergent), L4 (multi‑expert divergent).
+- Map each level to required review rigor (number of reviewers, need for additional evidence).
+
+### Technical formalization
+- YAML schema validator for Knowledge Diffs (machine‑readable schema).
+- Formal review criteria derived from real review disagreements.
+- Protocol for proposing new graph sections (not just new nodes).
+- Assessment of whether the Interview Guide question types need revision.
+- First working paper: protocol design rationale and Phase 2 findings.
 
 ---
 
@@ -70,11 +91,13 @@
 
 These are not assigned to a specific phase. They are ongoing research questions.
 
-- Can AI-assisted interviews surface tacit knowledge that structured questionnaires miss? What evidence would settle this question?
-- What is the appropriate scope of a single Knowledge Diff? The current `scope_too_broad` pre-review check (>3 section changes) is arbitrary — what should it actually be?
-- Is the mechanism distinction between automation_bias and the embodied foundation risk (as described in `diff-001-embodied-foundation`) empirically supportable? [VERIFY SOURCE: automation bias literature; embodied cognition literature]
+- Can AI‑assisted interviews surface tacit knowledge that structured questionnaires miss? What evidence would settle this question?
+- What is the appropriate scope of a single Knowledge Diff? The current `scope_too_broad` pre‑review check (>3 section changes) is arbitrary — what should it actually be?
+- Is the mechanism distinction between automation_bias and the embodied foundation risk (as described in `diff‑001‑embodied‑foundation`) empirically supportable? [VERIFY SOURCE: automation bias literature; embodied cognition literature]
 - Can the pipeline be partially automated without sacrificing the accountability properties that make the review meaningful?
 - What does it mean for a Knowledge Diff to fail the review — and how do rejected diffs improve the protocol?
+- **New:** How should the protocol handle expert disagreement when both experts have high confidence but propose incompatible changes?
+- **New:** Is the 45‑minute time bound for interviews optimal, or does it truncate valuable exploration?
 
 ---
 
