@@ -1,9 +1,9 @@
-# Pyragogy Cognitive Interview Protocol (CIP‑KGE) v0.3‑draft
+# Pyragogy Cognitive Interview Protocol (CIP‑KGE) v0.3.1
 
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-Open%20Reference%20Architecture-purple?style=flat-square)](docs/ROADMAP.md)
-[![Version](https://img.shields.io/badge/version-v0.3--draft-blue?style=flat-square)](docs/PROTOCOL.md)
+[![Version](https://img.shields.io/badge/version-v0.3.1-blue?style=flat-square)](docs/PROTOCOL.md)
 [![License](https://img.shields.io/badge/license-MIT-007bff?style=flat-square)](LICENSE)
 [![Contributions](https://img.shields.io/badge/contributions-welcome-28a745?style=flat-square)](CONTRIBUTING.md)
 
@@ -199,9 +199,9 @@ This produces a **draft** Knowledge Diff. It does **not** touch any graph. A hum
 
 ---
 
-## What changed from v0.2.1 → v0.3‑draft
+## What changed from v0.2.1 → v0.3.1
 
-| Area | v0.2.1 | v0.3‑draft |
+| Area | v0.2.1 | v0.3.1 |
 |------|--------|-------------|
 | **Positioning** | “AI‑assisted interview orchestrator” | “Epistemic Governance Protocol” — human‑gated, LLM handles Stage 3 only |
 | **Diff schema** | Coupled to Quartz/GitHub/wikilinks | Stack‑agnostic core + optional binding layer |
@@ -222,7 +222,7 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 <div align="center" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e1e4e8;">
 
-**CIP-KGE v0.3-draft** — Epistemic governance protocol for evidence-based knowledge-graph evolution<br>
+**CIP-KGE v0.3.1** — Epistemic governance protocol for evidence-based knowledge-graph evolution<br>
 © 2026 Pyragogy · [MIT License](LICENSE)
 
 </div>
