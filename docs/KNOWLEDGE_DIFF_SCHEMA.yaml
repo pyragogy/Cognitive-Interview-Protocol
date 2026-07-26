@@ -1,6 +1,12 @@
-# CIP‑KGE Knowledge Diff Schema v0.2
+# CIP-KGE Knowledge Diff Schema v0.3
 # Formal YAML schema for Knowledge Diffs, independent of implementation stack.
+# Valid JSON Schema (draft-07) expressed in YAML — usable with any JSON-Schema validator.
 # This schema enforces the 6 epistemic invariants through syntactic validation.
+# Conceptual companion document: KNOWLEDGE_DIFF_SCHEMA.md
+
+$schema: "http://json-schema.org/draft-07/schema#"
+title: "CIP-KGE Knowledge Diff"
+description: "Stack-agnostic contract for a bounded, human-reviewable knowledge-graph modification proposal."
 
 # Root object: Knowledge Diff
 type: object
@@ -9,10 +15,11 @@ required:
   - protocol_version
   - session_id
   - generated_at
-  - target_node
+  - target
   - section_changes
   - evidence
   - pre_review_check
+  - review_status
 properties:
   id:
     type: string
@@ -21,10 +28,8 @@ properties:
 
   protocol_version:
     type: string
-    enum:
-      - "CIP-KGE-v0.1"
-      - "CIP-KGE-v0.2"
-    description: Version of the CIP‑KGE protocol used to generate this diff
+    const: "CIP-KGE-v0.3"
+    description: Version of the CIP-KGE protocol used to generate this diff
 
   session_id:
     type: string
@@ -36,15 +41,20 @@ properties:
     format: date-time
     description: ISO 8601 timestamp of diff generation
 
-  target_node:
+  target:
     type: object
     required:
-      - path
+      - node_id
       - operation
     properties:
-      path:
+      node_id:
         type: string
-        description: Implementation‑specific path to the target node (e.g., section_prefix/node_id)
+        minLength: 1
+        description: >
+          Opaque, stack-agnostic identifier for the target node. Carries no
+          assumption about file paths, URL structures, or database keys.
+          The binding layer (e.g., SYLLABUS_SCHEMA.md for Pyragogy) maps this
+          identifier to a concrete graph location.
       operation:
         type: string
         enum:
@@ -57,27 +67,22 @@ properties:
   section_changes:
     type: array
     minItems: 1
-    maxItems: 3  # Bounded Modification Principle (Invariant 4)
+    maxItems: 3  # Bounded Modification Principle (Invariant 4)
     items:
       type: object
       required:
         - section
         - operation
-        - current_text
         - proposed_text
         - rationale
       properties:
         section:
           type: string
-          enum:
-            - definition
-            - use_case
-            - human_role
-            - ai_role
-            - friction
-            - risk
-            - observable_markers
-          description: Which of the seven node sections this change targets
+          minLength: 1
+          description: >
+            Which node section this change targets. The set of valid section
+            names is binding-defined (e.g., definition, use_case, human_role,
+            ai_role, friction, risk, observable_markers in the Pyragogy binding).
         operation:
           type: string
           enum:
@@ -87,20 +92,38 @@ properties:
           description: Type of change within the section
         current_text:
           type: string
-          description: Exact current text of the section (must match published version)
+          description: >
+            Exact current text of the section (must match published version).
+            Required when operation is "modify" or "remove_sentence";
+            optional for "append" (no pre-existing text to match).
         proposed_text:
           type: string
+          minLength: 1
           description: Replacement or addition text
         rationale:
           type: string
           minLength: 1
           description: Explanation of why this change improves the node; must cite session exchange
-        proposed_wikilinks:
+        proposed_relations:
           type: array
           items:
             type: string
-            pattern: "^\\[\\[[^\\]]+\\]\\]$"
-          description: Optional list of new wikilinks introduced by this change
+            minLength: 1
+          description: >
+            Optional list of new cross-references introduced by this change,
+            expressed as binding-agnostic node identifiers (e.g.,
+            "05_systemic_risks/automation_bias"), not platform-specific syntax.
+      # Conditional constraint: current_text required unless operation = append
+      allOf:
+        - if:
+            properties:
+              operation:
+                enum:
+                  - modify
+                  - remove_sentence
+          then:
+            required:
+              - current_text
 
   evidence:
     type: object
@@ -112,44 +135,74 @@ properties:
     properties:
       session_exchange_ref:
         type: string
-        pattern: "^session-\\d{4}-\\d{2}-\\d{2}-\\d{3}/exchange-\\d{2}$"
-        description: Reference to the specific exchange in the transcript (Traceability Constraint, Invariant 1)
+        pattern: "^session-\\d{4}-\\d{2}-\\d{2}-\\d{3}/exchange-\\d{2}(,exchange-\\d{2})*$"
+        description: >
+          Reference to the exchange(s) in the transcript that ground this diff
+          (Traceability Constraint, Invariant 1). Comma-separated lists are
+          allowed for multi-exchange corroboration within the same session.
+          All referenced exchanges MUST belong to this diff's session_id.
       summary:
         type: string
-        description: Concise summary of what the interviewee said that grounds the change
+        description: Verbatim-adjacent restatement of what the interviewee said that grounds the change
       confidence:
         type: string
         enum:
           - high
           - medium
           - low
-        description: Confidence level in the evidence (Explicit Uncertainty Requirement, Invariant 5)
+        description: >
+          Confidence in the evidence WITHIN this session
+          (Explicit Uncertainty Requirement, Invariant 5).
       confidence_rationale:
         type: string
-        description: Justification for the confidence level; required when confidence = low
+        description: >
+          Justification for the confidence level. If confidence = low, must
+          explicitly state why the diff is submitted despite low confidence.
+      corroboration_scope:
+        type: string
+        enum:
+          - intra_session
+          - inter_session
+          - none
+        default: none
+        description: >
+          Whether the claim is supported beyond a single statement:
+          intra_session (multiple exchanges, one session),
+          inter_session (independent support across sessions),
+          none (single exchange, no corroboration).
+      linked_sessions:
+        type: array
+        items:
+          type: string
+          pattern: "^session-\\d{4}-\\d{2}-\\d{2}-\\d{3}$"
+        description: >
+          Other sessions that independently support this same claim. Linked
+          sessions do NOT contribute section_changes to this diff — one diff,
+          one session. The reviewer aggregates; the schema does not.
 
   pre_review_check:
     type: object
     required:
       - passes_minimum_quality
+      - failure_reason
     properties:
       passes_minimum_quality:
         type: boolean
         description: Result of automated syntactic validation
       failure_reason:
-        type: string
+        type:
+          - string
+          - "null"
         enum:
+          - null
           - no_evidence
           - low_confidence_only
           - target_not_found
-          - wikilink_target_missing
+          - relation_target_missing
           - scope_too_broad
-          - yaml_schema_invalid
-          - missing_required_fields
-          - invalid_status
-          - circular_dependency_detected
-          - prerequisite_invalid
-        description: Reason for failure if passes_minimum_quality is false
+          - exchange_ref_unresolved
+          - conflicting_diff_pending
+        description: Reason for failure if passes_minimum_quality is false; null otherwise
 
   review_status:
     type: string
@@ -159,8 +212,11 @@ properties:
       - accepted
       - rejected
       - deferred
+      - in_arbitration
     default: proposed
-    description: Current status in the human‑review workflow
+    description: >
+      Current status in the human-review workflow. "in_arbitration" triggers
+      the conflict-resolution process defined in ARBITRATION.md.
 
   review_notes:
     type: array
@@ -177,7 +233,7 @@ properties:
           description: Identifier of the reviewer
         date:
           type: string
-          format: date-time
+          format: date
         status_set:
           type: string
           enum:
@@ -186,6 +242,7 @@ properties:
             - accepted
             - rejected
             - deferred
+            - in_arbitration
         note:
           type: string
           description: Reviewer's comment
@@ -194,18 +251,25 @@ properties:
   merge_ready:
     type: boolean
     default: false
-    description: Implementation‑specific flag indicating readiness for merge
+    description: Implementation-specific flag indicating readiness for merge
 
   pr_url:
-    type: string
-    format: uri
-    description: Optional URL of the pull request created from this diff
+    type:
+      - string
+      - "null"
+    description: Optional URL of the pull request created from this diff (binding-specific)
 
-# Additional constraints beyond YAML schema:
-# 1. If confidence = low, confidence_rationale must be non‑empty and describe corroboration source.
-# 2. session_exchange_ref must correspond to an existing exchange in the transcript.
-# 3. target_node.path must exist in the graph unless operation = add.
-# 4. proposed_wikilinks targets must exist in the graph (or be added in the same diff).
+# Additional constraints beyond what JSON Schema can express:
+# 1. If confidence = low, confidence_rationale must be non-empty and explicitly
+#    state why the diff is submitted despite low confidence (boilerplate triggers
+#    Stage 5 failure: low_confidence_only).
+# 2. session_exchange_ref must resolve to actual exchanges in the referenced
+#    transcript, all belonging to this diff's session_id.
+# 3. If target.operation != "add", target.node_id must resolve in the binding
+#    layer's graph (semantic check, not syntactic).
+# 4. proposed_relations targets must resolve in the graph (or be added in the
+#    same diff).
 # 5. No circular dependencies introduced by proposed changes (graph consistency).
 #
-# These constraints are enforced by automated validators (n8n workflow) and manual review.
+# These constraints are enforced by automated validators where possible
+# (scripts/validate_diff.py) and by human review otherwise.

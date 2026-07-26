@@ -58,7 +58,7 @@ v0.3 separates them:
 |-------|---------|--------|
 | `evidence.confidence` | How clear/explicit the evidence is **within this session** | `high`, `medium`, `low` |
 | `evidence.corroboration_scope` | Whether the claim is supported **outside this session** | `intra_session`, `inter_session`, `none` |
-| `evidence.linked_sessions` | Which other sessions provide independent support | Array of `session‑id`s |
+| `evidence.linked_sessions` | Which other sessions provide independent support | Array of `session-id`s |
 
 A diff with `confidence: high` and `corroboration_scope: none` is **valid but weak** — high confidence in what one person said, no independent support. Reviewers must **not** treat this as equivalent to `inter_session` corroboration.
 
@@ -80,9 +80,9 @@ A machine‑readable YAML Schema is available at [`KNOWLEDGE_DIFF_SCHEMA.yaml`](
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `id` | string | yes | Pattern: `^diff‑\d{4}‑\d{2}‑\d{2}‑\d{3}$` |
-| `protocol_version` | string | yes | Const: `"CIP‑KGE‑v0.3"` |
-| `session_id` | string | yes | Pattern: `^session‑\d{4}‑\d{2}‑\d{2}‑\d{3}$` |
+| `id` | string | yes | Pattern: `^diff-\d{4}-\d{2}-\d{2}-\d{3}$` |
+| `protocol_version` | string | yes | Const: `"CIP-KGE-v0.3"` |
+| `session_id` | string | yes | Pattern: `^session-\d{4}-\d{2}-\d{2}-\d{3}$` |
 | `generated_at` | string (ISO 8601) | yes | Timestamp of diff generation |
 | `target` | object | yes | Stack‑agnostic pointer to the node |
 | `section_changes` | array[1..3] | yes | Bounded modifications |
@@ -115,7 +115,7 @@ A machine‑readable YAML Schema is available at [`KNOWLEDGE_DIFF_SCHEMA.yaml`](
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `session_exchange_ref` | string | yes | Pattern: `^session‑\d{4}‑\d{2}‑\d{2}‑\d{3}/exchange‑\d{2,}$` |
+| `session_exchange_ref` | string | yes | Pattern: `^session-\d{4}-\d{2}-\d{2}-\d{3}/exchange-\d{2}(,exchange-\d{2})*$` (comma-separated lists allowed for multi-exchange corroboration within the same session) |
 | `summary` | string | yes | Verbatim‑adjacent restatement of what the interviewee said |
 | `confidence` | string | yes | Enum: `high`, `medium`, `low` |
 | `confidence_rationale` | string | yes | Justification for the confidence level |
@@ -157,7 +157,7 @@ The file `KNOWLEDGE_DIFF_SCHEMA.yaml` is a valid [JSON Schema](https://json-sche
 python -c "
 import yaml, jsonschema, sys
 schema = yaml.safe_load(open('docs/KNOWLEDGE_DIFF_SCHEMA.yaml'))
-diff = yaml.safe_load(open('diffs/diff-2026-07-15-001.yaml'))
+diff = yaml.safe_load(open('diffs/diff-2026-06-29-001.yaml'))
 jsonschema.validate(diff, schema)
 print('✓ Schema valid')
 "
@@ -187,10 +187,10 @@ jobs:
       - name: Install Python dependencies
         run: pip install jsonschema pyyaml
       - name: Validate diffs
-        run: python scripts/validate_diffs.py diffs/
+        run: python scripts/validate_diff.py diffs/
 ```
 
-A reference validator script (`scripts/validate_diffs.py`) is **not yet provided** but is a v0.3‑candidate contribution.
+A reference validator script is provided at [`scripts/validate_diff.py`](../scripts/validate_diff.py).
 
 ---
 

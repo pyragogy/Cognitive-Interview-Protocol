@@ -50,24 +50,24 @@ Cognitive-Interview-Protocol/
 ├── LICENSE
 │
 ├── docs/                             ← Protocol specifications
-│   ├── PROTOCOL.md                   ← 10‑stage pipeline + Epistemic Invariants
-│   ├── KNOWLEDGE_DIFF_SCHEMA.md       ← Formal, stack‑agnostic diff schema (conceptual)
-│   ├── KNOWLEDGE_DIFF_SCHEMA.yaml     ← Machine‑readable YAML schema for validation
-│   ├── ARBITRATION.md                 ← Conflict resolution between concurrent diffs (ex‑L5)
+│   ├── PROTOCOL.md                   ← 10-stage pipeline + Epistemic Invariants
+│   ├── KNOWLEDGE_DIFF_SCHEMA.md       ← Formal, stack-agnostic diff schema (conceptual)
+│   ├── KNOWLEDGE_DIFF_SCHEMA.yaml     ← Machine-readable YAML schema for validation
+│   ├── ARBITRATION.md                 ← Conflict resolution between concurrent diffs (ex-L5)
 │   ├── INTERVIEW_DECISION_TREE.md     ← Q1–Q5 termination rules (state machine)
-│   ├── SYLLABUS_SCHEMA.md             ← Pyragogy‑specific binding (optional layer)
+│   ├── SYLLABUS_SCHEMA.md             ← Pyragogy-specific binding (optional layer)
 │   ├── GLOSSARY.md
 │   ├── ROADMAP.md
 │   └── archive/
 │
 ├── examples/                         ← Worked demonstrations
-│   └── diff‑001‑embodied‑foundation/
+│   └── diff-001-embodied-foundation/
 │
 ├── workflows/                        ← Reference implementation (n8n)
-│   └── syllabus_co_creation_agent.json  ← Stage 3 automation only. Not an “agent” in the autonomous sense.
+│   └── syllabus_co_creation_agent.json  ← Stage 3 automation only. Not an “agent” in the autonomous sense.
 │
 ├── protocol/                         ← Quick reference
-│   └── cognitive_interview_spec.md   ← 4‑phase protocol + validation breakdown
+│   └── cognitive_interview_spec.md   ← 4-phase protocol + validation breakdown
 │
 ├── interviews/   ← audit trail
 ├── diffs/        ← Knowledge Diff YAML files
@@ -81,7 +81,7 @@ Cognitive-Interview-Protocol/
 
 The previous version of this protocol coupled the Knowledge Diff format directly to:
 - Quartz‑generated wikilinks (`[[node_id]]`)
-- GitHub PR mechanics on a specific repository (`pyragogy/ai‑pedagogy`)
+- GitHub PR mechanics on a specific repository (`pyragogy/ai-pedagogy`)
 - File paths in a specific content‑directory structure
 
 This violated the protocol’s own **Principle 5 — “Protocol is model‑agnostic.”** A contract that hardcodes a publishing stack is not agnostic to anything except which LLM API you call. That was a real inconsistency between the stated principle and the shipped artifact.
@@ -118,7 +118,7 @@ pip install jsonschema pyyaml
 python -c "
 import yaml, jsonschema, sys
 schema = yaml.safe_load(open('docs/KNOWLEDGE_DIFF_SCHEMA.yaml'))
-diff = yaml.safe_load(open('diffs/diff‑2026‑07‑15‑001.yaml'))
+diff = yaml.safe_load(open('diffs/diff-2026-06-29-001.yaml'))
 try:
     jsonschema.validate(diff, schema)
     print('✅ Schema valid')
@@ -143,7 +143,7 @@ on:
 
 jobs:
   validate:
-    runs‑on: ubuntu‑latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install Python dependencies
@@ -155,7 +155,7 @@ jobs:
           done
 ```
 
-A reference validator script (`scripts/validate_diff.py`) is a **v0.3‑candidate contribution** — not yet provided, but trivial to write once the schema exists.
+A reference validator script is provided at [`scripts/validate_diff.py`](scripts/validate_diff.py) — it accepts single files or whole directories and exits non-zero on any failure, ready for CI.
 
 **Why this matters:** Automated syntactic validation catches malformed diffs **before** they reach a human reviewer, reducing review burden and preventing epistemic errors (e.g., missing exchange references) from slipping through.
 
@@ -168,7 +168,7 @@ A reference validator script (`scripts/validate_diff.py`) is a **v0.3‑candidat
 Only this:
 
 ```
-[Transcript] → [Stage 3: LLM classifies exchanges → candidate section_changes] → [Draft Diff]
+[Transcript] → [Stage 3: LLM classifies exchanges → candidate section_changes] → [Draft Diff]
 ```
 
 Everything before and after is manual. The n8n workflow in `workflows/` implements Stage 3 only — evidence extraction and preliminary schema‑shape checking. It is **not** a substitute for human review at Stage 6.
@@ -185,12 +185,12 @@ In the n8n UI: **Settings → Import → `workflows/syllabus_co_creation_agent.j
 ### 3. Run a test extraction
 
 ```bash
-curl -X POST http://localhost:5678/webhook/test‑session \
-  -H "Content‑Type: application/json" \
+curl -X POST http://localhost:5678/webhook/test-session \
+  -H "Content-Type: application/json" \
   -d '{
-    "session_id": "test‑001",
+    "session_id": "test-001",
     "topic": "networking_fundamentals",
-    "transcript": "[exchange‑01] User explains their experience with networking..."
+    "transcript": "[exchange-01] User explains their experience with networking..."
   }'
 ```
 
@@ -219,9 +219,9 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ---
 
-<div align="center" style="margin‑top: 2rem; padding‑top: 2rem; border‑top: 1px solid #e1e4e8;">
+<div align="center" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e1e4e8;">
 
-**CIP‑KGE v0.3‑draft** — Epistemic governance protocol for evidence‑based knowledge‑graph evolution<br>
+**CIP-KGE v0.3-draft** — Epistemic governance protocol for evidence-based knowledge-graph evolution<br>
 © 2026 Pyragogy · [MIT License](LICENSE)
 
 </div>

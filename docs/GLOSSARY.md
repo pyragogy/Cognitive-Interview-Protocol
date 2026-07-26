@@ -137,7 +137,7 @@ The term is borrowed from Git and GitHub practice without modification.
 
 *Project coinage.*
 
-The ten-stage process defined in [`PIPELINE.md`](./PIPELINE.md) that transforms an interview session into a syllabus update. The stages are: Session Preparation, Interview Session, Evidence Extraction, Knowledge Diff Generation, Pre-Review Quality Check, Human Review, Markdown Transformation, Pull Request, Syllabus Update, Diff Archival.
+The ten-stage process defined in [`PROTOCOL.md`](./PROTOCOL.md) that transforms an interview session into a syllabus update. The stages are: Session Preparation, Interview Session, Evidence Extraction, Knowledge Diff Generation, Pre-Review Quality Check, Human Review, Markdown Transformation, Pull Request, Syllabus Update, Diff Archival.
 
 The term *pipeline* is common in software engineering and data processing; we use it here in the general sense of a sequential, stage-gated process. The specific ten-stage structure is project coinage.
 

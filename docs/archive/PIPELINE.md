@@ -155,7 +155,7 @@ The reviewer is a human who was not present in the interview session. They have 
 
 The transformation is deterministic: each `section_changes` entry replaces or appends to the corresponding section in the node's Markdown file. The transformation must be performed and verified by a human — not applied automatically — in this version of the protocol.
 
-If the diff proposes a **new node** (`operation: add`), the Markdown file is created from scratch following the schema in [`SYLLABUS_SCHEMA.md`](./SYLLABUS_SCHEMA.md).
+If the diff proposes a **new node** (`operation: add`), the Markdown file is created from scratch following the schema in [`SYLLABUS_SCHEMA.md`](../SYLLABUS_SCHEMA.md).
 
 ---
 

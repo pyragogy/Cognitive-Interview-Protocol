@@ -44,7 +44,7 @@ The protocol is open in three senses.
 
 **Openly documented.** Every version of the protocol, every decision made in its design, and every revision to its rationale is recorded in this repository. A researcher who wants to implement or critique the protocol should be able to do so without asking for permission or access.
 
-**Openly improvable.** The protocol is a living document. Empirical evidence from interview sessions, counterexamples, and theoretical challenges are all legitimate grounds for revision. The process for proposing revisions is documented in [CONTRIBUTING.md](../CONTRIBUTING.md).
+**Openly improvable.** The protocol is a living document. Empirical evidence from interview sessions, counterexamples, and theoretical challenges are all legitimate grounds for revision. The process for proposing revisions is documented in [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
 **Open to failure.** It is possible that the approach does not work — that AI-assisted interviews, structured in this way, do not produce knowledge diffs of sufficient quality to be useful. If that is what the evidence shows, the project will say so. Documenting a negative result rigorously is within scope.
 

@@ -104,7 +104,7 @@ This is a **v0.4 candidate** — we explicitly flag that the two‑diff case doe
 If you are integrating CIP‑KGE into an n8n workflow, CI pipeline, or custom tool, implement these steps:
 
 ```javascript
-// Pseudo‑code for conflict detection
+// Pseudo-code for conflict detection
 function detectConflicts(diffs) {
   const overlaps = new Map(); // key: `${node_id}/${section}`
   

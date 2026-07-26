@@ -12,9 +12,9 @@
 
 ## What a Knowledge Diff is
 
-A Knowledge Diff (we coin this term in a project-specific sense, as defined in [`GLOSSARY.md`](./GLOSSARY.md)) is a structured, bounded, human-reviewable proposal for a modification to one or more sections of a node in the Pyragogy Syllabus knowledge graph.
+A Knowledge Diff (we coin this term in a project-specific sense, as defined in [`GLOSSARY.md`](../GLOSSARY.md)) is a structured, bounded, human-reviewable proposal for a modification to one or more sections of a node in the Pyragogy Syllabus knowledge graph.
 
-It is not a summary of an interview session. It is not a free-form description of what an expert said. It is a machine-readable artifact that maps precisely to the schema defined in [`SYLLABUS_SCHEMA.md`](./SYLLABUS_SCHEMA.md) and that, if accepted, can be transformed into a pull request on [pyragogy/ai-pedagogy](https://github.com/pyragogy/ai-pedagogy).
+It is not a summary of an interview session. It is not a free-form description of what an expert said. It is a machine-readable artifact that maps precisely to the schema defined in [`SYLLABUS_SCHEMA.md`](../SYLLABUS_SCHEMA.md) and that, if accepted, can be transformed into a pull request on [pyragogy/ai-pedagogy](https://github.com/pyragogy/ai-pedagogy).
 
 ---
 

@@ -2,7 +2,7 @@
 
 This directory is the audit trail of the CIP-KGE pipeline.
 
-Every Knowledge Diff produced from an interview session is stored here as a YAML file, following the specification in [`docs/KNOWLEDGE_DIFF_SPEC.md`](../docs/KNOWLEDGE_DIFF_SPEC.md).
+Every Knowledge Diff produced from an interview session is stored here as a YAML file, following the specification in [`docs/KNOWLEDGE_DIFF_SCHEMA.md`](../docs/KNOWLEDGE_DIFF_SCHEMA.md).
 
 ## File naming
 

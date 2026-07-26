@@ -25,7 +25,7 @@ For each target section, the interview is in one of four states:
 ```
 OPEN → PROBING → SATURATED → CLOSED
                     ↑
-               CLOSED‑THIN (alternate terminal state)
+               CLOSED-THIN (alternate terminal state)
 ```
 
 ### OPEN (initial state)
@@ -78,8 +78,8 @@ Reached when **Q1 → Q2 (×2) → Q3 (×1)** still fails to operationalize the 
 **What to do:**
 
 1. **Do not fabricate resolution.** Do not ask “would you say X?” to force closure — this is explicitly prohibited (contamination).
-2. **Record the section as `CLOSED‑THIN` in the session brief**, not as a silent gap. This is a first‑class outcome, not a failure to hide.
-3. **No diff is drafted for this section from this session.** A `CLOSED‑THIN` section produces **zero** `section_changes` entries — it is **not** submitted with `confidence: low` as a placeholder. Low confidence is for weak‑but‑present evidence, not absent evidence.
+2. **Record the section as `CLOSED-THIN` in the session brief**, not as a silent gap. This is a first‑class outcome, not a failure to hide.
+3. **No diff is drafted for this section from this session.** A `CLOSED-THIN` section produces **zero** `section_changes` entries — it is **not** submitted with `confidence: low` as a placeholder. Low confidence is for weak‑but‑present evidence, not absent evidence.
 4. This connects directly to **Invariant 6 (Failure Visibility)**: a CLOSED‑THIN outcome is preserved in the session record precisely because “this expert did not have operationalizable knowledge here” is itself useful information for whoever runs the next session on this node.
 
 ---
@@ -116,7 +116,7 @@ These remain **open research questions** — flagged in `docs/ROADMAP.md`, not p
 |-------|---------------|--------------|---------------|
 | OPEN | Q1 (elicitation) | 1 | SATURATED (both criteria met)<br>PROBING (otherwise) |
 | PROBING | Q2 (clarification) | 2 | SATURATED (operationalized)<br>Q3 escalation (not operationalized after 2) |
-| PROBING → escalation | Q3 (Socratic) | 1 | SATURATED (edge case surfaced)<br>CLOSED‑THIN (no edge case) |
+| PROBING → escalation | Q3 (Socratic) | 1 | SATURATED (edge case surfaced)<br>CLOSED-THIN (no edge case) |
 | SATURATED | Optional Q4/Q5 | — | CLOSED |
 | CLOSED‑THIN | (none) | — | (terminal) |
 

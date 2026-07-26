@@ -1,5 +1,5 @@
 {
-  "name": "Syllabus Co-creation Agent (Cognitive Interview Edition)",
+  "name": "CIP-KGE Stage 3 — Interview Evidence Extraction (draft diffs only, no graph writes)",
   "nodes": [
     {
       "parameters": {
@@ -8,7 +8,10 @@
       },
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
-      "position": [-160, 400],
+      "position": [
+        -160,
+        400
+      ],
       "id": "webhook-trigger-id",
       "name": "Session Start Webhook"
     },
@@ -42,7 +45,10 @@
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [40, 400],
+      "position": [
+        40,
+        400
+      ],
       "id": "load-draft-syllabus-id",
       "name": "Load Draft Syllabus"
     },
@@ -76,7 +82,10 @@
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
-      "position": [260, 400],
+      "position": [
+        260,
+        400
+      ],
       "id": "prepare-syllabus-agent-id",
       "name": "Prepare Syllabus Agent"
     },
@@ -87,7 +96,10 @@
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
-      "position": [480, 280],
+      "position": [
+        480,
+        280
+      ],
       "id": "respond-webhook-id",
       "name": "Respond to Webhook"
     },
@@ -99,7 +111,10 @@
       },
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
-      "position": [700, 280],
+      "position": [
+        700,
+        280
+      ],
       "id": "wait-for-session-id",
       "name": "Wait for TruGen Session Complete"
     },
@@ -111,7 +126,10 @@
       },
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
-      "position": [940, 400],
+      "position": [
+        940,
+        400
+      ],
       "id": "merge-baseline-transcript-id",
       "name": "Merge Baseline + Transcript"
     },
@@ -140,9 +158,12 @@
       },
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
-      "position": [1160, 400],
+      "position": [
+        1160,
+        400
+      ],
       "id": "analyze-cocreation-id",
-      "name": "Analyze Co-creation & Update Syllabus",
+      "name": "Analyze Co-creation & Extract Updates",
       "credentials": {
         "openAiApi": {
           "id": "REPLACE_WITH_CREDENTIAL_ID",
@@ -156,7 +177,10 @@
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1380, 400],
+      "position": [
+        1380,
+        400
+      ],
       "id": "validate-syllabus-json-id",
       "name": "Validate Syllabus JSON"
     },
@@ -166,7 +190,10 @@
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1600, 400],
+      "position": [
+        1600,
+        400
+      ],
       "id": "graph-consistency-validator-id",
       "name": "Graph Consistency Validator"
     },
@@ -193,19 +220,25 @@
       },
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
-      "position": [1840, 400],
+      "position": [
+        1840,
+        400
+      ],
       "id": "graph-valid-if-id",
       "name": "Graph Consistency Check?"
     },
     {
       "parameters": {
-        "jsCode": "const updatedSyllabus = $json.updated_syllabus;\nreturn {\n  json: {\n    status: 'success',\n    message: 'Syllabus updated and stored successfully.',\n    syllabus_id: updatedSyllabus.syllabus_id,\n    version: updatedSyllabus.version + 1,\n    nodesCount: updatedSyllabus.nodes.length,\n    connectionsCount: updatedSyllabus.connections.length,\n    persistedAt: new Date().toISOString(),\n    data: updatedSyllabus\n  }\n};"
+        "jsCode": "// CIP-KGE v0.3 — Stage 3 output: DRAFT Knowledge Diff for human review.\n//\n// EPISTEMIC GATE — DO NOT REPLACE THIS NODE WITH A WRITE OPERATION.\n// Principle 3: \"AI proposes; humans validate.\"\n// Principle 4: \"Interviews generate diffs, not edits.\"\n// This workflow has NO write access to the knowledge graph, by design.\n// The output below must be saved under diffs/ and reviewed by a human\n// (Stages 5-8 of docs/PROTOCOL.md) before any graph is touched.\n\nconst updated = $json.updated_syllabus;\nconst graphCheck = $json.graph_consistency || { isValid: false, errors: ['missing graph_consistency'], warnings: [] };\nconst now = new Date();\nconst dateStr = now.toISOString().slice(0, 10);\n\n// Derive candidate changes from the LLM-proposed node status tags.\nconst changedNodes = (updated.nodes || []).filter(n => n.status && n.status !== 'existing');\nconst opMap = { added: 'add', modified: 'modify', removed: 'remove' };\n\nconst candidateChanges = changedNodes.map(n => ({\n  target: {\n    node_id: n.id,\n    operation: opMap[n.status] || 'modify'\n  },\n  section: null,              // human reviewer fills this from the transcript\n  proposed_text: n.summary || n.title || '',\n  rationale: 'PROPOSED BY STAGE 3 EXTRACTION — human must rewrite, citing numbered session exchanges, before submission.'\n}));\n\nconst draftDiff = {\n  id: `diff-${dateStr}-DRAFT`,    // human assigns the final NNN sequence number\n  protocol_version: 'CIP-KGE-v0.3',\n  session_id: $json.session_id || 'session-UNKNOWN',\n  generated_at: now.toISOString(),\n  status: 'DRAFT — NOT SUBMITTED',\n  candidate_changes: candidateChanges,\n  evidence: {\n    session_exchange_ref: null,   // human fills: session-YYYY-MM-DD-NNN/exchange-NN\n    summary: 'Automated Stage 3 extraction. Human reviewer must ground each change in numbered transcript exchanges.',\n    confidence: 'low',\n    confidence_rationale: 'Machine-extracted candidates without human verification of the evidence mapping. Exists only to trigger human review, per the Explicit Uncertainty Requirement.',\n    corroboration_scope: 'none',\n    linked_sessions: []\n  },\n  pre_review_check: {\n    passes_minimum_quality: false,  // a machine-extracted draft NEVER passes Stage 5 automatically\n    failure_reason: 'no_evidence'\n  },\n  review_status: 'proposed',\n  review_notes: [],\n  merge_ready: false,\n  pr_url: null\n};\n\nreturn {\n  json: {\n    status: 'draft_ready_for_human_review',\n    write_performed: false,\n    message: 'Stage 3 complete. Draft Knowledge Diff generated. NO graph write occurred — a human must ground the evidence, validate against docs/KNOWLEDGE_DIFF_SCHEMA.yaml (e.g. via scripts/validate_diff.py), and run Stages 5-8 manually.',\n    automated_checks: {\n      schema_shape: $json._validation || null,\n      graph_consistency: graphCheck\n    },\n    draft_diff: draftDiff,\n    generatedAt: now.toISOString()\n  }\n};"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [2080, 300],
-      "id": "persist-success-id",
-      "name": "Persist Updated Syllabus"
+      "position": [
+        2080,
+        300
+      ],
+      "id": "emit-draft-diff-success",
+      "name": "Emit Draft Diff for Human Review"
     },
     {
       "parameters": {
@@ -213,7 +246,10 @@
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [2080, 500],
+      "position": [
+        2080,
+        500
+      ],
       "id": "graph-consistency-failed-id",
       "name": "Graph Consistency Failed Log"
     },
@@ -223,24 +259,167 @@
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [2300, 600],
+      "position": [
+        2300,
+        600
+      ],
       "id": "validation-failed-id",
       "name": "Schema Validation Failed Log"
+    },
+    {
+      "parameters": {
+        "content": "## Epistemic gate (CIP-KGE Principles 3–4)\n\nThis workflow implements **Stage 3 only** (evidence extraction / draft generation).\n\nIt **never writes to the knowledge graph**. The success branch emits a *draft* Knowledge Diff with `pre_review_check.passes_minimum_quality: false` — a human must ground the evidence in numbered transcript exchanges and run Stages 5–8 (validation, review, transformation, PR) manually.\n\nDo not add persistence nodes downstream of `Emit Draft Diff for Human Review`.",
+        "height": 300,
+        "width": 420,
+        "color": 4
+      },
+      "id": "epistemic-gate-note",
+      "name": "Sticky Note — Epistemic Gate",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1400,
+        -260
+      ]
     }
   ],
   "connections": {
-    "Session Start Webhook": { "main": [[{ "node": "Load Draft Syllabus", "type": "main", "index": 0 }]] },
-    "Load Draft Syllabus": { "main": [[{ "node": "Prepare Syllabus Agent", "type": "main", "index": 0 }]] },
-    "Prepare Syllabus Agent": { "main": [[{ "node": "Respond to Webhook", "type": "main", "index": 0 }, { "node": "Merge Baseline + Transcript", "type": "main", "index": 1 }]] },
-    "Respond to Webhook": { "main": [[{ "node": "Wait for TruGen Session Complete", "type": "main", "index": 0 }]] },
-    "Wait for TruGen Session Complete": { "main": [[{ "node": "Merge Baseline + Transcript", "type": "main", "index": 0 }]] },
-    "Merge Baseline + Transcript": { "main": [[{ "node": "Analyze Co-creation & Update Syllabus", "type": "main", "index": 0 }]] },
-    "Analyze Co-creation & Update Syllabus": { "main": [[{ "node": "Validate Syllabus JSON", "type": "main", "index": 0 }]] },
-    "Validate Syllabus JSON": { "main": [[{ "node": "Graph Consistency Validator", "type": "main", "index": 0 }]] },
-    "Graph Consistency Validator": { "main": [[{ "node": "Graph Consistency Check?", "type": "main", "index": 0 }]] },
-    "Graph Consistency Check?": { "main": [[{ "node": "Persist Updated Syllabus", "type": "main", "index": 0 }], [{ "node": "Graph Consistency Failed Log", "type": "main", "index": 0 }]] },
-    "Graph Consistency Failed Log": { "main": [[{ "node": "Schema Validation Failed Log", "type": "main", "index": 0 }]] }
+    "Session Start Webhook": {
+      "main": [
+        [
+          {
+            "node": "Load Draft Syllabus",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Draft Syllabus": {
+      "main": [
+        [
+          {
+            "node": "Prepare Syllabus Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Syllabus Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge Baseline + Transcript",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        [
+          {
+            "node": "Wait for TruGen Session Complete",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for TruGen Session Complete": {
+      "main": [
+        [
+          {
+            "node": "Merge Baseline + Transcript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Baseline + Transcript": {
+      "main": [
+        [
+          {
+            "node": "Analyze Co-creation & Extract Updates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Co-creation & Extract Updates": {
+      "main": [
+        [
+          {
+            "node": "Validate Syllabus JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Syllabus JSON": {
+      "main": [
+        [
+          {
+            "node": "Graph Consistency Validator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Graph Consistency Validator": {
+      "main": [
+        [
+          {
+            "node": "Graph Consistency Check?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Graph Consistency Check?": {
+      "main": [
+        [
+          {
+            "node": "Emit Draft Diff for Human Review",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Graph Consistency Failed Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Graph Consistency Failed Log": {
+      "main": [
+        [
+          {
+            "node": "Schema Validation Failed Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
   },
   "active": false,
-  "settings": { "executionOrder": "v1" }
+  "settings": {
+    "executionOrder": "v1"
+  }
 }

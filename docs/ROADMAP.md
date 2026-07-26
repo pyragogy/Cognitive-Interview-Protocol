@@ -17,7 +17,7 @@
 - [x] Knowledge Diff specification, anchored to node sections ([`PROTOCOL.md`](./PROTOCOL.md))
 - [x] Complete 10‑stage pipeline with failure conditions (same)
 - [x] Interview guide mapping question types to node sections (same)
-- [x] Annotated synthetic example: `diff‑001‑embodied‑foundation/`
+- [x] Annotated synthetic example: `diff-001-embodied-foundation/`
 
 **Known limitations carried into Phase 2:**
 - Review criteria are partially specified; calibration requires real review disagreements
@@ -33,7 +33,7 @@
 
 **Goal.** Conduct a small number of real interview sessions using the v0.2 protocol and evaluate whether the pipeline produces Knowledge Diffs that are:
 1. Independently reviewable by someone who was not in the session
-2. Mergeable into `pyragogy/ai‑pedagogy` without requiring the reviewer to rewrite the proposal
+2. Mergeable into `pyragogy/ai-pedagogy` without requiring the reviewer to rewrite the proposal
 3. Descriptive of actual knowledge that improves the node's precision or coverage
 
 **What we are looking for:**
@@ -41,7 +41,7 @@
 - Do the question types in the Interview Guide surface evidence that maps to specific sections?
 - Where does the pre‑review quality check fail most often, and why?
 - Do reviewers disagree? If so, on what grounds?
-- What does the first real PR on `pyragogy/ai‑pedagogy` look like?
+- What does the first real PR on `pyragogy/ai-pedagogy` look like?
 - **New:** Does the decision‑tree for question transitions work in practice, or does it lead to premature termination?
 - **New:** How often do `confidence: low` proposals appear, and do they have adequate corroboration?
 
@@ -50,7 +50,7 @@
 - [ ] First real interview session (with transcript and evidence bundle)
 - [ ] First real Knowledge Diff (passes pre‑review quality check)
 - [ ] First real review decision (accepted or rejected, with rationale)
-- [ ] First real PR on `pyragogy/ai‑pedagogy` (or first rejection at this stage, with reason)
+- [ ] First real PR on `pyragogy/ai-pedagogy` (or first rejection at this stage, with reason)
 - [ ] Post‑session analysis: what did the protocol fail to capture?
 - [ ] **New:** Document at least one instance of reviewer disagreement.
 
@@ -93,7 +93,7 @@ These are not assigned to a specific phase. They are ongoing research questions.
 
 - Can AI‑assisted interviews surface tacit knowledge that structured questionnaires miss? What evidence would settle this question?
 - What is the appropriate scope of a single Knowledge Diff? The current `scope_too_broad` pre‑review check (>3 section changes) is arbitrary — what should it actually be?
-- Is the mechanism distinction between automation_bias and the embodied foundation risk (as described in `diff‑001‑embodied‑foundation`) empirically supportable? [VERIFY SOURCE: automation bias literature; embodied cognition literature]
+- Is the mechanism distinction between automation_bias and the embodied foundation risk (as described in `diff-001-embodied-foundation`) empirically supportable? [VERIFY SOURCE: automation bias literature; embodied cognition literature]
 - Can the pipeline be partially automated without sacrificing the accountability properties that make the review meaningful?
 - What does it mean for a Knowledge Diff to fail the review — and how do rejected diffs improve the protocol?
 - **New:** How should the protocol handle expert disagreement when both experts have high confidence but propose incompatible changes?
