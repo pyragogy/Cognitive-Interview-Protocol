@@ -41,8 +41,14 @@ def collect_files(paths):
     for raw in paths:
         p = Path(raw)
         if p.is_dir():
-            files.extend(sorted(p.glob("*.yaml")))
-            files.extend(sorted(p.glob("*.yml")))
+            # rglob: recursive — diffs may live one or more levels deep
+            # (e.g., examples/diff-001-embodied-foundation/diff.yaml)
+            found = sorted(set(p.rglob("*.yaml")) | set(p.rglob("*.yml")))
+            if not found:
+                print(f"WARNING: directory matched no YAML files: {raw}")
+            else:
+                print(f"{raw}: {len(found)} file(s) found")
+            files.extend(found)
         elif p.is_file():
             files.append(p)
         else:

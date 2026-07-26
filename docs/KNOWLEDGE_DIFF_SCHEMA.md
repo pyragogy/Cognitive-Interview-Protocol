@@ -66,7 +66,7 @@ A diff with `confidence: high` and `corroboration_scope: none` is **valid but we
 
 The schema includes **conditional validation rules** that cannot be expressed in pure YAML Schema:
 
-1. **If `confidence == "low"`**, `confidence_rationale` must be non‑empty and **explicitly state why the diff is being submitted despite low confidence** (e.g., “no other node covers this failure mode; documenting the gap outweighs the uncertainty”). A boilerplate rationale triggers a Stage 5 failure (`failure_reason: low_confidence_only`).
+1. **If `confidence == "low"`**, `confidence_rationale` must be non‑empty and **explicitly state why the diff is being submitted despite low confidence** (e.g., “no other node covers this failure mode; documenting the gap outweighs the uncertainty”). Machine-enforced in the YAML schema: `confidence_rationale` has `minLength: 1` always, raised to `minLength: 20` when `confidence == "low"` (via `if/then`), to reject empty strings and alibi rationales like "ok". Genuinely boilerplate-but-long rationales still require human Stage 5 judgment (`failure_reason: low_confidence_only`) — no regex replaces that.
 2. **If `target.operation != "add"`**, `target.node_id` must resolve in the binding layer’s graph (semantic check, not syntactic).
 3. **Every `section_changes` entry** must have a non‑empty `rationale` that **cites the session exchange** (not just “makes it clearer”).
 
