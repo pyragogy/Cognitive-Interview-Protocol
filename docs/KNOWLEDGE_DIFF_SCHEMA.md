@@ -98,7 +98,9 @@ A machine‑readable YAML Schema is available at [`KNOWLEDGE_DIFF_SCHEMA.yaml`](
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `node_id` | string | yes | Opaque identifier for the target node |
-| `operation` | string | yes | Enum: `add`, `modify`, `remove`, `deprecate` |
+| `operation` | string | yes | Enum: `add`, `modify`, `remove`, `deprecate`, `retract` |
+
+**On `retract`:** withdraws a previously accepted change that later evidence contradicts. The retraction diff must cite the superseding session, and the retracted content stays in the graph's history — a retraction is a new event, not a deletion (Invariant 6). Use `deprecate` for planned obsolescence, `retract` for epistemic error. Specified *before* the first real case requires it: a governance protocol that lacks a retraction path forces reviewers to choose between silent edits and leaving known-wrong content published.
 
 ### `section_changes` array items
 

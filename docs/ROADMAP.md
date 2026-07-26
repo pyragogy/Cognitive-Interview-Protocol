@@ -92,6 +92,7 @@
 These are not assigned to a specific phase. They are ongoing research questions.
 
 - Can AI‑assisted interviews surface tacit knowledge that structured questionnaires miss? What evidence would settle this question?
+- **Reliability, operationalized (replaces the open-ended framing above):** a Knowledge Diff counts as *reliable* if it survives a **test-retest**: same expert, same target node, two sessions 2–3 weeks apart, with the expert never shown the first session's diff before the second. Convergence on `section_changes` targets, `rationale`, and `confidence` = first signal of method reliability. Divergence is not a failure to hide — it is a Phase 2 finding to publish, per the Failure Visibility Principle. Until this test has been run at least once with a real external expert, every claim about the protocol's reliability is aspirational, not empirical.
 - What is the appropriate scope of a single Knowledge Diff? The current `scope_too_broad` pre‑review check (>3 section changes) is arbitrary — what should it actually be?
 - Is the mechanism distinction between automation_bias and the embodied foundation risk (as described in `diff-001-embodied-foundation`) empirically supportable? [VERIFY SOURCE: automation bias literature; embodied cognition literature]
 - Can the pipeline be partially automated without sacrificing the accountability properties that make the review meaningful?

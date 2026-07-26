@@ -55,7 +55,8 @@ Cognitive-Interview-Protocol/
 │   ├── KNOWLEDGE_DIFF_SCHEMA.yaml     ← Machine-readable YAML schema for validation
 │   ├── ARBITRATION.md                 ← Conflict resolution between concurrent diffs (ex-L5)
 │   ├── INTERVIEW_DECISION_TREE.md     ← Q1–Q5 termination rules (state machine)
-│   ├── SYLLABUS_SCHEMA.md             ← Pyragogy-specific binding (optional layer)
+│   ├── SYLLABUS_SCHEMA.md             ← Pyragogy‑specific binding (optional layer)
+│   ├── RELATED_WORK.md                ← Honest positioning vs. CommonKADS, Delphi, grounded theory
 │   ├── GLOSSARY.md
 │   ├── ROADMAP.md
 │   └── archive/

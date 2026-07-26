@@ -62,7 +62,15 @@ properties:
           - modify
           - remove
           - deprecate
-        description: Operation to perform on the target node
+          - retract
+        description: >
+          Operation to perform on the target node. "retract" withdraws a
+          previously accepted change (or node) that later evidence contradicts:
+          the retraction diff MUST cite the superseding session in
+          evidence.session_exchange_ref, and the retracted content is preserved
+          in the graph's history, not deleted (Failure Visibility Principle,
+          Invariant 6). Use "deprecate" for planned obsolescence, "retract"
+          for epistemic error.
 
   section_changes:
     type: array
