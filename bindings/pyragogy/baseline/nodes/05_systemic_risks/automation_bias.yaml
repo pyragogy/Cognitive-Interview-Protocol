@@ -1,0 +1,51 @@
+node_id: 05_systemic_risks/automation_bias
+title: Automation Bias
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 05_systemic_risks/automation_bias.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/risk
+sectioned: true
+content_hash: sha256:bb7c1ddaf09d42552bc21f990b5d53684e68b11395aa14007305a811c559ce86
+sections:
+  definition:
+    text: Automation Bias is the cognitive failure mode where a user accepts an AI-generated answer as
+      inherently correct due to the machine’s authoritative tone, bypassing active human verification.
+    hash: sha256:438220861661bd6b8d02d7306b76d65a103b982178b70dd94f8498f8a4d9be3a
+  use_case:
+    text: Activated as a diagnostic warning when a learner rapidly accepts complex syntheses, code, or
+      strategic recommendations without cross-referencing primary sources or testing edge cases.
+    hash: sha256:915db564692d859808f5d48ab108c1662e358e37827948e3337bc6e1456ea205
+  human_role:
+    text: The user must actively notice their own suspension of disbelief, interrupt the reflexive acceptance
+      of confident algorithmic prose, and reclaim the responsibility of fact-checking.
+    hash: sha256:af840426864a59ed0b464c7b8cb39c19959ad73be2ef90d30173db63290da41d
+  ai_role:
+    text: The AI system should expose this failure pattern by occasionally injecting “pedagogically useful
+      deficits” or explicitly requiring the user to cite external sources before accepting its output
+      as final.
+    hash: sha256:bd8699ca273411e1e6a43a94137e2241f7549d60f7c25379acb55480c0dcb965
+  friction:
+    text: The interruption mechanism involves structural roadblocks, such as demanding the human to verbally
+      explain the AI’s logic or explicitly confirm the underlying data sources before proceeding.
+    hash: sha256:8324811c5f26ba6c597999137c9048a4ac7b2688685a9696b52d90769035fc7d
+  risk:
+    text: If this pattern continues, the user suffers severe domain knowledge erosion, becoming incapable
+      of spotting dangerous hallucinations or systemic errors in the output they approve.
+    hash: sha256:4e0f602660b5c774afd37baa15d1329a57fefbdda4eb6b84c42a610dabc03f37
+  observable_markers:
+    text: Recovery is signaled when the user explicitly queries the AI’s logic (e.g., “What are the sources
+      for this claim?”), runs independent tests on the output, or rejects a plausible-sounding but flawed
+      suggestion.
+    hash: sha256:66c1c474f7eb00f1da5111201d23fdce66f153cb4e5b2fd964deeab5d9373420
+relations:
+  outbound:
+  - 01_foundations/cartesian_axes
+  inbound:
+  - 03_praxis/adolescent_sparring_arena
+  - 04_autonomy/adult_reflective_practice
+  - 05_systemic_risks/ai_over_reliance

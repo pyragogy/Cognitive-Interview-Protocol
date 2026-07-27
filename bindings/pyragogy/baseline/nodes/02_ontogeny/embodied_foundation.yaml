@@ -1,0 +1,51 @@
+node_id: 02_ontogeny/embodied_foundation
+title: 'The Embodied Portal: Sensory-Motor Inquiry in Early Childhood'
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 02_ontogeny/embodied_foundation.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/practice
+sectioned: true
+content_hash: sha256:441040cb916485c84396f4294903f1678780366c67e2e9220dca9ad0a0de62bd
+sections:
+  definition:
+    text: The Embodied Foundation is the developmental anchor that grounds early cognition in physical,
+      sensory-motor inquiry rather than screen-mediated abstraction. It establishes the baseline expectation
+      that learning requires physical manipulation and friction.
+    hash: sha256:6ddcad2f345252f90e85add9375d74a0c44ecfb3fee9d17083c19baf36d89e1f
+  use_case:
+    text: Activated during the earliest stages of learning (early childhood or the absolute beginning
+      of a novel, complex physical skill) before any automated cognitive assistance is introduced.
+    hash: sha256:bbb7e6fd7169ca3a6e5faf29ce29385d7b95add301e79c321f55bf42f71f435b
+  human_role:
+    text: The learner must demonstrate sustained embodied attention, actively manipulating physical objects
+      (e.g., tactile storybooks, building blocks) and engaging in joint physical attention with caregivers
+      or peers.
+    hash: sha256:d934c8a8f235d3cd0c6f850a6dd9b0eee8c43aed6df8c9e34644ab8e111f7ae6
+  ai_role:
+    text: The AI’s role in this phase is strictly absent or severely constrained. The digital system refuses
+      to provide conversational interfaces or frictionless problem-solving, preserving the analog environment.
+    hash: sha256:dd326e423b2384d6ff618ba3493e3a3b7d57cdfdcd44497c6e850a530b26f5c4
+  friction:
+    text: The mechanism relies on natural, physical friction—the inherent resistance of the material world.
+      It prevents the premature introduction of “magic” digital solutions that bypass sensory-motor struggle.
+    hash: sha256:11f1c55a13e2cff2db028e6d4b50529dae6e8c829ea51424076e6c8336a6ddc5
+  risk:
+    text: 'If the learner bypasses this foundation and is exposed prematurely to frictionless generative
+      interfaces, the framework treats this as a risk condition: attention, spatial reasoning, frustration
+      tolerance, and embodied problem-solving may become under-practiced rather than actively strengthened.'
+    hash: sha256:6101d3fe8c5cc5d4ee76f078af853ec99fff24aad8285ef8ac21d6be4a994f49
+  observable_markers:
+    text: The learner can sustain independent focus on a physical task for extended periods, solve basic
+      physical spatial problems without digital scaffolding, and demonstrate curiosity-driven tactile
+      exploration.
+    hash: sha256:ec0cc2a3544c00fc98cd0fcc31a72a7709b65ebe608c0f0508ab8d7e2ff921da
+relations:
+  outbound: []
+  inbound:
+  - 02_ontogeny/ontogeny_to_praxis_bridge
+  - index

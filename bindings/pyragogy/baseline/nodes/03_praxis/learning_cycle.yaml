@@ -1,0 +1,49 @@
+node_id: 03_praxis/learning_cycle
+title: Learning Cycle
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 03_praxis/learning_cycle.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/practice
+sectioned: true
+content_hash: sha256:b4e552301738bbf954ed3e9a84af39c1cf4ebf9a6249b939fd6659ecbe31ac22
+sections:
+  definition:
+    text: The Learning Cycle is a guided, iterative framework that structures inquiry into 6 specific
+      phases (Notice, Ask, Generate, Test, Reflect, Share) to transform AI interaction from passive absorption
+      into active, measurable discovery.
+    hash: sha256:2962b215ce4acb7a952059a247cc0273cbaaf8e4eb62bd6eb1d6f7290a34e9c5
+  use_case:
+    text: Activated when the learner encounters a new domain or a conceptual anomaly, requiring a rigorous
+      pathway to convert initial curiosity into testable hypotheses.
+    hash: sha256:f8e81088683a672b5a4e940c9e798124884aac6200bbf6907b5caefc619b658f
+  human_role:
+    text: Formulates initial questions, develops original hypotheses by cross-referencing intuition with
+      emerging data, critically evaluates failures during the test phase, and synthesizes the discovery
+      to argue it publicly.
+    hash: sha256:1ebec882e028e5b478130af2eac65bb841c17532218704260dcf4597d27c51c3
+  ai_role:
+    text: Responds to explorations by introducing methodological constraints and providing simulation
+      scenarios. It returns limited or partial feedback to force the student’s autonomous exploration,
+      refraining from delivering the final solution.
+    hash: sha256:2e87c3ac9d45fc5f7abd60f53f9fa97708a9b2765e092b09bc33686cc9e44b4a
+  friction:
+    text: Interrupts the reflex to externalize heuristic thinking, forcing human ideas to collide against
+      the structural limits of the system during the verification phase (“Test”) and blocking access to
+      the easy answer.
+    hash: sha256:62ddbb5f950bace8336d8800fcbda3952bab6da0ccf9e5aca1ecc14756b3f0e3
+  risk:
+    text: 'Without this closed loop, the student consolidates a silent epistemic dependency: they consume
+      the output as pre-digested truth without building and consolidating their own logical neural networks.'
+    hash: sha256:15a70cc19184738a5a75cfdf32f51130abc1c9335abdbe703cbd1b82b95e3b2d
+  observable_markers:
+    text: During the public sharing phase, the student can publicly reconstruct their methodological errors,
+      defending the exact reasons that forced them to adjust their starting hypotheses.
+    hash: sha256:86bb536d6d163d6e8ba61930e532cdbd130a09259271c1f524a46105a12d4c47
+relations:
+  outbound: []
+  inbound: []

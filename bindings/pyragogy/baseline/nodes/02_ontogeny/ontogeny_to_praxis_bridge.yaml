@@ -1,0 +1,52 @@
+node_id: 02_ontogeny/ontogeny_to_praxis_bridge
+title: Ontogeny to Praxis Bridge
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 02_ontogeny/ontogeny_to_praxis_bridge.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/bridge
+sectioned: true
+content_hash: sha256:c64a988af508ada9816be86983a1636172287d8e6890a86a6712292fc3ba15b1
+sections:
+  definition:
+    text: This bridge governs the critical transition from early cognitive foundation building and passive
+      first-contact (Ontogeny) into active, friction-based human-AI co-agency (Praxis).
+    hash: sha256:1b140d5af0e4690b587049452513b8d2161ca1cd37b5afa27eeff26acd04651d
+  use_case:
+    text: Activated when a learner has established basic conceptual vocabulary and attempts to move beyond
+      rote ingestion, showing signs of readiness for structured dialectic conflict.
+    hash: sha256:f6a6d4280c38a9c47f8366bb83654d0f67d18db45d76fbae4b208bb13a02f410
+  human_role:
+    text: The learner must demonstrate the ability to construct independent questions, tolerate contradiction
+      without retreating, and initiate challenges against initial assumptions rather than passively accepting
+      them.
+    hash: sha256:958ceff1d4662dbaf4356d6776b8aa855581b9b96ffe7673689136b263816a29
+  ai_role:
+    text: The AI shifts from a passive encyclopedia to an active sparring partner. It tests the learner
+      by introducing deliberate contradictions, prompting for alternatives, and refusing to provide direct,
+      frictionless answers.
+    hash: sha256:0a0de2c4c113b673030cab7822516915def787dfaab4796bc0e341a0dddddc42
+  friction:
+    text: The bridge institutes a hard block on copy-pasting and “do it for me” prompts. It prevents premature
+      advancement by demanding the user generate at least two independent hypotheses before the AI provides
+      synthesis.
+    hash: sha256:f2d4d20e284a5470363783df380c9dc70671c26e8a00cbaa0bba7eed79f67bec
+  risk:
+    text: If the learner crosses into Praxis too early, they will be overwhelmed by the cognitive load
+      of dialectic sparring, leading to frustration, disengagement, and a rapid regression to cognitive_offloading.
+    hash: sha256:0363dcf5ac6b0ce72c288214be7db49d9b7360ee4810f0b152db160625c5da35
+  observable_markers:
+    text: System logs show the learner actively rejecting the first AI-generated output, asking probing
+      follow-up questions, and successfully maintaining a multi-turn debate without simply agreeing to
+      reach closure.
+    hash: sha256:98eabb954ede7cb51db2212304218b1ef51f9b7f395157b4fff162530d649258
+relations:
+  outbound:
+  - 02_ontogeny/embodied_foundation
+  - 03_praxis/adolescent_sparring_arena
+  - 05_systemic_risks/cognitive_offloading
+  inbound: []

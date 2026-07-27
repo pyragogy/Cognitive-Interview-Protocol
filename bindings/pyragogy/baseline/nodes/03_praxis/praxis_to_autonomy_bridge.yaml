@@ -1,0 +1,52 @@
+node_id: 03_praxis/praxis_to_autonomy_bridge
+title: Praxis to Autonomy Bridge
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 03_praxis/praxis_to_autonomy_bridge.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/bridge
+sectioned: true
+content_hash: sha256:6be120a51fa07009fb497b455ece90301446f052901082bc26249d80472499ad
+sections:
+  definition:
+    text: This bridge manages the final systemic transition from AI-assisted dialectic sparring (Praxis)
+      into full cognitive sovereignty, responsible independent judgment, and self-directed metacognition
+      (Autonomy).
+    hash: sha256:fdbda434227555913e12fce5cfe88ab581baf87ad94b0f73ef4ee8024a53a17a
+  use_case:
+    text: Activated when a learner has mastered co-agency protocols and must now prove they can independently
+      structure, evaluate, and execute complex workflows without the AI setting the rails.
+    hash: sha256:7a1a7b16dc1ec525ede087e1b28bf64da6fdc78d64fdd905c9b0ab8add1a9e19
+  human_role:
+    text: The learner must demonstrate the capacity to define their own constraints, audit their own cognitive
+      biases, and explicitly judge the ethical and structural value of both human and machine outputs.
+    hash: sha256:c2f84a9fba2792dfc83a79cba8ff9d68a322607cbd4d4e83d25908de30d71ca7
+  ai_role:
+    text: The AI progressively disables its active tutoring and prompting interfaces. It acts as a passive,
+      silent tool that only responds to highly specific, user-structured commands, refusing to guide the
+      overarching methodology.
+    hash: sha256:4c6214de15fa38e947e9dd139f72049a83e56d5dd4b5c00ff84ab4005427ab3c
+  friction:
+    text: The system prevents premature autonomy by forcing the user to submit a manual “inquiry architecture”
+      (their own plan and criteria) before unlocking advanced tool access, ensuring they aren’t just improvising.
+    hash: sha256:09456b022ff0b3a3ce4cd6756cd55d6790312eb5c533ce3c73151d494bbec219
+  risk:
+    text: 'If a learner crosses this bridge without true autonomy, they fall into the “Echo Chamber” anti-pattern:
+      believing they are sovereign while actually following the implicit rails and biases of the AI’s
+      default behavior.'
+    hash: sha256:bc9a66a1bc04d5165eb5d63fe670a2230fd9924caa1e6f3868429c85161daa37
+  observable_markers:
+    text: The user initiates 100% of the structural changes in the project map. They write extensive,
+      standalone journal reflections and define custom, highly restrictive system prompts that enforce
+      their own methodologies.
+    hash: sha256:78b67ca43670a8882f0ebaa95a869811ef29f7697d4d0271fb6d655e0283e318
+relations:
+  outbound:
+  - 03_praxis/adolescent_sparring_arena
+  - 04_autonomy/adult_reflective_practice
+  inbound:
+  - 04_autonomy/autonomy_failure_modes

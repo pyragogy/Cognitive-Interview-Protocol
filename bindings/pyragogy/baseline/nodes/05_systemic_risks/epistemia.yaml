@@ -1,0 +1,84 @@
+node_id: 05_systemic_risks/epistemia
+title: 'Epistemia: The Illusion of Knowing'
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 05_systemic_risks/epistemia.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/risk
+- pyragogy/systemic-risk
+- pyragogy/epistemology
+sectioned: true
+content_hash: sha256:69b9793f28de899d399ac2a7fa0d41855296780662c9b0fcc7ae9958e3273430
+sections:
+  definition:
+    text: 'Epistemia is an emerging systemic-risk concept describing the condition in which linguistic
+      verisimilitude and statistical plausibility substitute for active epistemic evaluation. Originally
+      identified in computational and cultural sociology (e.g., Loru et al., 2025, “The simulation of
+      judgment in LLMs”, PNAS), it represents a meta-risk: the polished, grammatically impeccable output
+      of an AI system creates a powerful “illusion of knowing” (or cognitive sugar rush). This illusion
+      bypasses the active human cognitive labor—such as checking primary evidence, evaluating logical
+      coherence, and managing uncertainty—necessary to build genuine understanding.
+
+      Unlike specific cognitive biases, Epistemia is a systemic condition: it binds together individual
+      risks like the fluency_heuristic and unexamined_ai_answers, forming an environment where the appearance
+      of intelligence replaces the actual labor of judgment.'
+    hash: sha256:ed417d1b94bb06905e35321d2ef4acc1c1de97240f46af80e4ab3088e8d40c53
+  use_case:
+    text: Activated at a systemic level when designing or engaging with conversational interfaces, automated
+      summarization, and generative tutoring systems, particularly where the learner is exposed to fluent,
+      zero-shot AI outputs without structural friction.
+    hash: sha256:d5f6a08d19b48986cf506227c22fa5896aee64b3e4ff2d421a8a6fcaa40cf740
+  human_role:
+    text: The human learner must act as an active evaluator rather than a passive recipient. They must
+      deliberately resist the feeling of closure induced by a well-structured response, applying cognitive
+      effort to interrogate the AI’s premises, verify external evidence, and construct independent reasoning
+      trails. The human holds ultimate accountability for the truth status of any co-created knowledge.
+    hash: sha256:f0dfb0aaf1b69207daed52fb42af757bc81568efe52798e56e86ff08b46687a5
+  ai_role:
+    text: 'In an audited system, the AI is constrained from simulating final judgment or producing authoritative,
+      unprompted summaries. Instead of acting as an unquestioned oracle, it acts as a bounded partner:
+      exposing its statistical nature, highlighting areas of high uncertainty, and formatting its reasoning
+      steps to encourage human verification rather than passive ingestion.'
+    hash: sha256:c25ab52ce15e9ccf51d95b6a1083eee6ff0e200dc51a2421e5014639b2e261e0
+  friction:
+    text: The system implements structural friction to disrupt the illusion of fluency. This includes
+      an Evidence Demand protocol (requiring users to explicitly log and cross-reference primary sources
+      before accepting an AI synthesis) and Reasoning Trails (forcing the user to review, annotate, and
+      approve intermediate logical steps rather than receiving a finished zero-shot product).
+    hash: sha256:843ddd2f36db122c96ab9982a16d80c21f185c054818aa4e27fd3e178f499902
+  risk:
+    text: If Epistemia is not mitigated, the learner sinks into a state of epistemic dependency and cognitive
+      debt. They lose the procedural capacity to formulate independent thoughts, manage structural uncertainty,
+      and build lasting mental schemas, eventually mistaking the consumption of generated text for the
+      possession of knowledge.
+    hash: sha256:719602a533f9a48536b6851f1a6daa6d240494115cda74a16ac29217e3e48b19
+  observable_markers:
+    text: 'The user’s interaction logs show regular challenges to the AI’s outputs, explicit annotations
+      of source reliability, and documented revisions of AI-generated claims. In assessments, the learner
+      can reconstruct the underlying logical structure of the argument without relying on the AI’s specific
+      phrasing, demonstrating genuine cognitive mastery rather than performative compliance.
+
+
+      References
+
+
+      PNAS Study: Loru, E., Nudo, J., Di Marco, N., Quattrociocchi, W., et al. (2025). “The simulation
+      of judgment in LLMs.” Proceedings of the National Academy of Sciences.
+
+      Blog Discussion: Nostra Scuola Blog (nostrascuola.blog), discussing “Epistemia” as a cultural diagnosis
+      of the delegation of critical judgment to AI platforms.'
+    hash: sha256:eb34cdce526ce7263624e5677230b5d269cbe6a6955178942f2261fa059ef237
+relations:
+  outbound:
+  - 03_praxis/reasoning_trails
+  - 04_autonomy/epistemic_mirror
+  - 05_systemic_risks/fluency_heuristic
+  - 05_systemic_risks/performative_understanding
+  - 05_systemic_risks/unexamined_ai_answers
+  - 06_protocols/evidence_demand
+  inbound:
+  - 05_systemic_risks/index

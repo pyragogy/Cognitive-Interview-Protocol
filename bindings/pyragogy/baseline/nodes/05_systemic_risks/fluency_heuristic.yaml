@@ -1,0 +1,52 @@
+node_id: 05_systemic_risks/fluency_heuristic
+title: The Fluency Heuristic
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 05_systemic_risks/fluency_heuristic.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/risk
+sectioned: true
+content_hash: sha256:099bb6fb3495c659127421bbad1dddbc4dd4381b523cbe709c0bcb71356eca68
+sections:
+  definition:
+    text: The Fluency Heuristic is a cognitive trap where a user mistakes the grammatical smoothness,
+      clean typography, and authoritative tone of an AI output for objective truth, factual accuracy,
+      or intellectual depth.
+    hash: sha256:fea40dac36a85a3d767040dac62918e4a43cd5cd8f40f10623e84209d74f7b9a
+  use_case:
+    text: Activated as a diagnostic warning when a user rates a highly polished but logically shallow
+      text as superior to a fragmented but highly rigorous human draft.
+    hash: sha256:7b3d7ae991cfc3912c23145ab81dc86bd1c026c4ef58615b612743c7c88acaf4
+  human_role:
+    text: The user must recognize their emotional vulnerability to eloquent prose, interrupt the “halo
+      effect” of good grammar, and reclaim the ability to evaluate arguments based purely on structural
+      rigor.
+    hash: sha256:85af8d5cf347069face25e2cea071367734274ca8f85487c43084f87537097ba
+  ai_role:
+    text: The system exposes this bias by generating beautifully written but factually contradictory statements,
+      or by deliberately lowering its stylistic fluency to force the user to concentrate on the raw data.
+    hash: sha256:822effcd73a9c65e13cf3c43a594aa1b9347d08fbf987385fb49432bacbf37d6
+  friction:
+    text: The risk loop is broken by stripping the AI’s output of formatting, polite conversational wrappers,
+      and persuasive rhetoric, forcing the user to evaluate bare propositions.
+    hash: sha256:6b165efee3b4aafbb583782963b247cc48e4093a19f88b53e5c2737e2cd1c121
+  risk:
+    text: If this heuristic dominates, the user loses the ability to detect sophisticated misinformation,
+      becoming easily manipulated by any system that outputs confident and stylistically perfect prose.
+    hash: sha256:1c67b3642b08e66e0789c3bdbca7e2e918cd2bdfa099baa8d4aad8cbd43623ca
+  observable_markers:
+    text: Recovery is signaled when the user ignores the stylistic polish of the response and explicitly
+      attacks the underlying logic or missing citations.
+    hash: sha256:c3ad5d5a29eeeb3d7468fae07d74ced09796fdc608e094f524019078aa652617
+relations:
+  outbound:
+  - 05_systemic_risks/unexamined_ai_answers
+  inbound:
+  - 04_autonomy/critical_thinking
+  - 05_systemic_risks/ai_over_reliance
+  - 05_systemic_risks/epistemia
+  - 06_protocols/evidence_demand

@@ -1,0 +1,63 @@
+node_id: 05_systemic_risks/ai_over_reliance
+title: 'The Frictionless Trap: Algorithmic Comfort'
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 05_systemic_risks/ai_over_reliance.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/risk
+sectioned: true
+content_hash: sha256:bb399e1ce751fc185a3146b3a4bd29e873a31abf25b10ea0ad6dfd9070b5f800
+sections:
+  definition:
+    text: AI Over-Reliance is the overarching meta-risk and systemic collapse of human cognitive sovereignty,
+      occurring when learners or professionals chronically substitute machine outputs for active, independent
+      reasoning.
+    hash: sha256:ea8507bfb3c30696dd80bfa49e7b5d33386fdbf2baf3075945ac63983334c1bd
+  use_case:
+    text: Activated as a global diagnostic warning when the entire workflow is governed by the pursuit
+      of “zero-friction” execution, systematically bypassing the struggle required for memory encoding
+      and critical evaluation.
+    hash: sha256:e0db0302935d645bca2bd1985f4f02c6dbc95d1b3ea68b8a6498297e764a34a1
+  human_role:
+    text: The user must recognize the overall atrophy of their autonomous capabilities, interrupt the
+      habitual outsourcing of cognitive labor, and actively reclaim the highest levels of technical and
+      ethical decision-making.
+    hash: sha256:e60821147b2d278456cbf5740e2087e834543358f462d018abb493a1f84bbc74
+  ai_role:
+    text: The system exposes this meta-failure by tracking long-term dependency metrics and enforcing
+      macro-frictions, refusing to act as a silent, frictionless executor across multiple domains simultaneously.
+    hash: sha256:9811b268071e0b1abe2d2b3b380330dffb2649f6d470d43ec1eb1646c42922d8
+  friction:
+    text: The interruption mechanism requires a radical workflow redesign, instituting mandatory “unplugged”
+      phases or accountability checkpoints where the user must perform complex tasks entirely without
+      AI assistance.
+    hash: sha256:1bdeac6d4834bbc1020683ae3f28dfa8cc93ec50250f974d0ea3c761ea52b27f
+  risk:
+    text: If this macro-pattern continues, the human becomes entirely subservient to the machine, suffering
+      a permanent loss of sovereign critical thought, focus endurance, and the ability to solve novel
+      problems.
+    hash: sha256:6905827a73f0e8de2d4ca7f7fae59832e0604bf2326bd768b8e7c47e5d0cf9f6
+  observable_markers:
+    text: Recovery is signaled when the user intentionally designs workflows that include high-friction
+      human-only phases, and successfully navigates complex problems without resorting to generative tools.
+    hash: sha256:ac5d92700b9c18ba4c3451d70365ca41f3b01c5d725680ab8da2d797070505e4
+relations:
+  outbound:
+  - 05_systemic_risks/automation_bias
+  - 05_systemic_risks/cognitive_debt
+  - 05_systemic_risks/cognitive_offloading
+  - 05_systemic_risks/convergence_bias
+  - 05_systemic_risks/epistemic_dependency
+  - 05_systemic_risks/fluency_heuristic
+  - 05_systemic_risks/performative_understanding
+  inbound:
+  - 03_praxis/adolescent_sparring_arena
+  - 03_praxis/ai_augmentation_stance
+  - 03_praxis/collaborative_thinking
+  - 04_autonomy/adult_reflective_practice
+  - 04_autonomy/creative_thinking
+  - 04_autonomy/independent_thinking

@@ -1,0 +1,60 @@
+node_id: 06_protocols/evidence_demand
+title: 'Protocol: Evidence Demand'
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 06_protocols/evidence_demand.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/protocol
+sectioned: true
+content_hash: sha256:b70802df508ed763e5c9e16a1084cc3c3561d216d320e1bab72fd7c01edcf0f8
+sections:
+  definition:
+    text: Evidence Demand is a rigorous validation protocol that forces the user to anchor AI-generated
+      claims or independent hypotheses to verifiable primary evidence, source quality, and explicit degrees
+      of uncertainty.
+    hash: sha256:9c37e066ac5ab414cf5c5c38291c4668f247589fd50349a54e0c31d3b2ea808f
+  use_case:
+    text: Activated whenever the user attempts to integrate a strong empirical claim, a complex factual
+      synthesis, or a controversial statement into their final deliverable.
+    hash: sha256:e2be29b95ee94cb59480af9a8b176527a5a035841c6de1c9a5cdcf207fe19344
+  human_role:
+    text: 'The learner must act as a forensic auditor: they must leave the AI interface, locate primary
+      sources when available (otherwise apply the explicit source-quality hierarchy), evaluate the quality
+      of the evidence, and explicitly link the claim to its epistemological foundation.'
+    hash: sha256:99a29fbf564101a3f9085ca59573519ba66605fa4144738ed068c0f40a124261
+  ai_role:
+    text: 'The AI introduces structured resistance by shifting from a generative to a skeptical stance.
+
+
+      The AI flags a declarative statement as “unsupported.”
+
+      It refuses to elaborate further on the topic.
+
+      It demands the user provide a primary source (or follow the source-quality hierarchy: primary source
+      → peer-reviewed source → official documentation → reputable secondary analysis → clearly marked
+      speculation) before unlocking the next phase of the discussion.'
+    hash: sha256:c92a8d9b7758eee99cd8561ef16b68cd5b93ffdf45c534a8afce59ac26d4a9c3
+  friction:
+    text: The mechanism interrupts the flow of fluent text generation, imposing a hard stop that requires
+      the high-effort, analog task of reading primary literature and weighing source credibility.
+    hash: sha256:ec2bbe7bd3996d79f184cfdd737e4d037e1c7ce14d3be6fa50a4708b28924a09
+  risk:
+    text: This protocol mitigates epistemic_dependency and the fluency_heuristic, ensuring the user does
+      not mistake the AI’s confident tone for verified objective truth.
+    hash: sha256:ce729dc3abb8e1c907f32b389ba1bf528a23b662412efe9a3e0c638a1439a235
+  observable_markers:
+    text: All major claims in the final output are accompanied by explicit citations linking to primary
+      literature or verified external data. The user’s prompts reflect uncertainty mapping (e.g., “What
+      is the confidence interval for this claim?”).
+    hash: sha256:dbe3b3f52b13d674be03ac15f6f922bb22a24f286385c3d4818c7c88a90a9c04
+relations:
+  outbound:
+  - 05_systemic_risks/epistemic_dependency
+  - 05_systemic_risks/fluency_heuristic
+  inbound:
+  - 04_autonomy/critical_thinking
+  - 05_systemic_risks/epistemia

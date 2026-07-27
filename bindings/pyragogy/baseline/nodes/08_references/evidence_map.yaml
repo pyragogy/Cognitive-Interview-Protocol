@@ -1,0 +1,51 @@
+node_id: 08_references/evidence_map
+title: Project Evidence Map
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 08_references/evidence_map.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/reference
+sectioned: true
+content_hash: sha256:669590647fa47d884d8173f426ab7532b3456901ca4aba38c79f407deb556583
+sections:
+  definition:
+    text: The Evidence Map governs the evidential discipline of the entire syllabus, explicitly categorizing
+      the empirical status of claims using labels like supported claim, theoretical synthesis, design
+      hypothesis, speculative extension, and needs empirical validation.
+    hash: sha256:1462d2cfd6f65a1faf1118d2343be41ff203e23a6c519c0d2c0bb8cdc7792573
+  use_case:
+    text: Activated whenever a node makes definitive claims about human learning, cognitive science, AI
+      behavior, developmental psychology, or pedagogical efficacy.
+    hash: sha256:1ad3377c7778c3f249245681d382b1ff446157dab16331f645a7ab98659679ee
+  human_role:
+    text: The human must actively distinguish between well-supported empirical claims, their own theoretical
+      syntheses, design hypotheses intended for testing, and speculative extensions. They are responsible
+      for maintaining the academic integrity of the map.
+    hash: sha256:314c2c42bef560ce4c6c50e4e6c6e0d2ab3b80acb87b58694714d10b4f156fe6
+  ai_role:
+    text: The AI must act as a strict auditor. It is required to flag unsupported claims, ask for the
+      placement of claims within the evidence hierarchy, and strictly avoid inventing citations, studies,
+      or authors (hallucinations).
+    hash: sha256:27b6bad7bec429064ba2c58938f84d099c0c64d42c94d6dcee17870c6390fc42
+  friction:
+    text: The protocol prevents persuasive theory from pretending to be established empirical fact. Any
+      new claim introduced into the system must be halted and tagged with its correct evidence status
+      before it can be fully integrated into the public syllabus.
+    hash: sha256:1fa8a44a1ff16e99453331c822ea3d5f85170bb52e4842356032e287db86d970
+  risk:
+    text: Without rigorous evidence mapping, Pyragogy risks becoming rhetorically strong but academically
+      fragile. If design hypotheses are mistaken for supported claims, the entire framework loses its
+      empirical grounding and credibility.
+    hash: sha256:0089a87f78ba4e783420d49c11a12a2c70c1ebb65887bc954dbd93788cc34a83
+  observable_markers:
+    text: Every major claim in the syllabus is explicitly labeled by its evidence status. Speculative
+      extensions are clearly marked as such, and no fake citation authority or inflated maturity is introduced
+      into the framework.
+    hash: sha256:2e61defc8e9a5f3243c59361a6359af6c2476255c3d36d274bec57da25b85f7f
+relations:
+  outbound: []
+  inbound: []

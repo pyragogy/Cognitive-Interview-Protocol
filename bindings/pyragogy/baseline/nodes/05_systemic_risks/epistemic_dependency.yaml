@@ -1,0 +1,53 @@
+node_id: 05_systemic_risks/epistemic_dependency
+title: Epistemic Dependency
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 05_systemic_risks/epistemic_dependency.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/risk
+sectioned: true
+content_hash: sha256:c2224fa93bf7ba608b001cd36064b7694a4d7478bea1b19de1aca271dc21ad4f
+sections:
+  definition:
+    text: Epistemic Dependency is a state of intellectual paralysis where the user loses confidence in
+      their independent judgment, becoming incapable of validating a belief or claim without explicit
+      confirmation from the AI.
+    hash: sha256:9c2766a9eec14c984ee7860a1fd71bd1b06449a995af2ad8bdb8cbd18d31e61f
+  use_case:
+    text: Activated as a diagnostic warning when interaction logs show a high frequency of micro-validations,
+      such as the user repeatedly asking “Is this correct?” for every intermediate step of a problem.
+    hash: sha256:40944876d6cadd11b5ee2285f15bdcfc943871987ad0dc5cae1ffc60c3d2a688
+  human_role:
+    text: The learner must recognize their anxiety over being wrong, interrupt the cycle of continuous
+      algorithmic validation, and reclaim the courage to apply independent logical operators to verify
+      truth.
+    hash: sha256:ca76a51b54a303bc774e70016b6363e1ebad5f8dd1b8f2d9554439ac72206cfb
+  ai_role:
+    text: The system exposes the dependency by tracking validation loops and occasionally shifting into
+      a “reflective silence,” refusing to confirm the user’s statement and instead asking, “How would
+      you prove this without me?“
+    hash: sha256:a19f3a8a1975052ca498c4cd18147748d484ff510ee1b91db510381be93a5776
+  friction:
+    text: The risk loop is broken by disabling the AI’s confirmation function, forcing the user to commit
+      to a decision or mathematical proof relying solely on their own internal verification mechanisms.
+    hash: sha256:fabacfbbbf9c567d36fe8e2348a0dec525d1e74b9eb27ee0bad61e3053f56433
+  risk:
+    text: If the dependency solidifies, the user becomes completely helpless in offline environments or
+      unfamiliar situations, masking profound incompetence behind the illusion of machine-assisted fluency.
+    hash: sha256:aec78910f760fa14301ea33d7cdad8fdfbe527a515722feadb2e5e5a913da818
+  observable_markers:
+    text: Recovery is signaled when the user stops asking for confirmation on intermediate steps, submits
+      completed work with internal consistency checks, and defends their logic independently of the machine’s
+      opinion.
+    hash: sha256:9cee7f832ccf2c7946da6119eca455439a252ad53e08bfdf116ec3ed32f5c7ce
+relations:
+  outbound:
+  - 04_autonomy/autonomy_failure_modes
+  inbound:
+  - 04_autonomy/autonomy_failure_modes
+  - 05_systemic_risks/ai_over_reliance
+  - 06_protocols/evidence_demand

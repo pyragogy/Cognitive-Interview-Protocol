@@ -1,0 +1,18 @@
+node_id: 00_meta/index
+title: 00. Meta
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 00_meta/index.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags: []
+sectioned: false
+content_hash: sha256:2adbf7a588bb4e4f62d994453f6452a2ed3b100ff015b240f7a1e633337f8cbb
+sections:
+  body:
+    text: Meta-documentation, schemas, and system status audit reports.
+    hash: sha256:2adbf7a588bb4e4f62d994453f6452a2ed3b100ff015b240f7a1e633337f8cbb
+relations:
+  outbound: []
+  inbound: []

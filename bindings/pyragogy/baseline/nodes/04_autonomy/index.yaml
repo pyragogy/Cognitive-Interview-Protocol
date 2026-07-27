@@ -1,0 +1,18 @@
+node_id: 04_autonomy/index
+title: 04. Autonomy
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 04_autonomy/index.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags: []
+sectioned: false
+content_hash: sha256:0ed957f881845893c1929adfd313bdd92412d20f5cc454115442b260fcfd6910
+sections:
+  body:
+    text: Reflective practice, sovereign decision-making, and learner autonomy metrics.
+    hash: sha256:0ed957f881845893c1929adfd313bdd92412d20f5cc454115442b260fcfd6910
+relations:
+  outbound: []
+  inbound: []

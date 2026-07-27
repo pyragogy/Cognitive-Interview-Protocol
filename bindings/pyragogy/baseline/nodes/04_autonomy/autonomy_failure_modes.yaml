@@ -1,0 +1,60 @@
+node_id: 04_autonomy/autonomy_failure_modes
+title: Autonomy Failure Modes
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 04_autonomy/autonomy_failure_modes.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/risk
+sectioned: true
+content_hash: sha256:ad0e0f082743d7db9b363c6204e14575f19850d333485e08aaf6a1c2e948a53d
+sections:
+  definition:
+    text: Autonomy Failure Modes are specific diagnostic patterns where a learner’s apparent cognitive
+      sovereignty is actually compromised, resulting in hidden dependency, simulated competence, or passive
+      compliance during human-AI interactions.
+    hash: sha256:60036ec215f6803957fc91c075ad9421596ed96f396aa3b00b20bccb4c3ea66a
+  use_case:
+    text: Activated as a continuous diagnostic overlay when evaluating a learner’s long-term progression
+      toward the Autonomy phase, particularly when the user appears to be successfully completing tasks
+      but with minimal original input.
+    hash: sha256:223727a43c491089c861bf42f90bb302f60724ae9928cae39a7cadd307da65bb
+  human_role:
+    text: The learner must identify when their “independent” decisions are actually pre-calculated algorithmic
+      suggestions and actively reclaim control over the architecture, pacing, and evaluation criteria
+      of the task.
+    hash: sha256:18e83ed95d0b44043b5672aad207a78ff23884982f60912632a8d4175c84e786
+  ai_role:
+    text: The AI operates as a passive trap or enabler of these failures unless explicitly constrained.
+      In a diagnostic capacity, it records the speed of user acceptance, the frequency of unaltered prompt
+      executions, and the lack of structural resistance.
+    hash: sha256:c1786c701710b7448187d0e1df67444baf92034f2d3375e1304fb490a99c496f
+  friction:
+    text: The diagnostic protocol interrupts the workflow by requiring a manual reasoning reconstruction
+      before the learner can continue using AI assistance.
+    hash: sha256:cb7743ed5f4b04fbe26aff8e280812615ff14aeafb922869cc33b79118ed4a69
+  risk:
+    text: If these failure modes go undetected, the learner graduates into high-stakes environments believing
+      they are sovereign agents, while in reality, they are highly vulnerable to epistemic_dependency
+      and algorithmic manipulation.
+    hash: sha256:1427fb756c5d775683f6d147b613d8c43371f55f6840f8393ec41bf445abd2ac
+  observable_markers:
+    text: 'System logs reveal that user-initiated prompts are merely cosmetic variations of the AI’s previous
+      outputs.
+
+      Recovery is marked when the user begins introducing entirely novel constraints, refusing the AI’s
+      framing, or identifying contradictory machine claims.
+
+      High rates of copy-paste actions during essay writing tasks.'
+    hash: sha256:ce8ba7164fa34c3a4bb6b2d18829f01415ee68b500eb8ef6b2720c153dbce3ed
+relations:
+  outbound:
+  - 03_praxis/praxis_to_autonomy_bridge
+  - 05_systemic_risks/epistemic_dependency
+  inbound:
+  - 05_systemic_risks/cognitive_debt
+  - 05_systemic_risks/cognitive_offloading
+  - 05_systemic_risks/epistemic_dependency

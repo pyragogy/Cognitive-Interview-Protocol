@@ -1,0 +1,18 @@
+node_id: tags/pyragogy/practice
+title: pyragogy/practice
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: tags/pyragogy/practice.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags: []
+sectioned: false
+content_hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+sections:
+  body:
+    text: ''
+    hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+relations:
+  outbound: []
+  inbound: []

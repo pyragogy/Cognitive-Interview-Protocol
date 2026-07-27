@@ -1,0 +1,58 @@
+node_id: 06_protocols/anti_convergence_loop
+title: 'Protocol: Anti-Convergence Loop'
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 06_protocols/anti_convergence_loop.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/protocol
+sectioned: true
+content_hash: sha256:a70f44f3609dd357e655ecaf6990667607a26818b2bf757df5f603251376b425
+sections:
+  definition:
+    text: The Anti-Convergence Loop is an operational protocol that forces the human-AI system to delay
+      final synthesis by actively generating and evaluating competing, divergent alternatives before reaching
+      closure.
+    hash: sha256:64be4a54bb1ca6aec9d051263f8c68cf2eda1a2f645077c47679d368783dff1d
+  use_case:
+    text: Activated during the early ideation or problem-structuring phases when the AI generates a highly
+      plausible first answer and the user attempts to immediately accept it as the final solution.
+    hash: sha256:7eacfb4e40c8702a5050ba9e8ef2c2bab926daf337f0f00ef0927b5b1463bfa4
+  human_role:
+    text: The learner must tolerate the ambiguity of holding multiple conflicting ideas simultaneously,
+      actively evaluate the tradeoffs of each alternative, and explicitly defend why one path is chosen
+      over the others.
+    hash: sha256:dc285fb803637c04c7cbcc0d0a2f0e37375974ccf836b76fff5d44addebe61ac
+  ai_role:
+    text: 'The AI operates as a divergence engine, introducing structured resistance to early closure.
+
+
+      The AI detects an attempt to finalize a concept prematurely.
+
+      It temporarily locks the synthesis and generates two radically different alternatives to the proposed
+      solution.
+
+      It demands the user explicitly analyze the weaknesses of the new alternatives before allowing closure.'
+    hash: sha256:9307a8fa4cea6a0f52683694de53a4cbe6a655c338de64ee45b130981427883c
+  friction:
+    text: The mechanism interrupts the human instinct for rapid cognitive closure by making the first,
+      easiest answer mechanically impossible to accept without passing through a mandatory comparison
+      phase.
+    hash: sha256:5fb66573784cd3214dc928c3c164fa14f94b1f75edd1ca1ba47f344cff0f6639
+  risk:
+    text: This protocol specifically mitigates convergence_bias, preventing the user from collapsing their
+      intellectual exploration into the most statistically average machine output.
+    hash: sha256:d58e3fe4eb91d4d2b7fcb84214b0c30a0064b4709b276667d4cb741c1526c3bf
+  observable_markers:
+    text: Interaction logs show the user exploring at least three distinct conceptual branches. The final
+      submitted work contains explicit justifications detailing why alternate hypotheses were discarded.
+    hash: sha256:03f86da9138e0cc212de96ca6926586952c3e5620c6002079ed498f4ab596d15
+relations:
+  outbound:
+  - 03_praxis/agents/pattern_perturbator
+  - 05_systemic_risks/convergence_bias
+  inbound:
+  - 03_praxis/agents/pattern_perturbator

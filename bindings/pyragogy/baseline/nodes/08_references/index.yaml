@@ -1,0 +1,18 @@
+node_id: 08_references/index
+title: 08. References
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 08_references/index.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags: []
+sectioned: false
+content_hash: sha256:01dc0f412ae25dcd3117bbf4cc8f967bef2f2bbe66b074a0793e8e4ddfc521a3
+sections:
+  body:
+    text: Evidence maps, academic references, and project bibliography.
+    hash: sha256:01dc0f412ae25dcd3117bbf4cc8f967bef2f2bbe66b074a0793e8e4ddfc521a3
+relations:
+  outbound: []
+  inbound: []

@@ -1,0 +1,24 @@
+node_id: 05_systemic_risks/index
+title: 05. Systemic Risks
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 05_systemic_risks/index.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags: []
+sectioned: false
+content_hash: sha256:8eba10ae91fccd0cc71074a47c4ac5dad5ca772bb5b03ddf1a5bce5368cf9ca5
+sections:
+  body:
+    text: 'Algorithmic dependencies, offloading, and cognitive atrophy nodes.
+
+
+      epistemia
+
+      '
+    hash: sha256:8eba10ae91fccd0cc71074a47c4ac5dad5ca772bb5b03ddf1a5bce5368cf9ca5
+relations:
+  outbound:
+  - 05_systemic_risks/epistemia
+  inbound: []

@@ -1,0 +1,56 @@
+node_id: 04_autonomy/independent_thinking
+title: Independent Thinking
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 04_autonomy/independent_thinking.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/capability
+sectioned: true
+content_hash: sha256:701a7830d745bd4b46cbc692fac34af8de2b11a37b8dbe40e9c0f9831b6b6d20
+sections:
+  definition:
+    text: Independent Thinking is the foundational cognitive capability to originate, hold, and revise
+      an intellectual position based on personal reasoning before seeking external validation from an
+      algorithmic or human authority.
+    hash: sha256:4031eacdf8416e0953a0dbdbc3dab79c4389029781f801aa391e5229e28b0429
+  use_case:
+    text: Activated at the absolute beginning of any analytical task, problem-solving sequence, or creative
+      endeavor, before any generative AI tools are queried.
+    hash: sha256:2aef7fb966ee9932c78fd5f9aed9d103ca12d7848f07046577ebd40fdc4dd8c5
+  human_role:
+    text: The learner must tolerate the discomfort of the blank page and the uncertainty of an unvalidated
+      hypothesis (“Can I stand on my own judgment?”). They must construct their initial argument entirely
+      in isolation.
+    hash: sha256:319559306cad95aea542703d16f2a807704efc04f207424fb521c0e5c5d1abe1
+  ai_role:
+    text: The AI’s role is strictly delayed. In an implemented learning environment, the AI interaction
+      should be delayed until the learner has produced a sufficiently detailed independent draft.
+    hash: sha256:73f12d555e987b0f995fdc161e001fb5a323855d0ed37021a19d1369dc33b268
+  friction:
+    text: The mechanism relies on a “First-Draft Lockout.” The protocol design specifies that the generative
+      interface should remain inaccessible until the user meets a minimum threshold of independent effort,
+      preventing the immediate offloading of the initial cognitive struggle.
+    hash: sha256:a9d8c20433130ec589e0911dbb74f7086eb9390a5f285b84a329ade5b932db2a
+  risk:
+    text: If independent thinking is bypassed, the user suffers from cognitive_offloading and convergence_bias,
+      allowing the machine to set the initial anchor for the thought process, which the human then merely
+      edits or accepts.
+    hash: sha256:fc8b04cbb073e16860d6de24caa0e6363546305d993be7f8516a2f0bbd409145
+  observable_markers:
+    text: The workspace contains substantial drafts, outlines, or raw notes created prior to the first
+      AI prompt. The final product retains the core structural idiosyncrasies of the user’s original,
+      unassisted thought process.
+    hash: sha256:69f30794a872cf2c0df90ea3845a56f049a4ce4dc85da57896dfa4b7acd115e7
+relations:
+  outbound:
+  - 05_systemic_risks/ai_over_reliance
+  - 05_systemic_risks/cognitive_offloading
+  - 05_systemic_risks/convergence_bias
+  inbound:
+  - 03_praxis/adolescent_sparring_arena
+  - 03_praxis/ai_cognitive_partner
+  - 05_systemic_risks/unexamined_ai_answers

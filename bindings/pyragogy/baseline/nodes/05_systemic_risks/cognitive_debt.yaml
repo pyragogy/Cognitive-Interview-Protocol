@@ -1,0 +1,53 @@
+node_id: 05_systemic_risks/cognitive_debt
+title: Cognitive Debt
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 05_systemic_risks/cognitive_debt.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/risk
+sectioned: true
+content_hash: sha256:e72d08819256130010dc12658d729569bcc4fd19d1623ffdcde66e19b8ca300a
+sections:
+  definition:
+    text: Cognitive Debt is the accumulated, long-term deficit in memory encoding, critical thinking,
+      and focus endurance caused by repeatedly choosing the frictionless shortcut over active reasoning.
+    hash: sha256:b8fa82bd720813a0873ffd422ac2ae7de72c8dec2ad5702bbcd2cef161fd10f2
+  use_case:
+    text: Activated as a long-term diagnostic warning when historical metrics show a progressive decline
+      in the user’s ability to maintain deep focus or independently synthesize complex information over
+      months.
+    hash: sha256:39fac831c652a40d95d8c2ab01d3a2cee21c0d37869e756249c3d6bb5dd4238c
+  human_role:
+    text: The learner must acknowledge the structural decay of their mental endurance, interrupt the continuous
+      accumulation of “unpaid reasoning,” and proactively engage in high-effort, unsupported intellectual
+      labor to rebuild capacity.
+    hash: sha256:76789803d148a33597b15e58682e35332497bb842355a89c1992f550bf2d5a9e
+  ai_role:
+    text: The system exposes this accumulated debt by periodically withdrawing assistance for tasks the
+      user used to perform independently, forcing them to confront their diminished raw capacity.
+    hash: sha256:2f8aef443b354cedfe92b135a8a8ceaf98318d63a47bfafc1026ca7124ae6034
+  friction:
+    text: 'The interruption mechanism requires a “cognitive repayment plan”: instituting strict analog
+      reading sessions, forced independent drafting, and deliberate practice without any digital scaffolding.'
+    hash: sha256:1309f71c76991a39f70c9516b55d7e6ff1fb81af7857c62a48ff262b40a4bc6f
+  risk:
+    text: 'If the debt is left unpaid, it leads to cognitive bankruptcy: a progressive weakening of the
+      learner’s practiced capacity for sustained independent reasoning, leaving the user permanently dependent
+      on external tools.'
+    hash: sha256:fadd38fbf1b942444ca9d5fd53190fc85cbbf4e83cd5a2ca8cfaf90ea794cc80
+  observable_markers:
+    text: Recovery is signaled by a gradual return to sustained focus, demonstrated by the user’s ability
+      to read long-form academic papers or write complex outlines entirely unaided.
+    hash: sha256:4f28fe7186da9e8d342a5f4e7c6b0f16c4b8a8b30e37704ab30d633d74a5dc87
+relations:
+  outbound:
+  - 04_autonomy/autonomy_failure_modes
+  inbound:
+  - 04_autonomy/adult_reflective_practice
+  - 04_autonomy/growing_learner_autonomy
+  - 05_systemic_risks/ai_over_reliance
+  - 06_protocols/friction_escalation_ladder

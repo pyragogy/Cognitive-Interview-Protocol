@@ -1,0 +1,55 @@
+node_id: 05_systemic_risks/cognitive_offloading
+title: Cognitive Offloading
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 05_systemic_risks/cognitive_offloading.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/risk
+sectioned: true
+content_hash: sha256:7921a44ecc0d1c3eb0526ec11856d3dffc302bbb5aeecc9b86cd479adf0406f9
+sections:
+  definition:
+    text: Cognitive Offloading is the physical outsourcing of inner monologue, structural outlining, and
+      logical heavy-lifting to a generative assistant, leaving the human brain in a purely reactive and
+      ingestive state.
+    hash: sha256:ab1fabc2041f6da8e62d3495807053f2ac106c8f0d6a0533e511cf1147b901bc
+  use_case:
+    text: Activated as a diagnostic warning when a learner commands the machine to generate first drafts,
+      brainstorm ideas, or outline structures before attempting any independent cognitive effort.
+    hash: sha256:37ce3d028caaabaf7c6bf4264b7811ef374a1a8bfb26eb1f3d3203447508cb7f
+  human_role:
+    text: The learner must recognize the urge to bypass the initial “blank page” struggle, interrupt the
+      immediate delegation of structural thought, and reclaim the act of initial synthesis.
+    hash: sha256:93af451050a045897cfad39a4cc76ee8ba17a1ca98f0100000a0dbe94fc6e9ff
+  ai_role:
+    text: The system exposes this pattern by measuring the ratio of human input to machine output, refusing
+      to generate full frameworks from empty prompts, and demanding the user provide an initial scaffold
+      first.
+    hash: sha256:c2a9c22adfee77eafe33e8a8315127524a95e23ab10b31ace92eed1b7a3d366e
+  friction:
+    text: The risk loop is broken by blocking zero-shot generation requests for complex tasks, forcing
+      the user to submit a minimum threshold of original thought or a partial outline before the AI provides
+      assistance.
+    hash: sha256:b45ecfd3cd8812885e92d706f077d257f2f826fdc549fe0cb226d51c4cd49b64
+  risk:
+    text: If the offloading continues, the learner loses the biological capability to structure complex
+      arguments from scratch, leading to a permanent drop in long-term memory retention and independent
+      synthesis skills.
+    hash: sha256:134bf9b01ac26ef0d77f320ef90d740fde3b440ce8a9e96ef628d044d4ee977e
+  observable_markers:
+    text: Recovery is signaled when the user submits detailed, structured prompts containing their own
+      original hypotheses, rather than asking the machine “Give me 10 ideas about X.”
+    hash: sha256:d064ec00febb48306ad170a5a587fa0f338383e4376d85b433fe290c1ddea04f
+relations:
+  outbound:
+  - 04_autonomy/autonomy_failure_modes
+  inbound:
+  - 02_ontogeny/ontogeny_to_praxis_bridge
+  - 03_praxis/ai_cognitive_partner
+  - 04_autonomy/independent_thinking
+  - 05_systemic_risks/ai_over_reliance
+  - 06_protocols/friction_escalation_ladder

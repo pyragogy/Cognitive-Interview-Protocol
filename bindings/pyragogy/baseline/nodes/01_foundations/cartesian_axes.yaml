@@ -1,0 +1,55 @@
+node_id: 01_foundations/cartesian_axes
+title: The Cartesian Axes of Pyragogy
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 01_foundations/cartesian_axes.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/foundation
+sectioned: true
+content_hash: sha256:86361edce87fbecca78688001a4e83f066ca57fbef16e80492f2fd7ac3a58fbd
+sections:
+  definition:
+    text: 'The Cartesian Axes define the three-dimensional pedagogical space of Pyragogy: Ontogeny (developmental
+      readiness), Praxis (cognitive friction and effort), and Autonomy (epistemic sovereignty). They are
+      structured interpretive coordinates, not objective mathematical measurements.'
+    hash: sha256:cfb3f03dc8781609360b80d3ca673dbc36a02722e1221c1347e69c70129f23bb
+  use_case:
+    text: Activated whenever a node (a risk, capability, or protocol) needs to be positioned within the
+      system, compared against other nodes, or audited for its pedagogical appropriateness at a given
+      stage of a learner’s development.
+    hash: sha256:a226b354401386f5458794b8ce6843db31ceedd446ec79dd37fdc1b8453373fe
+  human_role:
+    text: The human must interpret axis placement as a qualitative pedagogical judgment. The user decides
+      whether a specific intervention is appropriate based on where the learner currently sits in the
+      three-dimensional space, rather than treating the coordinates as a decorative score.
+    hash: sha256:262d6c3ed11c07e69f30c4f8976cc82add07245645f284317531b37224dbb830
+  ai_role:
+    text: The AI can suggest coordinate placement for new concepts based on structural similarity to existing
+      nodes, but it must explicitly justify its suggestions using the node’s actual function and the definitions
+      of the axes.
+    hash: sha256:9306f7abecd37cb6a2b66efd9ab5ad99fb48cef1cee7f5bab07b950d1a5ff890
+  friction:
+    text: The governance mechanism prevents arbitrary scoring by forcing explicit reasoning for each coordinate.
+      A node cannot simply be assigned “10/10 Autonomy”; the system demands a rationale for why the node
+      requires that level of sovereignty.
+    hash: sha256:6260bb984777612789250994302bc7f24d76f1066a6b8f17811ff9277f874d4d
+  risk:
+    text: Without these axes, the graph becomes a beautiful but semantically flat constellation. Nodes
+      would exist in a vacuum, making it impossible to determine if a specific protocol is an early-stage
+      necessity or an advanced capability, leading to pedagogical misapplication.
+    hash: sha256:cd0e6f63467b7784ecc3d9eb1c0108956fcca000454462a2a9e7b6374989207a
+  observable_markers:
+    text: Nodes can be compared meaningfully. The axis values clearly explain why one node belongs in
+      early ontogeny, why another requires high friction (praxis), and why a third demands complete autonomy.
+    hash: sha256:c0736fe784b7c94c6f3621e16834e61b72fb88796579cfc23a794be98dc36503
+relations:
+  outbound:
+  - 01_foundations/epistemic_relation_grammar
+  inbound:
+  - 01_foundations/epistemic_relation_grammar
+  - 01_foundations/index
+  - 05_systemic_risks/automation_bias

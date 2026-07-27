@@ -1,0 +1,56 @@
+node_id: 01_foundations/epistemic_relation_grammar
+title: Epistemic Relation Grammar
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 01_foundations/epistemic_relation_grammar.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/foundation
+sectioned: true
+content_hash: sha256:9186f155a3ded44ece5841c5ee6bd56522e4957e8b36f9fc93a2f0bf1e6d7335
+sections:
+  definition:
+    text: The Epistemic Relation Grammar defines the semantic logic of links between concepts in the Pyragogy
+      framework. It establishes typed relations such as REQUIRES, STRENGTHENS, CONTRADICTS, MITIGATES,
+      ACTIVATES, and FAILS_INTO to structure the graph.
+    hash: sha256:461dadd8077603fd0b664e469f4c41c67597bae3f977f8862ab5f247295d8d47
+  use_case:
+    text: Activated whenever adding new nodes to the syllabus or auditing the connections between existing
+      notes, ensuring that the graph operates as a rigorous reasoning instrument rather than just visual
+      navigation.
+    hash: sha256:f41b543d0db441f98dca37fc7ac4d9ba9f21c439fc5107da88c4cc43e0fdf855
+  human_role:
+    text: The human must choose relation types intentionally. They cannot simply create generic backlinks
+      because two topics share a keyword; they must explicitly define the epistemological nature of the
+      connection.
+    hash: sha256:b53aeb47a390d43fcf31c9474b0caffa3b3b1a674609566d5ad4f231123b8999
+  ai_role:
+    text: The AI can propose relation types when analyzing text or suggesting new nodes, but it must explain
+      why the proposed edge is epistemically valid according to the grammar rules, rather than relying
+      on statistical keyword proximity.
+    hash: sha256:c8db2ea42fa93aa224d348fbd3752f4dbb0aed117c2d25a2d28872a343300e9b
+  friction:
+    text: The grammar introduces structural friction by preventing “everything links to everything” graph
+      inflation. If a user attempts to link two nodes without specifying a valid, directional typed relation,
+      the connection is treated as invalid.
+    hash: sha256:687301ed2f04e72704f51762287456c6fe0b05e658bd42d718adf139656d67f9
+  risk:
+    text: Without a strict relation grammar, the Graph View degenerates into visual noise—a hairball of
+      generic associations that looks complex but offers no actual utility for diagnosing risks or prescribing
+      protocols.
+    hash: sha256:5687cac0d2f515bc29c92ae980e6b1ce2e850625a42bed106b238cd72fb884b2
+  observable_markers:
+    text: Links between nodes are strictly typed and justified. The resulting graph can be traversed logically
+      (e.g., following a chain from a capability, to the risk that threatens it, to the protocol that
+      mitigates that risk).
+    hash: sha256:da545b90ef7887f66448edab3957898add815aef950069a446058510d3b05a83
+relations:
+  outbound:
+  - 01_foundations/cartesian_axes
+  inbound:
+  - 01_foundations/cartesian_axes
+  - 01_foundations/index
+  - 05_systemic_risks/convergence_bias

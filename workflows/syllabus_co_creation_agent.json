@@ -1,5 +1,5 @@
 {
-  "name": "CIP-KGE Stage 3 — Interview Evidence Extraction (draft diffs only, no graph writes)",
+  "name": "CIP-KGE Stage 3 — Interview Evidence Extraction (Pyragogy binding, draft diffs only)",
   "nodes": [
     {
       "parameters": {
@@ -17,77 +17,49 @@
     },
     {
       "parameters": {
-        "mode": "manual",
-        "duplicateItem": false,
-        "assignments": {
-          "assignments": [
-            {
-              "id": "f1a2b3c4-1111-4a2b-9c3d-000000000001",
-              "name": "baseline_syllabus",
-              "value": "{\n  \"syllabus_id\": \"syl_intro_networking_101\",\n  \"version\": 1,\n  \"nodes\": [\n    { \"id\": \"osi_model\", \"label\": \"OSI Model\", \"description\": \"Seven-layer conceptual model for network communication.\", \"status\": \"existing\", \"tags\": [\"fundamentals\"] },\n    { \"id\": \"tcp_ip\", \"label\": \"TCP/IP Suite\", \"description\": \"Practical four-layer protocol suite used on the real internet.\", \"status\": \"existing\", \"tags\": [\"fundamentals\", \"protocols\"] },\n    { \"id\": \"subnetting\", \"label\": \"Subnetting\", \"description\": \"Dividing an IP network into smaller routable sub-networks.\", \"status\": \"existing\", \"tags\": [\"addressing\"] }\n  ],\n  \"connections\": [\n    { \"from\": \"osi_model\", \"to\": \"tcp_ip\", \"relationship\": \"related\", \"status\": \"existing\" },\n    { \"from\": \"tcp_ip\", \"to\": \"subnetting\", \"relationship\": \"prerequisite\", \"status\": \"existing\" }\n  ],\n  \"change_log\": [],\n  \"open_gaps\": []\n}",
-              "type": "object"
-            },
-            {
-              "id": "f1a2b3c4-1111-4a2b-9c3d-000000000002",
-              "name": "session_id",
-              "value": "={{ $json.session_id ?? $json.body?.session_id ?? $execution.id }}",
-              "type": "string"
-            },
-            {
-              "id": "f1a2b3c4-1111-4a2b-9c3d-000000000003",
-              "name": "topic",
-              "value": "={{ $json.topic ?? $json.body?.topic ?? 'untitled-topic' }}",
-              "type": "string"
+        "url": "={{ $('Session Start Webhook').item.json.body.graph_url || 'https://syllabus.pyragogy.org/static/contentIndex.json' }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
             }
-          ]
-        },
-        "options": {}
+          }
+        }
       },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
+      "id": "fetch-graph",
+      "name": "Fetch Knowledge Graph",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
       "position": [
-        40,
-        400
-      ],
-      "id": "load-draft-syllabus-id",
-      "name": "Load Draft Syllabus"
+        320,
+        300
+      ]
     },
     {
       "parameters": {
-        "mode": "manual",
-        "duplicateItem": false,
-        "assignments": {
-          "assignments": [
-            {
-              "id": "eb05da77-0001",
-              "name": "agentName",
-              "value": "Pyragogical Cognitive Interviewer",
-              "type": "string"
-            },
-            {
-              "id": "37cf0f28-0002",
-              "name": "welcomeMessage",
-              "value": "Hi, I'm your Pyragogical Co-learning Partner. I'm holding an incomplete knowledge map of this topic. I don't intend to lecture you; I'm here to conduct a cognitive interview so you can correct, expand, and restructure this map with me. Shall we begin with your experience on this topic?",
-              "type": "string"
-            },
-            {
-              "id": "dbe0d0dd-0003",
-              "name": "systemPrompt",
-              "value": "=You are the Pyragogical Cognitive Interviewer. Your objective is to collaborate with the user to map and restructure a knowledge graph (Syllabus) based on an initial baseline.\n\nUse the 4 adapted Cognitive Interview phases:\n1. REINSTATING CONTEXT: Ask the user to describe the real-world context where they apply or learned these concepts.\n2. FREE RECALL / MAPPING: Allow the user to explain what is missing or wrong without interrupting or lecturing.\n3. PERSPECTIVE SHIFT: Ask adversarial or alternative perspective questions ('If we drop X, what breaks in Y?').\n4. REVERSE ORDER: Trace concept dependencies backwards to verify prerequisites.\n\nRULES:\n- Do NOT lecture.\n- Accept user corrections and adopt their domain terminology.\n- Actively extract gaps ('open_gaps') when uncertainty arises.\n\nBaseline Syllabus: {{ JSON.stringify($json.baseline_syllabus) }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
+        "jsCode": "// CIP-KGE Stage 1 (binding layer): extract the local sub-graph for the target node.\n// Input: $json = full contentIndex dict (from Fetch Knowledge Graph).\n// The sub-graph = target node + immediate dependencies (outbound + inbound links).\n\nconst index = $json;\nconst body = $('Session Start Webhook').item.json.body || {};\nconst targetId = body.target_node_id;\n\nif (!targetId) {\n  throw new Error('target_node_id missing in webhook body. Required: {session_id, target_node_id, transcript?}');\n}\nconst target = index[targetId];\nif (!target) {\n  throw new Error(`target_node_id '${targetId}' not found in knowledge graph (${Object.keys(index).length} nodes loaded)`);\n}\n\n// Same numbered-header parser as bindings/pyragogy/import_graph.py.\n// Node content in contentIndex.json is plain text: \"1. Definition\", \"2. Use Case\", ...\nconst SECTION_MAP = { '1': 'definition', '2': 'use_case', '3': 'human_role', '4': 'ai_role', '5': 'friction', '6': 'risk', '7': 'observable_markers' };\nconst HEADER_RE = /^\\s*([1-7])\\.\\s+(Definition|Use\\s*Case|Human\\s*Role|AI\\s*Role|Friction|Risk|Observable\\s*Markers)\\s*:?\\s*$/gim;\n\nfunction parseSections(content) {\n  const matches = [...content.matchAll(HEADER_RE)];\n  if (matches.length === 0) return { body: content.trim() };\n  const sections = {};\n  matches.forEach((m, i) => {\n    const start = m.index + m[0].length;\n    const end = i + 1 < matches.length ? matches[i + 1].index : content.length;\n    sections[SECTION_MAP[m[1]]] = content.slice(start, end).trim();\n  });\n  return sections;\n}\n\nconst outbound = (target.links || []).filter(l => index[l]);\nconst inbound = Object.keys(index).filter(s => (index[s].links || []).includes(targetId));\nconst neighborIds = [...new Set([...outbound, ...inbound])];\n\nreturn {\n  json: {\n    session_id: body.session_id || 'session-UNKNOWN',\n    target_node_id: targetId,\n    graph_source_url: body.graph_url || 'https://syllabus.pyragogy.org/static/contentIndex.json',\n    fetched_at: new Date().toISOString(),\n    target_node: {\n      node_id: targetId,\n      title: target.title || targetId,\n      tags: target.tags || [],\n      sections: parseSections(target.content || '')\n    },\n    neighbor_summaries: neighborIds.map(id => ({\n      node_id: id,\n      title: index[id].title || id,\n      content_preview: (index[id].content || '').slice(0, 400)\n    })),\n    all_slugs: Object.keys(index)\n  }\n};"
       },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
+      "id": "extract-subgraph",
+      "name": "Extract Local Sub-graph",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
-        260,
-        400
-      ],
-      "id": "prepare-syllabus-agent-id",
-      "name": "Prepare Syllabus Agent"
+        560,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepares the TruGen interview agent config for THIS node (Stage 2 setup).\n// The graph data passes through untouched for the downstream Stage 3 analysis.\n\nconst target = $json.target_node;\n\nconst sectionList = Object.entries(target.sections)\n  .map(([name, text]) => `## ${name}\\n${text}`)\n  .join('\\n\\n');\n\nconst systemPrompt = `You are the Pyragogy Cognitive Interviewer (CIP-KGE protocol).\nYou are interviewing an expert about ONE node of the Pyragogy Syllabus knowledge graph: \"${target.title}\" (${target.node_id}).\n\nThe interview is NOT about discovering what the node says — it is about finding where it is incomplete, imprecise, or wrong.\n\nCURRENT PUBLISHED STATE OF THE NODE:\n${sectionList}\n\nUse the five question types: Q1 Elicitation (surface knowledge), Q2 Clarification (make statements precise and operationalizable), Q3 Socratic (test premises, constructive adversary), Q4 Contrastive (boundaries vs. related concepts), Q5 Mapping (relationships to other nodes).\n\nWhat you MUST NOT do:\n- Do not summarize the interviewee's words back to them during the session.\n- Do not suggest answers (e.g., \"Would you say the risk here is X?\" contaminates the evidence).\n- Do not close topics on a thin answer — return with a different question type.\n- Do not ask what the node SHOULD say. Ask what they know about the phenomenon.\n\nEvery exchange is numbered. The output of this session is a Knowledge Diff subject to human review.`;\n\nreturn {\n  json: {\n    ...$json,\n    agentName: 'Pyragogy Cognitive Interviewer',\n    welcomeMessage: `I'm holding the current published version of \"${target.title}\". I'm not here to lecture you — I'm here to find where this node is incomplete, imprecise, or wrong, using your experience. Shall we start from the real-world context where you encountered this?`,\n    systemPrompt\n  }\n};"
+      },
+      "id": "prepare-interview-agent",
+      "name": "Prepare Interview Agent",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        300
+      ]
     },
     {
       "parameters": {
@@ -143,11 +115,11 @@
         "messages": {
           "values": [
             {
-              "content": "=You are the syllabus co-creation analyst. Analyze the transcript between the Cognitive Interviewer agent and the user.\n\nRead the baseline Syllabus JSON:\n{{ JSON.stringify($json.baseline_syllabus) }}\n\nAnd the session transcript:\n{{ $json.transcript ?? $json.body?.transcript }}\n\nIdentify all structural updates proposed, agreed upon, or corrected. Output strictly ONE valid JSON matching the target schema. Use status tags: 'existing', 'added', 'removed', 'modified'.",
+              "content": "You are the Stage 3 evidence extractor of the CIP-KGE protocol (Cognitive Interview for Knowledge Graph Evolution).\n\nYou receive: (a) the current published state of ONE knowledge-graph node (target_node, with its seven sections) plus summaries of its immediate graph neighbors, and (b) the transcript of a cognitive interview about that node, with numbered exchanges.\n\nYour ONLY job: propose bounded candidate modifications to the target node, grounded in the transcript.\n\nRules (epistemic invariants, non-negotiable):\n1. Every candidate change MUST cite the exchange numbers it comes from (exchange_refs). If no exchange supports a change, do not propose it.\n2. At most 3 candidate changes (Bounded Modification Principle).\n3. current_text MUST be copied verbatim from the published section you want to change (required for modify/remove_sentence; omit for append). Never paraphrase it.\n4. Keep evidence (what the interviewee said) separate from interpretation (why the change improves the node).\n5. If the evidence is thin, say so in extraction_notes instead of inventing support.\n\nSections: definition | use_case | human_role | ai_role | friction | risk | observable_markers.\nOperations: modify | append | remove_sentence.\n\nOutput STRICTLY one JSON object, no markdown fences:\n{\n  \"candidate_changes\": [\n    {\"section\": \"...\", \"operation\": \"modify|append|remove_sentence\",\n     \"current_text\": \"verbatim from the node (omit for append)\",\n     \"proposed_text\": \"...\",\n     \"rationale\": \"why, citing exchange numbers\",\n     \"exchange_refs\": [\"exchange-01\"]}\n  ],\n  \"detected_relations\": [\"other/node_slug\"],\n  \"extraction_notes\": \"...\"\n}",
               "role": "system"
             },
             {
-              "content": "=baseline_syllabus:\n{{ JSON.stringify($json.baseline_syllabus) }}\n\ntranscript:\n{{ $json.transcript ?? $json.body?.transcript }}",
+              "content": "=TARGET NODE (current published state):\n{{ JSON.stringify($json.target_node) }}\n\nIMMEDIATE NEIGHBORS (context, do not modify):\n{{ JSON.stringify($json.neighbor_summaries) }}\n\nTRANSCRIPT:\n{{ $json.transcript ?? $json.body?.transcript ?? '[no transcript provided]' }}",
               "role": "user"
             }
           ]
@@ -173,29 +145,29 @@
     },
     {
       "parameters": {
-        "jsCode": "let rawContent = $json.message?.content || $json.output || $json.text || '';\nif (typeof rawContent === 'object') {\n  rawContent = JSON.stringify(rawContent);\n}\n\nrawContent = rawContent.replace(/```json/g, '').replace(/```/g, '').trim();\n\nlet candidate;\nlet errors = [];\n\ntry {\n  candidate = JSON.parse(rawContent);\n} catch (e) {\n  errors.push('JSON Parsing failed: ' + e.message);\n}\n\nif (candidate) {\n  const REQUIRED_KEYS = ['syllabus_id', 'version', 'nodes', 'connections', 'change_log', 'open_gaps'];\n  REQUIRED_KEYS.forEach(k => {\n    if (!(k in candidate)) errors.push(`Missing top-level key: ${k}`);\n  });\n\n  if (Array.isArray(candidate.nodes)) {\n    candidate.nodes.forEach((n, idx) => {\n      if (!n.id) errors.push(`Node at index ${idx} is missing an id`);\n      if (!['existing', 'added', 'removed', 'modified'].includes(n.status)) {\n        errors.push(`Node ${n.id || idx} has invalid status: ${n.status}`);\n      }\n    });\n  } else {\n    errors.push('nodes field must be an array');\n  }\n}\n\nreturn {\n  json: {\n    ...$json,\n    updated_syllabus: candidate || null,\n    _validation: {\n      isValid: errors.length === 0,\n      errors: errors\n    }\n  }\n};"
+        "jsCode": "// Stage 5 (automated part): validate the LLM-produced draft against the\n// seven-section contract AND against the actual published baseline.\n// A candidate change whose current_text does not match the published section\n// is REJECTED here — this is the check that prevents stale-context edits.\n\nlet raw = $json.message?.content || $json.output || $json.text || '';\nif (typeof raw === 'object') raw = JSON.stringify(raw);\nraw = raw.replace(/```json/g, '').replace(/```/g, '').trim();\n\nconst errors = [];\nconst checks = { current_text_match: [] };\nlet candidate = null;\ntry {\n  candidate = JSON.parse(raw);\n} catch (e) {\n  errors.push('JSON parsing failed: ' + e.message);\n}\n\nconst SECTIONS = ['definition', 'use_case', 'human_role', 'ai_role', 'friction', 'risk', 'observable_markers'];\nconst OPS = ['modify', 'append', 'remove_sentence'];\n\n// Same normalization as the binding: typographic quotes/dashes and whitespace\n// must not defeat the comparison with the published text.\nfunction norm(s) {\n  return (s || '')\n    .normalize('NFKC')\n    .replace(/[\\u2018\\u2019]/g, \"'\").replace(/[\\u201c\\u201d]/g, '\"')\n    .replace(/[\\u2011\\u2013\\u2014]/g, '-')\n    .replace(/\\s+/g, ' ').trim();\n}\n\nconst baselineSections = $json.target_node?.sections || {};\nconst changes = candidate?.candidate_changes || [];\n\nif (candidate) {\n  if (!Array.isArray(changes) || changes.length === 0) errors.push('candidate_changes must be a non-empty array');\n  if (changes.length > 3) errors.push(`Bounded Modification violated: ${changes.length} changes (max 3)`);\n\n  changes.forEach((c, i) => {\n    const label = `change[${i}]`;\n    if (!SECTIONS.includes(c.section)) errors.push(`${label}: unknown section '${c.section}'`);\n    if (!OPS.includes(c.operation)) errors.push(`${label}: unknown operation '${c.operation}'`);\n    if (!c.proposed_text || !c.proposed_text.trim()) errors.push(`${label}: empty proposed_text`);\n    if (!c.rationale || !c.rationale.trim()) errors.push(`${label}: empty rationale`);\n    if (!Array.isArray(c.exchange_refs) || c.exchange_refs.length === 0) {\n      errors.push(`${label}: no exchange_refs — Traceability Constraint (Invariant 1)`);\n    }\n    if (c.operation !== 'append') {\n      if (!c.current_text || !c.current_text.trim()) {\n        errors.push(`${label}: current_text required for ${c.operation}`);\n      } else {\n        const published = baselineSections[c.section];\n        const match = published !== undefined && norm(published) === norm(c.current_text);\n        checks.current_text_match.push({ index: i, section: c.section, match });\n        if (!published) errors.push(`${label}: section '${c.section}' not present in published node`);\n        else if (!match) errors.push(`${label}: current_text does NOT match published '${c.section}' section (stale or paraphrased)`);\n      }\n    }\n  });\n}\n\nreturn {\n  json: {\n    ...$json,\n    draft: candidate,\n    _validation: { isValid: errors.length === 0, errors, checks }\n  }\n};"
       },
+      "id": "validate-draft-shape",
+      "name": "Validate Draft Diff Shape",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1380,
-        400
-      ],
-      "id": "validate-syllabus-json-id",
-      "name": "Validate Syllabus JSON"
+        1440,
+        300
+      ]
     },
     {
       "parameters": {
-        "jsCode": "// Graph Consistency Validator\n// Checks for: circular references, orphan nodes, invalid prerequisite links\n\nconst syllabus = $json.updated_syllabus || $json;\nconst errors = [];\nconst warnings = [];\n\nif (!syllabus.nodes || !Array.isArray(syllabus.nodes)) {\n  errors.push('nodes field is required and must be an array');\n  return { json: { ...$json, graph_consistency: { isValid: false, errors, warnings } } };\n}\n\nif (!syllabus.connections || !Array.isArray(syllabus.connections)) {\n  errors.push('connections field is required and must be an array');\n  return { json: { ...$json, graph_consistency: { isValid: false, errors, warnings } } };\n}\n\nconst nodeIds = new Set(syllabus.nodes.map(n => n.id));\n\n// Check 1: Verify all connection references point to existing nodes\nsyllabus.connections.forEach((conn, idx) => {\n  if (!nodeIds.has(conn.from)) {\n    errors.push(`Connection[${idx}]: Reference to non-existent node: '${conn.from}' (from field)`);\n  }\n  if (!nodeIds.has(conn.to)) {\n    errors.push(`Connection[${idx}]: Reference to non-existent node: '${conn.to}' (to field)`);\n  }\n});\n\n// Check 2: Detect circular dependencies (simple cycle detection)\nconst adjacencyList = new Map();\nsyllabus.connections.forEach(conn => {\n  if (!adjacencyList.has(conn.from)) {\n    adjacencyList.set(conn.from, []);\n  }\n  adjacencyList.get(conn.from).push(conn.to);\n});\n\nconst visited = new Set();\nconst recursionStack = new Set();\nlet hasCircularRef = false;\n\nfunction detectCycle(nodeId) {\n  visited.add(nodeId);\n  recursionStack.add(nodeId);\n  \n  const neighbors = adjacencyList.get(nodeId) || [];\n  for (const neighbor of neighbors) {\n    if (!visited.has(neighbor)) {\n      if (detectCycle(neighbor)) {\n        hasCircularRef = true;\n        return true;\n      }\n    } else if (recursionStack.has(neighbor)) {\n      hasCircularRef = true;\n      return true;\n    }\n  }\n  \n  recursionStack.delete(nodeId);\n  return false;\n}\n\nfor (const nodeId of nodeIds) {\n  if (!visited.has(nodeId)) {\n    detectCycle(nodeId);\n  }\n}\n\nif (hasCircularRef) {\n  errors.push('Graph contains circular dependencies in connections');\n}\n\n// Check 3: Detect orphan nodes (nodes with no connections)\nconst connectedNodes = new Set();\nsyllabus.connections.forEach(conn => {\n  connectedNodes.add(conn.from);\n  connectedNodes.add(conn.to);\n});\n\nconst orphanNodes = [...nodeIds].filter(id => !connectedNodes.has(id));\nif (orphanNodes.length > 0) {\n  warnings.push(`Orphan nodes detected (no connections): ${orphanNodes.join(', ')}`);\n}\n\nreturn {\n  json: {\n    ...$json,\n    graph_consistency: {\n      isValid: errors.length === 0,\n      errors,\n      warnings,\n      nodeCount: nodeIds.size,\n      connectionCount: syllabus.connections.length,\n      orphanNodes\n    }\n  }\n};"
+        "jsCode": "// Relation consistency: every detected relation must resolve to a real node\n// of the graph. Self-references are rejected.\n\nconst known = new Set($json.all_slugs || []);\nconst relations = $json.draft?.detected_relations || [];\nconst errors = [];\nconst warnings = [];\n\nrelations.forEach(r => {\n  if (r === $json.target_node_id) errors.push(`self-reference: relation '${r}' points to the target node itself`);\n  else if (!known.has(r)) errors.push(`relation target '${r}' does not exist in the knowledge graph`);\n});\n\nreturn {\n  json: {\n    ...$json,\n    relation_consistency: {\n      isValid: errors.length === 0,\n      errors,\n      warnings,\n      checked: relations\n    }\n  }\n};"
       },
+      "id": "relation-consistency",
+      "name": "Relation Consistency Validator",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1600,
-        400
-      ],
-      "id": "graph-consistency-validator-id",
-      "name": "Graph Consistency Validator"
+        1680,
+        300
+      ]
     },
     {
       "parameters": {
@@ -208,7 +180,7 @@
           "conditions": [
             {
               "id": "cond-graph-valid",
-              "leftValue": "={{ $json.graph_consistency.isValid }}",
+              "leftValue": "={{ $json._validation.isValid && $json.relation_consistency.isValid }}",
               "transitionProperty": "equal",
               "rightValue": true,
               "type": "boolean"
@@ -225,52 +197,39 @@
         400
       ],
       "id": "graph-valid-if-id",
-      "name": "Graph Consistency Check?"
+      "name": "Automated Checks OK?"
     },
     {
       "parameters": {
-        "jsCode": "// CIP-KGE v0.3 — Stage 3 output: DRAFT Knowledge Diff for human review.\n//\n// EPISTEMIC GATE — DO NOT REPLACE THIS NODE WITH A WRITE OPERATION.\n// Principle 3: \"AI proposes; humans validate.\"\n// Principle 4: \"Interviews generate diffs, not edits.\"\n// This workflow has NO write access to the knowledge graph, by design.\n// The output below must be saved under diffs/ and reviewed by a human\n// (Stages 5-8 of docs/PROTOCOL.md) before any graph is touched.\n\nconst updated = $json.updated_syllabus;\nconst graphCheck = $json.graph_consistency || { isValid: false, errors: ['missing graph_consistency'], warnings: [] };\nconst now = new Date();\nconst dateStr = now.toISOString().slice(0, 10);\n\n// Derive candidate changes from the LLM-proposed node status tags.\nconst changedNodes = (updated.nodes || []).filter(n => n.status && n.status !== 'existing');\nconst opMap = { added: 'add', modified: 'modify', removed: 'remove' };\n\nconst candidateChanges = changedNodes.map(n => ({\n  target: {\n    node_id: n.id,\n    operation: opMap[n.status] || 'modify'\n  },\n  section: null,              // human reviewer fills this from the transcript\n  proposed_text: n.summary || n.title || '',\n  rationale: 'PROPOSED BY STAGE 3 EXTRACTION — human must rewrite, citing numbered session exchanges, before submission.'\n}));\n\nconst draftDiff = {\n  id: `diff-${dateStr}-DRAFT`,    // human assigns the final NNN sequence number\n  protocol_version: 'CIP-KGE-v0.3',\n  session_id: $json.session_id || 'session-UNKNOWN',\n  generated_at: now.toISOString(),\n  status: 'DRAFT — NOT SUBMITTED',\n  candidate_changes: candidateChanges,\n  evidence: {\n    session_exchange_ref: null,   // human fills: session-YYYY-MM-DD-NNN/exchange-NN\n    summary: 'Automated Stage 3 extraction. Human reviewer must ground each change in numbered transcript exchanges.',\n    confidence: 'low',\n    confidence_rationale: 'Machine-extracted candidates without human verification of the evidence mapping. Exists only to trigger human review, per the Explicit Uncertainty Requirement.',\n    corroboration_scope: 'none',\n    linked_sessions: []\n  },\n  pre_review_check: {\n    passes_minimum_quality: false,  // a machine-extracted draft NEVER passes Stage 5 automatically\n    failure_reason: 'no_evidence'\n  },\n  review_status: 'proposed',\n  review_notes: [],\n  merge_ready: false,\n  pr_url: null\n};\n\nreturn {\n  json: {\n    status: 'draft_ready_for_human_review',\n    write_performed: false,\n    message: 'Stage 3 complete. Draft Knowledge Diff generated. NO graph write occurred — a human must ground the evidence, validate against docs/KNOWLEDGE_DIFF_SCHEMA.yaml (e.g. via scripts/validate_diff.py), and run Stages 5-8 manually.',\n    automated_checks: {\n      schema_shape: $json._validation || null,\n      graph_consistency: graphCheck\n    },\n    draft_diff: draftDiff,\n    generatedAt: now.toISOString()\n  }\n};"
+        "jsCode": "// CIP-KGE v0.3 — Stage 3 output: DRAFT Knowledge Diff for human review.\n//\n// EPISTEMIC GATE — DO NOT REPLACE THIS NODE WITH A WRITE OPERATION.\n// Principle 3: \"AI proposes; humans validate.\" Principle 4: \"Interviews generate diffs, not edits.\"\n// The output must be saved under diffs/ and reviewed by a human (Stages 5-8) before any graph is touched.\n\nconst now = new Date();\nconst dateStr = now.toISOString().slice(0, 10);\nconst changes = ($json.draft?.candidate_changes || []).map(c => ({\n  section: c.section,\n  operation: c.operation,\n  ...(c.operation !== 'append' ? { current_text: c.current_text } : {}),\n  proposed_text: c.proposed_text,\n  rationale: c.rationale\n}));\n\nconst allRefs = [...new Set(($json.draft?.candidate_changes || []).flatMap(c => c.exchange_refs || []))].sort();\nconst sessionId = $json.session_id;\nconst exchangeRef = allRefs.length > 0 ? `${sessionId}/${allRefs.join(',')}` : null;\n\nconst shapeOk = $json._validation?.isValid === true;\nconst relationsOk = $json.relation_consistency?.isValid === true;\nconst passes = shapeOk && relationsOk && exchangeRef !== null;\n\nconst draftDiff = {\n  id: `diff-${dateStr}-DRAFT`,          // human assigns the final NNN; schema rejects '-DRAFT' until finalized — intentional\n  protocol_version: 'CIP-KGE-v0.3',\n  session_id: sessionId,\n  generated_at: now.toISOString(),\n  status: 'DRAFT — NOT SUBMITTED',\n  target: { node_id: $json.target_node_id, operation: 'modify' },\n  section_changes: changes,\n  evidence: {\n    session_exchange_ref: exchangeRef,\n    summary: $json.draft?.extraction_notes || 'Automated Stage 3 extraction — human reviewer must verify against the transcript.',\n    confidence: 'low',\n    confidence_rationale: 'Machine-extracted candidates: current_text verified against published baseline, but exchange-level grounding requires human transcript review.',\n    corroboration_scope: allRefs.length > 1 ? 'intra_session' : 'none',\n    linked_sessions: []\n  },\n  pre_review_check: {\n    passes_minimum_quality: passes,\n    failure_reason: passes ? null : (!exchangeRef ? 'no_evidence' : (!shapeOk ? 'yaml_schema_invalid' : 'relation_target_missing'))\n  },\n  review_status: 'proposed',\n  review_notes: [],\n  merge_ready: false,\n  pr_url: null\n};\n\nreturn {\n  json: {\n    status: passes ? 'draft_ready_for_human_review' : 'draft_incomplete_human_review_required',\n    write_performed: false,\n    message: 'Stage 3 complete. NO graph write occurred — a human must verify exchange grounding, finalize the diff id, and run Stages 5-8 (validate_diff.py, review, transformation, PR).',\n    baseline_anchor: { graph_source_url: $json.graph_source_url, fetched_at: $json.fetched_at },\n    automated_checks: { shape: $json._validation, relations: $json.relation_consistency },\n    draft_diff: draftDiff,\n    generatedAt: now.toISOString()\n  }\n};"
       },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        2080,
-        300
-      ],
       "id": "emit-draft-diff-success",
-      "name": "Emit Draft Diff for Human Review"
-    },
-    {
-      "parameters": {
-        "jsCode": "const graphConsistency = $json.graph_consistency;\nreturn {\n  json: {\n    status: 'error',\n    error_type: 'GRAPH_CONSISTENCY_FAILED',\n    details: {\n      errors: graphConsistency.errors,\n      warnings: graphConsistency.warnings,\n      nodeCount: graphConsistency.nodeCount,\n      connectionCount: graphConsistency.connectionCount,\n      orphanNodes: graphConsistency.orphanNodes\n    },\n    timestamp: new Date().toISOString()\n  }\n};"
-      },
+      "name": "Emit Draft Diff for Human Review",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2080,
-        500
-      ],
-      "id": "graph-consistency-failed-id",
-      "name": "Graph Consistency Failed Log"
+        2160,
+        180
+      ]
     },
     {
       "parameters": {
-        "jsCode": "const validation = $json._validation;\nreturn {\n  json: {\n    status: 'error',\n    error_type: 'SCHEMA_VALIDATION_FAILED',\n    details: validation.errors,\n    timestamp: new Date().toISOString()\n  }\n};"
+        "jsCode": "return {\n  json: {\n    status: 'error',\n    error_type: 'AUTOMATED_CHECKS_FAILED',\n    shape_validation: $json._validation || null,\n    relation_consistency: $json.relation_consistency || null,\n    write_performed: false,\n    timestamp: new Date().toISOString()\n  }\n};"
       },
+      "id": "checks-failed-log",
+      "name": "Automated Checks Failed Log",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2300,
-        600
-      ],
-      "id": "validation-failed-id",
-      "name": "Schema Validation Failed Log"
+        2160,
+        420
+      ]
     },
     {
       "parameters": {
-        "content": "## Epistemic gate (CIP-KGE Principles 3–4)\n\nThis workflow implements **Stage 3 only** (evidence extraction / draft generation).\n\nIt **never writes to the knowledge graph**. The success branch emits a *draft* Knowledge Diff with `pre_review_check.passes_minimum_quality: false` — a human must ground the evidence in numbered transcript exchanges and run Stages 5–8 (validation, review, transformation, PR) manually.\n\nDo not add persistence nodes downstream of `Emit Draft Diff for Human Review`.",
-        "height": 300,
-        "width": 420,
+        "content": "## Epistemic gate (CIP-KGE Principles 3–4)\n\nStage 3 only: fetch graph → extract local sub-graph → LLM proposes bounded candidate changes → automated shape + relation + current_text-vs-baseline checks → **draft** Knowledge Diff.\n\n**Never writes to the knowledge graph.** A human grounds the evidence in numbered transcript exchanges, finalizes the diff id, and runs Stages 5–8 (`scripts/validate_diff.py`, review, transformation, PR).\n\nDo not add persistence nodes downstream of `Emit Draft Diff for Human Review`.",
+        "height": 320,
+        "width": 460,
         "color": 4
       },
       "id": "epistemic-gate-note",
@@ -278,8 +237,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1400,
-        -260
+        1500,
+        -80
       ]
     }
   ],
@@ -288,25 +247,36 @@
       "main": [
         [
           {
-            "node": "Load Draft Syllabus",
+            "node": "Fetch Knowledge Graph",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Load Draft Syllabus": {
+    "Fetch Knowledge Graph": {
       "main": [
         [
           {
-            "node": "Prepare Syllabus Agent",
+            "node": "Extract Local Sub-graph",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Prepare Syllabus Agent": {
+    "Extract Local Sub-graph": {
+      "main": [
+        [
+          {
+            "node": "Prepare Interview Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Interview Agent": {
       "main": [
         [
           {
@@ -359,36 +329,36 @@
       "main": [
         [
           {
-            "node": "Validate Syllabus JSON",
+            "node": "Validate Draft Diff Shape",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Validate Syllabus JSON": {
+    "Validate Draft Diff Shape": {
       "main": [
         [
           {
-            "node": "Graph Consistency Validator",
+            "node": "Relation Consistency Validator",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Graph Consistency Validator": {
+    "Relation Consistency Validator": {
       "main": [
         [
           {
-            "node": "Graph Consistency Check?",
+            "node": "Automated Checks OK?",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Graph Consistency Check?": {
+    "Automated Checks OK?": {
       "main": [
         [
           {
@@ -399,18 +369,7 @@
         ],
         [
           {
-            "node": "Graph Consistency Failed Log",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Graph Consistency Failed Log": {
-      "main": [
-        [
-          {
-            "node": "Schema Validation Failed Log",
+            "node": "Automated Checks Failed Log",
             "type": "main",
             "index": 0
           }

@@ -1,0 +1,52 @@
+node_id: 04_autonomy/growing_learner_autonomy
+title: Growing Learner Autonomy
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 04_autonomy/growing_learner_autonomy.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/capability
+sectioned: true
+content_hash: sha256:3cbcea25ec535068e81c1ff01c4c4a31f9eff90394434c549e89eae864f7ffc6
+sections:
+  definition:
+    text: Growing Learner Autonomy is the longitudinal, developmental capability to progressively increase
+      self-directed judgment, methodological control, and epistemic sovereignty across repeated human-AI
+      interactions.
+    hash: sha256:ee7c27fa028493a474e47ccb04b9835b1eee91bad22fa747116e8ba7e7e871a4
+  use_case:
+    text: Activated as the macro-level metric for evaluating the success of the entire Pyragogy framework
+      over months or years, tracking the trajectory from initial dependence to complete cognitive self-regulation.
+    hash: sha256:b16a80bd3bce5677d14de9f3f357eaf8c9c60e44eca62f0c1b5da6a2e924b22f
+  human_role:
+    text: The learner must continuously assess their own operational dependence (“Am I becoming less dependent
+      across time?”). They must actively shed AI scaffolding, transitioning from using the AI to structure
+      their learning, to using the AI only as a tightly bounded technical instrument.
+    hash: sha256:20a99379258c24fdf1c7a7bd4e500d5293065301a2ce0f89830a83e4da1e0def
+  ai_role:
+    text: The AI acts as a fading scaffold. Over time, it systematically reduces its proactive prompting,
+      shortens its explanatory outputs, and refuses to provide methodological guidance, forcing the user
+      to supply the structural architecture.
+    hash: sha256:b96aac7af0a88c3559c8d2847ad3c90ee22f1ebc74ca9027e15070308eaccf56
+  friction:
+    text: The system employs the friction_escalation_ladder across multiple sessions. As the learner’s
+      historical competence increases, the system raises the activation energy required to get an answer,
+      demanding more sophisticated and constrained prompts.
+    hash: sha256:794dce96926631e981dd88d76e5d2e6df75dbaecbbaed0ea0f778556571c28d7
+  risk:
+    text: If this developmental capability stalls, the user enters a state of permanent symbiosis or cognitive_debt,
+      where they remain highly productive but completely unable to function outside the augmented environment.
+    hash: sha256:ba2fa2fd4c4fd746c9ecae9bb5f5d74e70396ac63b4ef9af4c9f33055e39fd02
+  observable_markers:
+    text: Longitudinal analytics show a consistent decrease in the volume of AI-generated text used per
+      project, an increase in the complexity of user constraints, and a higher frequency of human-only
+      work phases.
+    hash: sha256:a5354fc36a86175e52a5f81cfa8fb2208630d75cab045b368971e9cd1bbc040e
+relations:
+  outbound:
+  - 05_systemic_risks/cognitive_debt
+  - 06_protocols/friction_escalation_ladder
+  inbound: []

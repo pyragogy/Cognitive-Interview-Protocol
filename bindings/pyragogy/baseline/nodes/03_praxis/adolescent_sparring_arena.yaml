@@ -1,0 +1,55 @@
+node_id: 03_praxis/adolescent_sparring_arena
+title: 'The Dialectic Sparring Arena: Socratic Debate and Collaborative Projects'
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 03_praxis/adolescent_sparring_arena.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/practice
+sectioned: true
+content_hash: sha256:3bbe535be91a884ebe0fe77851bb20b75c813b98c3018a4447f042f6a1ef274b
+sections:
+  definition:
+    text: The Dialectic Sparring Arena is a formative infrastructure that shifts interaction from a basic
+      search and inquiry model to rigorous logical-critical debate, where the AI assumes an oppositional
+      role.
+    hash: sha256:8af6c1e9fc4b762db4375dc08628d78fe1f0d45bb345d182fd2367f4bc3786ca
+  use_case:
+    text: Activated during the transitional phase when the learner begins to tackle complex abstractions,
+      ethical dilemmas, or collaborative projects, and needs to stress-test their arguments.
+    hash: sha256:f2563642f39af047dcbdcd7e8230df7d26fa0b8e77c0b3948467a5c8d7ae891a
+  human_role:
+    text: Verbally and analytically defends their project decisions or conceptual theses against systematic
+      objections raised by the system, documenting their logical steps in a logbook.
+    hash: sha256:c1f533cb82dda78d7ed7c0d99fecc5c17f678d046c02847812e6e71d92f88c7e
+  ai_role:
+    text: 'Operates as a Socratic “Devil’s Advocate.” It is programmed with a “pedagogically useful deficit”:
+      it does not provide the correct answer, but identifies logical fallacies, highlights unstated assumptions,
+      and stress-tests the learner’s claims.'
+    hash: sha256:1a861ee841cd2284e920a091c90e27e586ec5d4dfa8b2214d4015f5103a8138b
+  friction:
+    text: Forces the learner to justify every inferential leap. Instead of receiving reassuring confirmations,
+      the user encounters structural resistance that makes it impossible to close the project without
+      having solidly defended the thesis first.
+    hash: sha256:5a97afab881212535c2406c1c3328ece3292032347b4249baf4a5ef83bc9a239
+  risk:
+    text: 'Without the habit of oppositional debate, students develop a severe automation_bias: they become
+      accustomed to treating LLM outputs as unquestionable oracles, atrophying their ability to produce
+      autonomous critical thought.'
+    hash: sha256:20742079f3fb22e5e0bd0f1d44246d4d4f479327126f9adb5db0e73671dbbb4b
+  observable_markers:
+    text: The learner documents in a traceable way (via notes or commits) exactly how they refuted the
+      AI’s objections, or what specific modifications they made to their original project to make it unassailable.
+    hash: sha256:3ddd0ff62473b2d8bb70d0bb4484de2d70c79528500404dc6379278abf975d45
+relations:
+  outbound:
+  - 04_autonomy/independent_thinking
+  - 05_systemic_risks/ai_over_reliance
+  - 05_systemic_risks/automation_bias
+  inbound:
+  - 02_ontogeny/ontogeny_to_praxis_bridge
+  - 03_praxis/praxis_to_autonomy_bridge
+  - index

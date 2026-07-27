@@ -1,0 +1,18 @@
+node_id: 03_praxis/index
+title: 03. Praxis
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 03_praxis/index.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags: []
+sectioned: false
+content_hash: sha256:90ffaa49607b14c6a097fead761481133cf3cb6303bb2a9447b7531329c883e3
+sections:
+  body:
+    text: Adolescent sparring, active co-agency, and learning cycle practices.
+    hash: sha256:90ffaa49607b14c6a097fead761481133cf3cb6303bb2a9447b7531329c883e3
+relations:
+  outbound: []
+  inbound: []

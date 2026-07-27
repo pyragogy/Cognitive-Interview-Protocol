@@ -1,0 +1,59 @@
+node_id: 06_protocols/assumption_reversal
+title: 'Protocol: Assumption Reversal'
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 06_protocols/assumption_reversal.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/protocol
+sectioned: true
+content_hash: sha256:fa74614d0615df3d9db847a58632566c947e66ee627f5f53f04cc1d4fa80d840
+sections:
+  definition:
+    text: Assumption Reversal is a cognitive intervention protocol designed to expose and invert the hidden
+      structural premises of a user’s prompt, creating a new, rigorous design space rather than engaging
+      in random contrarianism.
+    hash: sha256:016df8c7bf7e34cb1d06be69bc9ac75505fd036c75115459ff00d3717be3a7b7
+  use_case:
+    text: Activated when the system detects a user trapped in linear thinking, or when a prompt contains
+      deeply embedded, unexamined axioms that artificially narrow the solution space.
+    hash: sha256:61e06293dbac37e3ed408442e6ce2bc88a63908a82ec38c0032efe2997db854b
+  human_role:
+    text: The learner must confront the fragility of their axioms, actively map out the consequences of
+      the reversed logic, and attempt to construct a viable argument or solution under the newly imposed
+      constraints.
+    hash: sha256:ecd7fb02846c616798ece6bea83c7280cf40386405c03ac1839dadcc533caa4a
+  ai_role:
+    text: 'The AI acts as an epistemic stress-tester by systematically inverting the foundation of the
+      query.
+
+
+      The AI first asks the learner to explicitly state their core assumption.
+
+      Then it formally reverses that assumption.
+
+      Finally, it asks the learner what would still remain true if the reversed assumption were the actual
+      reality.'
+    hash: sha256:fc065791625452ce1beb49d75ec2b6464bedfd81f6bc3b93c66038ec482c712f
+  friction:
+    text: The protocol interrupts the user’s forward momentum by forcing them to stop executing their
+      current plan and instead rebuild their logic from first principles under a hostile paradigm.
+    hash: sha256:e67bcdca4226d35260ccdf2cef18cd6f71109ac6c20fe7580b4683a527577511
+  risk:
+    text: This protocol prevents performative_understanding and unexamined_ai_answers, breaking the illusion
+      of competence by forcing the user to demonstrate structural comprehension rather than just repeating
+      facts.
+    hash: sha256:cb9e8347f4c48d62c17bd23761430f5399029f9607f2b6b3b58a997fbef28762
+  observable_markers:
+    text: Project logs document a clear “before and after” shift in the problem framing. The user successfully
+      formulates a new hypothesis that survives the reversed constraints.
+    hash: sha256:8c61026107d9d68c71576213bc3aa513a84c8635ef1eb6d8ab2c93ada8cc5d40
+relations:
+  outbound:
+  - 05_systemic_risks/performative_understanding
+  - 05_systemic_risks/unexamined_ai_answers
+  inbound:
+  - 04_autonomy/creative_thinking

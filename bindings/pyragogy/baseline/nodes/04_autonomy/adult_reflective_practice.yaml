@@ -1,0 +1,55 @@
+node_id: 04_autonomy/adult_reflective_practice
+title: 'Epistemic Integration in Complex Arenas: Real Work and Reflective Practice'
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 04_autonomy/adult_reflective_practice.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/practice
+sectioned: true
+content_hash: sha256:0481cdab329e1aa9ec322481bd0d106dca4683ff2c6191180c7af500457048bb
+sections:
+  definition:
+    text: Reflective Practice for adults is the structural integration of cognitive friction into real-world
+      professional environments, designed to slow down the automatic acceptance of AI outputs in high-pressure
+      contexts.
+    hash: sha256:7075fb3fbad147086e4cb01935e65a6457fbc5337c9d1df398f6f1615f41c6d6
+  use_case:
+    text: Activated in the production of critical professional deliverables (e.g., software architectures,
+      strategic plans, clinical assessments) where AI agents are used to accelerate development or generate
+      first drafts.
+    hash: sha256:c921a302718e5b6ae4b39dc987cec86e5aa79f051396aad225f614bd02b10e67
+  human_role:
+    text: 'Maintains mature autonomy: defines acceptance criteria before generation, frames the specific
+      domain context, validates the output, and assumes exclusive legal, ethical, and technical responsibility
+      for the final result.'
+    hash: sha256:7fe0cbda692f94a7f56b7dc786504ed1f4552d491d52971a2a02a86eeee5edb3
+  ai_role:
+    text: Functions as a production accelerator and Diagnostic Checker. It operates strictly within the
+      boundaries and constraints established by the professional, providing high-speed syntheses or variations.
+    hash: sha256:016830e20bc0a6523a8a79b057847ddf93d1c6dfe7a750dd6a131f7a700146a8
+  friction:
+    text: Imposes an explicit “accountability checkpoint” in the workflow. The professional cannot approve
+      or implement the generated code/text without first validating it against the pre-established parameters.
+    hash: sha256:74d3962245a9da3608187b0411bca0ff63a5dda69f19052f04f8831b247812f9
+  risk:
+    text: 'The absence of this practice in teams leads to cognitive_debt and automation_bias: professionals
+      trust outputs blindly, gradually losing mastery of the complex systems they manage.'
+    hash: sha256:6d0bfb64c8b2909dd86e125601cefbfcb3786e7ac324bf624d86635c7eac11d0
+  observable_markers:
+    text: The professional documents (in Git commits or release notes) the exact criteria by which the
+      AI’s output was validated, highlighting which portions were rejected or modified to fit the human
+      context.
+    hash: sha256:bb58eb6b63850e9d1fc65221ad7e5ca19e7fd764fbf8a4503f29863f671c0e00
+relations:
+  outbound:
+  - 03_praxis/collaborative_thinking
+  - 05_systemic_risks/ai_over_reliance
+  - 05_systemic_risks/automation_bias
+  - 05_systemic_risks/cognitive_debt
+  inbound:
+  - 03_praxis/praxis_to_autonomy_bridge
+  - index

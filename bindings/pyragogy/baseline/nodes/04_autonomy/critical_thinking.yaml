@@ -1,0 +1,54 @@
+node_id: 04_autonomy/critical_thinking
+title: Critical Thinking
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 04_autonomy/critical_thinking.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/capability
+sectioned: true
+content_hash: sha256:536149d25edd5580e58306f4e1abd2df9cf2a9275ffe20ddeb77428e11a44b8c
+sections:
+  definition:
+    text: Critical Thinking is the cognitive capability to rigorously test claims, dissect underlying
+      assumptions, evaluate primary evidence, and trace the logical implications of a given argument or
+      dataset.
+    hash: sha256:e317c7708bc32a0452382a094f9700dc9f3b64bbd0545c8932f9457739f96393
+  use_case:
+    text: Activated when analyzing complex texts, assessing AI-generated arguments, or preparing to integrate
+      external information into a formal knowledge structure.
+    hash: sha256:35d5b4e5e09b9662c4dd28cf408d84b80189f6e2895c4b1f932667faa6712735
+  human_role:
+    text: The learner acts as a relentless forensic auditor (“Does this claim survive pressure?”). They
+      must refuse to accept fluent prose at face value, demanding explicitly structured arguments and
+      independently verifying the causal links between premise and conclusion.
+    hash: sha256:66a155d513b123008bb50cca11daff8c0c8912e05a2723327d410550c3cfb133
+  ai_role:
+    text: The AI is positioned as a logical adversary or an epistemic_mirror. It is tasked with exposing
+      the flaws in the user’s logic, or alternatively, it is intentionally instructed to present a flawed
+      argument that the human must systematically dismantle.
+    hash: sha256:b6bf7a775e02f624ef49e9c1699a340eb963838ea3d09d168e49b2c063ff9cc8
+  friction:
+    text: The protocol prevents passive reading by implementing an evidence_demand or forcing the user
+      to map the argument in a formal syllogism before the system allows the content to be summarized
+      or stored.
+    hash: sha256:e9426daa327c32f7221487f02fe22d0647eee787a09415da5857a6f43ab67b3a
+  risk:
+    text: If critical thinking is outsourced, the user falls victim to the fluency_heuristic and unexamined_ai_answers,
+      silently absorbing hallucinations, biases, and logically invalid conclusions simply because they
+      are well-formatted.
+    hash: sha256:0f337e08238ad73df2b7ab0f8235c51dbd888b78a10e070eb4a71a7222877a2a
+  observable_markers:
+    text: The user’s dialogue history shows a high frequency of “Why?”, “What is the source for this?”,
+      and “Identify the logical flaw in that statement” rather than “Summarize this for me.”
+    hash: sha256:68f079a50bf4c0eda434a62358c9e2d7b17f7aaf9f78353b3f1931834a253fde
+relations:
+  outbound:
+  - 04_autonomy/epistemic_mirror
+  - 05_systemic_risks/fluency_heuristic
+  - 05_systemic_risks/unexamined_ai_answers
+  - 06_protocols/evidence_demand
+  inbound: []

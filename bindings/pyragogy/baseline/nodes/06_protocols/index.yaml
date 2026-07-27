@@ -1,0 +1,18 @@
+node_id: 06_protocols/index
+title: 06. Protocols
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 06_protocols/index.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags: []
+sectioned: false
+content_hash: sha256:ce8dd98f0fefa0bcd252bd54750b95000c216e89f65a57165002406392363d4c
+sections:
+  body:
+    text: Operational procedures and loops designed to enforce cognitive friction.
+    hash: sha256:ce8dd98f0fefa0bcd252bd54750b95000c216e89f65a57165002406392363d4c
+relations:
+  outbound: []
+  inbound: []

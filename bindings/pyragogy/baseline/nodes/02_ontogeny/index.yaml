@@ -1,0 +1,18 @@
+node_id: 02_ontogeny/index
+title: 02. Ontogeny
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 02_ontogeny/index.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags: []
+sectioned: false
+content_hash: sha256:705c97d114652d55c97e0caa014b6808924e0df12efbeb47ab6e7ea00785194b
+sections:
+  body:
+    text: Pedagogical patterns for early childhood, sensory-motor development, and developmental growth.
+    hash: sha256:705c97d114652d55c97e0caa014b6808924e0df12efbeb47ab6e7ea00785194b
+relations:
+  outbound: []
+  inbound: []

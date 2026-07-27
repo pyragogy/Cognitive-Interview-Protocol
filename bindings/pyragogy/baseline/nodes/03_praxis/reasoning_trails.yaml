@@ -1,0 +1,50 @@
+node_id: 03_praxis/reasoning_trails
+title: Reasoning Trails
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 03_praxis/reasoning_trails.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/practice
+sectioned: true
+content_hash: sha256:abe3df7ab2cd8d5d6832716da41298d657037e5e6d0ec0e23ae3507162eca3a4
+sections:
+  definition:
+    text: The Reasoning Trails protocol is the practice of systematically tracking, preserving, and evaluating
+      the intermediate steps of the hybrid (human-AI) cognitive process, shifting the evaluation metric
+      from the final textual product to the map of the reasoning employed.
+    hash: sha256:7232918abede32886c159b24bb5e00d27bb71f0f15abd65c35f1504a45642ba3
+  use_case:
+    text: Activated during the drafting of complex papers, design decisions, or peer review cycles, in
+      cases where the authenticity and solidity of human inquiry must be validated in the presence of
+      auto-generative tools.
+    hash: sha256:7b84e9d57edce0c02d323fd49556c11ed32be1c16ee167da73d28f0a215eae8c
+  human_role:
+    text: Actively preserves intermediate drafts, explicitly argues prompt variations, annotates methodological
+      doubts, and defends—verbally or in writing—the reasons for accepting or rejecting the agent’s output.
+    hash: sha256:6e2e73167f7d18a11857d678a5d7557ec2b0c9c3d7ac628989e00702eb9ee7e4
+  ai_role:
+    text: Produces the speculative output subjected to scrutiny. It acts as an expansive mirror, generating
+      material upon which the human must necessarily operate cuts, selections, and logical validations.
+    hash: sha256:ae13498166420706e08e90140f0137b847e9eece2573b71e8589ec7f3fcf9d58
+  friction:
+    text: Makes fluid “copy-and-paste” automation impractical and immediately evident, imposing the cognitive
+      load of critical archiving and forcing the explanation of causal links before synthesis.
+    hash: sha256:fd588897ad64e267af07a187d111929d038c0b85226ec7f034562a075eabae85
+  risk:
+    text: 'Without Reasoning Trails, evaluation fails: it rewards the formal production of the agent,
+      hiding unexamined_ai_answers and obscuring the user’s lack of deep understanding.'
+    hash: sha256:e50c422030bc715392c946240f8071d381463184aefe3a0e0e8d8963932c34ab
+  observable_markers:
+    text: The final document is accompanied by structured metadata or a log file in which the learner
+      cites failed prompts and demonstrates, line by line, where and why they intervened to correct the
+      machine’s shortcuts.
+    hash: sha256:964aa0f9a6d6317b88f4eb7d2de9d30777ecf9cf4fb3c60ec46ba8cb9795e8dd
+relations:
+  outbound:
+  - 05_systemic_risks/unexamined_ai_answers
+  inbound:
+  - 05_systemic_risks/epistemia

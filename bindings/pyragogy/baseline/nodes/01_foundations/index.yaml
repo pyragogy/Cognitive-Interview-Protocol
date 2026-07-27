@@ -1,0 +1,40 @@
+node_id: 01_foundations/index
+title: 01. Foundations
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 01_foundations/index.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags: []
+sectioned: false
+content_hash: sha256:1109d0468db2f2dff8dea4589b7e7fb813fd45e5346c7e58597fdb8aa8b8e568
+sections:
+  body:
+    text: 'The epistemic principles that underpin Pyragogy: the axis system used to map human-AI co-learning,
+      the relation grammar that defines how concepts connect, and the architectural blueprint of the framework.
+
+      Core Documents
+
+
+      blueprint — The architectural blueprint of the Pyragogy framework: what it is, what it is not, and
+      how its components interlock.
+
+      cartesian_axes — The three measurement axes (Ontogeny, Praxis, Autonomy) used to position every
+      node in the epistemic space.
+
+      epistemic_relation_grammar — The formal vocabulary of relations between nodes: reinforces, contradicts,
+      enables, threatens, and more.
+
+
+      Purpose
+
+      These three documents are the load-bearing walls of the framework. Read them before navigating any
+      other section: they define the coordinate system that gives the rest of the graph its shape.'
+    hash: sha256:1109d0468db2f2dff8dea4589b7e7fb813fd45e5346c7e58597fdb8aa8b8e568
+relations:
+  outbound:
+  - 01_foundations/blueprint
+  - 01_foundations/cartesian_axes
+  - 01_foundations/epistemic_relation_grammar
+  inbound: []

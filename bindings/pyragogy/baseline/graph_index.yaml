@@ -1,0 +1,520 @@
+generated_at: '2026-07-27T05:35:36Z'
+importer: bindings/pyragogy/import_graph.py
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+source_hash: sha256:d3af653250939f3c7fc46d0c3c22ca55b369eb95c5ab94aca8203d493b3a8307
+node_count: 60
+sectioned_nodes: 34
+baseline_hash: sha256:870917f2965eb33b672d675d640cf80e0000a2eef24083b45fb793422afd7276
+nodes:
+- node_id: 00_meta/index
+  title: 00. Meta
+  sectioned: false
+  content_hash: sha256:2adbf7a588bb4e4f62d994453f6452a2ed3b100ff015b240f7a1e633337f8cbb
+  outbound: []
+  inbound: []
+- node_id: 00_meta/system_audit_report
+  title: system_audit_report
+  sectioned: false
+  content_hash: sha256:7065000c86cc5a14baf4456609a497bd560d44868be4c66b711b8d7095d3ca4f
+  outbound:
+  - package.json
+  - quartz.config.yaml
+  - quartz/styles/custom.scss
+  inbound: []
+- node_id: 01_foundations/blueprint
+  title: Architectural Blueprint
+  sectioned: false
+  content_hash: sha256:cfc0027b6788d378bb833b4714da00c0c88ce449c274ac26adec847932e23602
+  outbound: []
+  inbound:
+  - 01_foundations/index
+- node_id: 01_foundations/cartesian_axes
+  title: The Cartesian Axes of Pyragogy
+  sectioned: true
+  content_hash: sha256:86361edce87fbecca78688001a4e83f066ca57fbef16e80492f2fd7ac3a58fbd
+  outbound:
+  - 01_foundations/epistemic_relation_grammar
+  inbound:
+  - 01_foundations/epistemic_relation_grammar
+  - 01_foundations/index
+  - 05_systemic_risks/automation_bias
+- node_id: 01_foundations/epistemic_relation_grammar
+  title: Epistemic Relation Grammar
+  sectioned: true
+  content_hash: sha256:9186f155a3ded44ece5841c5ee6bd56522e4957e8b36f9fc93a2f0bf1e6d7335
+  outbound:
+  - 01_foundations/cartesian_axes
+  inbound:
+  - 01_foundations/cartesian_axes
+  - 01_foundations/index
+  - 05_systemic_risks/convergence_bias
+- node_id: 01_foundations/index
+  title: 01. Foundations
+  sectioned: false
+  content_hash: sha256:1109d0468db2f2dff8dea4589b7e7fb813fd45e5346c7e58597fdb8aa8b8e568
+  outbound:
+  - 01_foundations/blueprint
+  - 01_foundations/cartesian_axes
+  - 01_foundations/epistemic_relation_grammar
+  inbound: []
+- node_id: 02_ontogeny/embodied_foundation
+  title: 'The Embodied Portal: Sensory-Motor Inquiry in Early Childhood'
+  sectioned: true
+  content_hash: sha256:441040cb916485c84396f4294903f1678780366c67e2e9220dca9ad0a0de62bd
+  outbound: []
+  inbound:
+  - 02_ontogeny/ontogeny_to_praxis_bridge
+  - index
+- node_id: 02_ontogeny/index
+  title: 02. Ontogeny
+  sectioned: false
+  content_hash: sha256:705c97d114652d55c97e0caa014b6808924e0df12efbeb47ab6e7ea00785194b
+  outbound: []
+  inbound: []
+- node_id: 02_ontogeny/ontogeny_to_praxis_bridge
+  title: Ontogeny to Praxis Bridge
+  sectioned: true
+  content_hash: sha256:c64a988af508ada9816be86983a1636172287d8e6890a86a6712292fc3ba15b1
+  outbound:
+  - 02_ontogeny/embodied_foundation
+  - 03_praxis/adolescent_sparring_arena
+  - 05_systemic_risks/cognitive_offloading
+  inbound: []
+- node_id: 03_praxis/adolescent_sparring_arena
+  title: 'The Dialectic Sparring Arena: Socratic Debate and Collaborative Projects'
+  sectioned: true
+  content_hash: sha256:3bbe535be91a884ebe0fe77851bb20b75c813b98c3018a4447f042f6a1ef274b
+  outbound:
+  - 04_autonomy/independent_thinking
+  - 05_systemic_risks/ai_over_reliance
+  - 05_systemic_risks/automation_bias
+  inbound:
+  - 02_ontogeny/ontogeny_to_praxis_bridge
+  - 03_praxis/praxis_to_autonomy_bridge
+  - index
+- node_id: 03_praxis/agents/index
+  title: agents
+  sectioned: false
+  content_hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  outbound: []
+  inbound: []
+- node_id: 03_praxis/agents/pattern_perturbator
+  title: 'Agent Primitive: Pattern Perturbator'
+  sectioned: true
+  content_hash: sha256:b0343a3220a5ed051c1f71d9fa087d4840c65c22e8b8cf6c1d7225f37effe2b7
+  outbound:
+  - 05_systemic_risks/convergence_bias
+  - 06_protocols/anti_convergence_loop
+  inbound:
+  - 06_protocols/anti_convergence_loop
+- node_id: 03_praxis/ai_augmentation_stance
+  title: 'The Sovereign Augmentation Stance: Intentional Agency and Algorithmic Accountability'
+  sectioned: true
+  content_hash: sha256:e9f53d42c7c36a1b899661b0bf4db96b60c2a138db76e4b8220c1d5ade60ee01
+  outbound:
+  - 05_systemic_risks/ai_over_reliance
+  inbound:
+  - 04_autonomy/creative_thinking
+- node_id: 03_praxis/ai_cognitive_partner
+  title: AI as Cognitive Partner
+  sectioned: true
+  content_hash: sha256:10e971e42660e2bea1cff68cd7fedb7aba1e34fa9402dd937eec98649f4a4484
+  outbound:
+  - 04_autonomy/independent_thinking
+  - 05_systemic_risks/cognitive_offloading
+  inbound: []
+- node_id: 03_praxis/collaborative_thinking
+  title: 'Co-Agency and Collaborative Prototyping: Professional Hybrid Intelligence'
+  sectioned: true
+  content_hash: sha256:29c3402ceff1970e11b1f0854fc8cf2975f29e0963f16021ab77934830db1e13
+  outbound:
+  - 05_systemic_risks/ai_over_reliance
+  inbound:
+  - 04_autonomy/adult_reflective_practice
+- node_id: 03_praxis/index
+  title: 03. Praxis
+  sectioned: false
+  content_hash: sha256:90ffaa49607b14c6a097fead761481133cf3cb6303bb2a9447b7531329c883e3
+  outbound: []
+  inbound: []
+- node_id: 03_praxis/learning_cycle
+  title: Learning Cycle
+  sectioned: true
+  content_hash: sha256:b4e552301738bbf954ed3e9a84af39c1cf4ebf9a6249b939fd6659ecbe31ac22
+  outbound: []
+  inbound: []
+- node_id: 03_praxis/praxis_to_autonomy_bridge
+  title: Praxis to Autonomy Bridge
+  sectioned: true
+  content_hash: sha256:6be120a51fa07009fb497b455ece90301446f052901082bc26249d80472499ad
+  outbound:
+  - 03_praxis/adolescent_sparring_arena
+  - 04_autonomy/adult_reflective_practice
+  inbound:
+  - 04_autonomy/autonomy_failure_modes
+- node_id: 03_praxis/reasoning_trails
+  title: Reasoning Trails
+  sectioned: true
+  content_hash: sha256:abe3df7ab2cd8d5d6832716da41298d657037e5e6d0ec0e23ae3507162eca3a4
+  outbound:
+  - 05_systemic_risks/unexamined_ai_answers
+  inbound:
+  - 05_systemic_risks/epistemia
+- node_id: 04_autonomy/adult_reflective_practice
+  title: 'Epistemic Integration in Complex Arenas: Real Work and Reflective Practice'
+  sectioned: true
+  content_hash: sha256:0481cdab329e1aa9ec322481bd0d106dca4683ff2c6191180c7af500457048bb
+  outbound:
+  - 03_praxis/collaborative_thinking
+  - 05_systemic_risks/ai_over_reliance
+  - 05_systemic_risks/automation_bias
+  - 05_systemic_risks/cognitive_debt
+  inbound:
+  - 03_praxis/praxis_to_autonomy_bridge
+  - index
+- node_id: 04_autonomy/autonomy_failure_modes
+  title: Autonomy Failure Modes
+  sectioned: true
+  content_hash: sha256:ad0e0f082743d7db9b363c6204e14575f19850d333485e08aaf6a1c2e948a53d
+  outbound:
+  - 03_praxis/praxis_to_autonomy_bridge
+  - 05_systemic_risks/epistemic_dependency
+  inbound:
+  - 05_systemic_risks/cognitive_debt
+  - 05_systemic_risks/cognitive_offloading
+  - 05_systemic_risks/epistemic_dependency
+- node_id: 04_autonomy/creative_thinking
+  title: 'The Generative Synthesis: Orchestrating Architectural Alternatives and Structural Making'
+  sectioned: true
+  content_hash: sha256:5bcdab0f43396daebca5801585bbb18901b9dbf65e93572de7e42faaf65364ad
+  outbound:
+  - 03_praxis/ai_augmentation_stance
+  - 05_systemic_risks/ai_over_reliance
+  - 05_systemic_risks/convergence_bias
+  - 06_protocols/assumption_reversal
+  inbound: []
+- node_id: 04_autonomy/critical_thinking
+  title: Critical Thinking
+  sectioned: true
+  content_hash: sha256:536149d25edd5580e58306f4e1abd2df9cf2a9275ffe20ddeb77428e11a44b8c
+  outbound:
+  - 04_autonomy/epistemic_mirror
+  - 05_systemic_risks/fluency_heuristic
+  - 05_systemic_risks/unexamined_ai_answers
+  - 06_protocols/evidence_demand
+  inbound: []
+- node_id: 04_autonomy/epistemic_mirror
+  title: Epistemic Mirroring
+  sectioned: true
+  content_hash: sha256:49090d58fd6b33e29a42deae466af23d5fe7d675dae458f1153345c2138777d1
+  outbound:
+  - 05_systemic_risks/unexamined_ai_answers
+  inbound:
+  - 04_autonomy/critical_thinking
+  - 05_systemic_risks/epistemia
+- node_id: 04_autonomy/growing_learner_autonomy
+  title: Growing Learner Autonomy
+  sectioned: true
+  content_hash: sha256:3cbcea25ec535068e81c1ff01c4c4a31f9eff90394434c549e89eae864f7ffc6
+  outbound:
+  - 05_systemic_risks/cognitive_debt
+  - 06_protocols/friction_escalation_ladder
+  inbound: []
+- node_id: 04_autonomy/independent_thinking
+  title: Independent Thinking
+  sectioned: true
+  content_hash: sha256:701a7830d745bd4b46cbc692fac34af8de2b11a37b8dbe40e9c0f9831b6b6d20
+  outbound:
+  - 05_systemic_risks/ai_over_reliance
+  - 05_systemic_risks/cognitive_offloading
+  - 05_systemic_risks/convergence_bias
+  inbound:
+  - 03_praxis/adolescent_sparring_arena
+  - 03_praxis/ai_cognitive_partner
+  - 05_systemic_risks/unexamined_ai_answers
+- node_id: 04_autonomy/index
+  title: 04. Autonomy
+  sectioned: false
+  content_hash: sha256:0ed957f881845893c1929adfd313bdd92412d20f5cc454115442b260fcfd6910
+  outbound: []
+  inbound: []
+- node_id: 05_systemic_risks/ai_over_reliance
+  title: 'The Frictionless Trap: Algorithmic Comfort'
+  sectioned: true
+  content_hash: sha256:bb399e1ce751fc185a3146b3a4bd29e873a31abf25b10ea0ad6dfd9070b5f800
+  outbound:
+  - 05_systemic_risks/automation_bias
+  - 05_systemic_risks/cognitive_debt
+  - 05_systemic_risks/cognitive_offloading
+  - 05_systemic_risks/convergence_bias
+  - 05_systemic_risks/epistemic_dependency
+  - 05_systemic_risks/fluency_heuristic
+  - 05_systemic_risks/performative_understanding
+  inbound:
+  - 03_praxis/adolescent_sparring_arena
+  - 03_praxis/ai_augmentation_stance
+  - 03_praxis/collaborative_thinking
+  - 04_autonomy/adult_reflective_practice
+  - 04_autonomy/creative_thinking
+  - 04_autonomy/independent_thinking
+- node_id: 05_systemic_risks/automation_bias
+  title: Automation Bias
+  sectioned: true
+  content_hash: sha256:bb7c1ddaf09d42552bc21f990b5d53684e68b11395aa14007305a811c559ce86
+  outbound:
+  - 01_foundations/cartesian_axes
+  inbound:
+  - 03_praxis/adolescent_sparring_arena
+  - 04_autonomy/adult_reflective_practice
+  - 05_systemic_risks/ai_over_reliance
+- node_id: 05_systemic_risks/cognitive_debt
+  title: Cognitive Debt
+  sectioned: true
+  content_hash: sha256:e72d08819256130010dc12658d729569bcc4fd19d1623ffdcde66e19b8ca300a
+  outbound:
+  - 04_autonomy/autonomy_failure_modes
+  inbound:
+  - 04_autonomy/adult_reflective_practice
+  - 04_autonomy/growing_learner_autonomy
+  - 05_systemic_risks/ai_over_reliance
+  - 06_protocols/friction_escalation_ladder
+- node_id: 05_systemic_risks/cognitive_offloading
+  title: Cognitive Offloading
+  sectioned: true
+  content_hash: sha256:7921a44ecc0d1c3eb0526ec11856d3dffc302bbb5aeecc9b86cd479adf0406f9
+  outbound:
+  - 04_autonomy/autonomy_failure_modes
+  inbound:
+  - 02_ontogeny/ontogeny_to_praxis_bridge
+  - 03_praxis/ai_cognitive_partner
+  - 04_autonomy/independent_thinking
+  - 05_systemic_risks/ai_over_reliance
+  - 06_protocols/friction_escalation_ladder
+- node_id: 05_systemic_risks/convergence_bias
+  title: Convergence Bias
+  sectioned: true
+  content_hash: sha256:989a454de4d9ab3ee82ee339953e721cc8ce417e54e86d7257e40392fdbe594e
+  outbound:
+  - 01_foundations/epistemic_relation_grammar
+  inbound:
+  - 03_praxis/agents/pattern_perturbator
+  - 04_autonomy/creative_thinking
+  - 04_autonomy/independent_thinking
+  - 05_systemic_risks/ai_over_reliance
+  - 06_protocols/anti_convergence_loop
+- node_id: 05_systemic_risks/epistemia
+  title: 'Epistemia: The Illusion of Knowing'
+  sectioned: true
+  content_hash: sha256:69b9793f28de899d399ac2a7fa0d41855296780662c9b0fcc7ae9958e3273430
+  outbound:
+  - 03_praxis/reasoning_trails
+  - 04_autonomy/epistemic_mirror
+  - 05_systemic_risks/fluency_heuristic
+  - 05_systemic_risks/performative_understanding
+  - 05_systemic_risks/unexamined_ai_answers
+  - 06_protocols/evidence_demand
+  inbound:
+  - 05_systemic_risks/index
+- node_id: 05_systemic_risks/epistemic_dependency
+  title: Epistemic Dependency
+  sectioned: true
+  content_hash: sha256:c2224fa93bf7ba608b001cd36064b7694a4d7478bea1b19de1aca271dc21ad4f
+  outbound:
+  - 04_autonomy/autonomy_failure_modes
+  inbound:
+  - 04_autonomy/autonomy_failure_modes
+  - 05_systemic_risks/ai_over_reliance
+  - 06_protocols/evidence_demand
+- node_id: 05_systemic_risks/fluency_heuristic
+  title: The Fluency Heuristic
+  sectioned: true
+  content_hash: sha256:099bb6fb3495c659127421bbad1dddbc4dd4381b523cbe709c0bcb71356eca68
+  outbound:
+  - 05_systemic_risks/unexamined_ai_answers
+  inbound:
+  - 04_autonomy/critical_thinking
+  - 05_systemic_risks/ai_over_reliance
+  - 05_systemic_risks/epistemia
+  - 06_protocols/evidence_demand
+- node_id: 05_systemic_risks/index
+  title: 05. Systemic Risks
+  sectioned: false
+  content_hash: sha256:8eba10ae91fccd0cc71074a47c4ac5dad5ca772bb5b03ddf1a5bce5368cf9ca5
+  outbound:
+  - 05_systemic_risks/epistemia
+  inbound: []
+- node_id: 05_systemic_risks/performative_understanding
+  title: Performative Understanding
+  sectioned: true
+  content_hash: sha256:fd886ce0d0af2a448446067594c04ec0859878fd93426732ae1f3fcaf123dac6
+  outbound:
+  - 05_systemic_risks/unexamined_ai_answers
+  inbound:
+  - 05_systemic_risks/ai_over_reliance
+  - 05_systemic_risks/epistemia
+  - 06_protocols/assumption_reversal
+- node_id: 05_systemic_risks/unexamined_ai_answers
+  title: Unexamined AI Answers
+  sectioned: true
+  content_hash: sha256:d946966b0d2acfb916fe4586524d13046cbd88e7db329f5c928b8dad7acbbf12
+  outbound:
+  - 04_autonomy/independent_thinking
+  inbound:
+  - 03_praxis/reasoning_trails
+  - 04_autonomy/critical_thinking
+  - 04_autonomy/epistemic_mirror
+  - 05_systemic_risks/epistemia
+  - 05_systemic_risks/fluency_heuristic
+  - 05_systemic_risks/performative_understanding
+  - 06_protocols/assumption_reversal
+- node_id: 06_protocols/anti_convergence_loop
+  title: 'Protocol: Anti-Convergence Loop'
+  sectioned: true
+  content_hash: sha256:a70f44f3609dd357e655ecaf6990667607a26818b2bf757df5f603251376b425
+  outbound:
+  - 03_praxis/agents/pattern_perturbator
+  - 05_systemic_risks/convergence_bias
+  inbound:
+  - 03_praxis/agents/pattern_perturbator
+- node_id: 06_protocols/assumption_reversal
+  title: 'Protocol: Assumption Reversal'
+  sectioned: true
+  content_hash: sha256:fa74614d0615df3d9db847a58632566c947e66ee627f5f53f04cc1d4fa80d840
+  outbound:
+  - 05_systemic_risks/performative_understanding
+  - 05_systemic_risks/unexamined_ai_answers
+  inbound:
+  - 04_autonomy/creative_thinking
+- node_id: 06_protocols/evidence_demand
+  title: 'Protocol: Evidence Demand'
+  sectioned: true
+  content_hash: sha256:b70802df508ed763e5c9e16a1084cc3c3561d216d320e1bab72fd7c01edcf0f8
+  outbound:
+  - 05_systemic_risks/epistemic_dependency
+  - 05_systemic_risks/fluency_heuristic
+  inbound:
+  - 04_autonomy/critical_thinking
+  - 05_systemic_risks/epistemia
+- node_id: 06_protocols/friction_escalation_ladder
+  title: 'Protocol: Friction Escalation Ladder'
+  sectioned: true
+  content_hash: sha256:b2e7a98bd1120ba3d3a52c0e17da8f341774c05834bb2088ce307bbd5a76f879
+  outbound:
+  - 05_systemic_risks/cognitive_debt
+  - 05_systemic_risks/cognitive_offloading
+  inbound:
+  - 04_autonomy/growing_learner_autonomy
+- node_id: 06_protocols/index
+  title: 06. Protocols
+  sectioned: false
+  content_hash: sha256:ce8dd98f0fefa0bcd252bd54750b95000c216e89f65a57165002406392363d4c
+  outbound: []
+  inbound: []
+- node_id: 07_cases/essay_revision_with_ai
+  title: 'Case: Revising a Weak Argument with AI'
+  sectioned: false
+  content_hash: sha256:42008397febfb0fd6b22629a9f1263e675c1b0ea19b24575c0f58945fe17cad7
+  outbound: []
+  inbound: []
+- node_id: 07_cases/index
+  title: 07. Cases
+  sectioned: false
+  content_hash: sha256:cb51f356e8853b5e1b2cbeaf6efc7a0dc357aea9182d19606110d838a1dcbed1
+  outbound: []
+  inbound: []
+- node_id: 08_references/evidence_map
+  title: Project Evidence Map
+  sectioned: true
+  content_hash: sha256:669590647fa47d884d8173f426ab7532b3456901ca4aba38c79f407deb556583
+  outbound: []
+  inbound: []
+- node_id: 08_references/index
+  title: 08. References
+  sectioned: false
+  content_hash: sha256:01dc0f412ae25dcd3117bbf4cc8f967bef2f2bbe66b074a0793e8e4ddfc521a3
+  outbound: []
+  inbound: []
+- node_id: index
+  title: Pyragogy Syllabus
+  sectioned: false
+  content_hash: sha256:ce06016fe803c39597833d51f8bc711982286e38da983d29d9ca77ed8a80a2e0
+  outbound:
+  - 02_ontogeny/embodied_foundation
+  - 03_praxis/adolescent_sparring_arena
+  - 04_autonomy/adult_reflective_practice
+  - trugen-teammate
+  inbound: []
+- node_id: tags/index
+  title: Tag Index
+  sectioned: false
+  content_hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  outbound: []
+  inbound: []
+- node_id: tags/pyragogy
+  title: pyragogy
+  sectioned: false
+  content_hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  outbound: []
+  inbound: []
+- node_id: tags/pyragogy/agent
+  title: pyragogy/agent
+  sectioned: false
+  content_hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  outbound: []
+  inbound: []
+- node_id: tags/pyragogy/bridge
+  title: pyragogy/bridge
+  sectioned: false
+  content_hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  outbound: []
+  inbound: []
+- node_id: tags/pyragogy/capability
+  title: pyragogy/capability
+  sectioned: false
+  content_hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  outbound: []
+  inbound: []
+- node_id: tags/pyragogy/epistemology
+  title: pyragogy/epistemology
+  sectioned: false
+  content_hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  outbound: []
+  inbound: []
+- node_id: tags/pyragogy/foundation
+  title: pyragogy/foundation
+  sectioned: false
+  content_hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  outbound: []
+  inbound: []
+- node_id: tags/pyragogy/practice
+  title: pyragogy/practice
+  sectioned: false
+  content_hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  outbound: []
+  inbound: []
+- node_id: tags/pyragogy/protocol
+  title: pyragogy/protocol
+  sectioned: false
+  content_hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  outbound: []
+  inbound: []
+- node_id: tags/pyragogy/reference
+  title: pyragogy/reference
+  sectioned: false
+  content_hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  outbound: []
+  inbound: []
+- node_id: tags/pyragogy/risk
+  title: pyragogy/risk
+  sectioned: false
+  content_hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  outbound: []
+  inbound: []
+- node_id: tags/pyragogy/systemic-risk
+  title: pyragogy/systemic-risk
+  sectioned: false
+  content_hash: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  outbound: []
+  inbound: []

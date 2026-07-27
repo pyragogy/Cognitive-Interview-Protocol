@@ -1,0 +1,53 @@
+node_id: 03_praxis/ai_augmentation_stance
+title: 'The Sovereign Augmentation Stance: Intentional Agency and Algorithmic Accountability'
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 03_praxis/ai_augmentation_stance.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/practice
+sectioned: true
+content_hash: sha256:e9f53d42c7c36a1b899661b0bf4db96b60c2a138db76e4b8220c1d5ade60ee01
+sections:
+  definition:
+    text: 'The AI Augmentation Stance defines the conditional posture of Pyragogy: artificial intelligence
+      expands human capacity only when human epistemic agency, critical criteria, and ultimate accountability
+      remain intact.'
+    hash: sha256:fcb23e82553938689cf1f7d263bee7de84788d142b133369610cda6172db2001
+  use_case:
+    text: Activated as the governing philosophical and operational rule whenever a user attempts to integrate
+      a generative AI tool into a high-stakes professional or academic workflow.
+    hash: sha256:f9acd2854284a00632a930c0a34c066c5027b12f24a17529164ce5de86399b37
+  human_role:
+    text: The user must maintain strict boundary control, actively deciding which repetitive tasks to
+      offshore while fiercely defending the core acts of synthesis, ethical judgment, and final decision-making
+      as exclusively human.
+    hash: sha256:47dba6f91943622cca0ef41616dc89e64a70dfb3ea6ae2436afd2290a37c5de1
+  ai_role:
+    text: The AI acts strictly as a bounded cognitive amplifier, not an autonomous oracle. It exposes
+      its own limitations, provides transparent retrieval mechanics, and refuses to finalize high-stakes
+      judgments on behalf of the user.
+    hash: sha256:0331b2ce1a0a0e3b868e23c651721f0cceea25c0cf222c5b5e180d78efa2b3e9
+  friction:
+    text: 'The stance imposes a mandatory “Accountability Checkpoint”: the system halts and demands the
+      human explicitly verify the rationale and assume liability for any AI-generated architecture before
+      it is deployed.'
+    hash: sha256:bf78b598ec0169ebbf49d63de4acba8a319c6f6409186e70e7d0888178213c33
+  risk:
+    text: If augmentation is treated as unconditional techno-optimism, it degrades into ai_over_reliance,
+      where the human becomes a mere operator of a machine that holds the actual intellectual and ethical
+      authority.
+    hash: sha256:045e0603d31ac303880b0b5576e19c7457d15f1441343d4a55c379cfda6842e6
+  observable_markers:
+    text: 'The user’s workflows show clear demarcation lines: AI is used for data manipulation and adversarial
+      testing, but the final architectural design and ethical justification are drafted entirely by the
+      human.'
+    hash: sha256:40277b8c00e73be666860e4bf782b9133c7cb4c76839128cfb0448a48ce87ccc
+relations:
+  outbound:
+  - 05_systemic_risks/ai_over_reliance
+  inbound:
+  - 04_autonomy/creative_thinking

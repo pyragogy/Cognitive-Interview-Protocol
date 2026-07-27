@@ -1,0 +1,18 @@
+node_id: 07_cases/index
+title: 07. Cases
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 07_cases/index.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags: []
+sectioned: false
+content_hash: sha256:cb51f356e8853b5e1b2cbeaf6efc7a0dc357aea9182d19606110d838a1dcbed1
+sections:
+  body:
+    text: Empirical case logs, pedagogical trials, and validation records.
+    hash: sha256:cb51f356e8853b5e1b2cbeaf6efc7a0dc357aea9182d19606110d838a1dcbed1
+relations:
+  outbound: []
+  inbound: []

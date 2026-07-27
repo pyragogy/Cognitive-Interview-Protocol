@@ -1,0 +1,97 @@
+node_id: 01_foundations/blueprint
+title: Architectural Blueprint
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 01_foundations/blueprint.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/foundation
+sectioned: false
+content_hash: sha256:cfc0027b6788d378bb833b4714da00c0c88ce449c274ac26adec847932e23602
+sections:
+  body:
+    text: 'Architectural Blueprint
+
+      This blueprint defines the structural logic of the syllabus.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      LayerFunctionMain FolderFoundationsEpistemic principles, axes, and relation grammar01_foundationsOntogenyEarly
+      embodied learning and first contact with AI02_ontogenyPraxisFriction, sparring, reasoning trails,
+      co-agency03_praxisAutonomyReflective practice and sovereign decision-making04_autonomySystemic RisksFailure
+      modes of passive automation05_systemic_risksProtocolsOperational loops for constructive cognitive
+      friction06_protocolsCasesField trials and observed learning patterns07_casesReferencesEvidence map
+      and bibliography08_references
+
+      Reading Logic
+
+      The syllabus is not a linear textbook. It is a developmental graph.
+
+      Each node should answer four questions:
+
+
+      What human capacity is being protected?
+
+      What AI failure mode is being resisted?
+
+      What kind of friction is introduced?
+
+      What observable behavior proves that learning is happening?
+
+      '
+    hash: sha256:cfc0027b6788d378bb833b4714da00c0c88ce449c274ac26adec847932e23602
+relations:
+  outbound: []
+  inbound:
+  - 01_foundations/index

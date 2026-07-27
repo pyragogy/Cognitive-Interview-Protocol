@@ -1,0 +1,390 @@
+node_id: 00_meta/system_audit_report
+title: system_audit_report
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 00_meta/system_audit_report.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags: []
+sectioned: false
+content_hash: sha256:7065000c86cc5a14baf4456609a497bd560d44868be4c66b711b8d7095d3ca4f
+sections:
+  body:
+    text: 'System Audit Report: AI-Pedagogy Digital Garden
+
+      Date: June 20, 2026
+
+      Project Path: .
+
+      SSG Framework: Quartz v5.0.0 (Quartz 4 TSX/Preact-based architecture)
+
+
+      1. Core Project Identity &amp; Architecture
+
+      Conceptual &amp; Technical Framework
+
+      The ai-pedagogy project is structured as a local Obsidian Vault that serves as a digital garden
+      and cognitive extension. It is compiled and served as a static site using Quartz v5.0.0 (built on
+      a Preact, lightningcss, and unified/remark processing framework).
+
+      Conceptually, the vault details Pyragogy—an evolutionary handbook mapping pedagogical frameworks,
+      practices, and capabilities designed to preserve human intellectual sovereignty, intentional agency,
+      and effortful reasoning (cognitive friction) in an age of automated AI scaffolding.
+
+      Exact Directory Layout Verification
+
+      The root directory . contains the following critical system and structure files:
+
+
+      quartz.config.yaml: Defines configuration options, plugin parameters, color theme, typography, and
+      page layout structure.
+
+      package.json: Handles dependencies (Preact, chokidar, lightningcss, workerpool, etc.) and execution
+      scripts (quartz bootstrap, build, test). Engines require node &gt;=22 and npm &gt;=10.9.2.
+
+      custom.scss: Declares custom Sass style overrides targeting layout alignment, graph sizing, transitions,
+      and hover interactions.
+
+      .obsidian/: Contains configuration files (app.json, core-plugins.json, graph.json, etc.) that configure
+      the folder as a native Obsidian Vault.
+
+      content/: Root folder for all markdown documentation, divided into evolutionary taxonomy paths.
+
+
+
+      2. Visual System &amp; Layout Audit
+
+      Theme &amp; Color Palette
+
+      The color theme is defined in quartz.config.yaml under theme.colors. Notably, both lightMode and
+      darkMode are mapped to the same dark aesthetic palette:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      HSL/Hex TokenCategory NameColor Role in UI#050506lightMain page background (Near-black)#18181blightgrayBorders,
+      divider lines, and component containers#52525bgrayMeta-text, reading time, dates, and subtitle lines#d4d4d8darkgrayMain
+      body/paragraph text (High-contrast light gray)#ffffffdarkPrimary page headers (h1, h2), page titles,
+      and strong text#10b981 / #34d399secondaryLinks, folder tree nodes, active files (Elegant Emerald
+      Green)#059669 / #10b981tertiaryBacklink items, hover states, tag links, graph nodes (Medium Green)rgba(16,
+      185, 129, 0.14) / rgba(52, 211, 153, 0.14)highlightBlock quotes and code block backgroundsrgba(16,
+      185, 129, 0.22) / rgba(52, 211, 153, 0.22)textHighlightHighlighted search results &amp; text highlights
+
+      Typography
+
+      Font families are fetched via Google Fonts (fontOrigin: googleFonts and cdnCaching: true enabled):
+
+
+      Header Font: Fraunces
+
+      Body Font: Inter
+
+      Code Font: JetBrains Mono
+
+
+      Layout Balancing &amp; Structural Overrides
+
+      The site layout balances information across a three-column desktop presentation:
+
+
+      Left Sidebar (Navigation): Houses the page-title (“AI-Augmented Pedagogy Handbook”), the search
+      bar (search, grouped in toolbar), darkmode/reader-mode controls, and the explorer plugin (configured
+      with the title &quot;Syllabus&quot;, collapsed by default).
+
+      Central Content Column: Includes a breadcrumbs trail (omitted on index pages), article-title, note-properties
+      (displays metadata for description, tags, and aliases), and content-meta (reading speed metadata),
+      followed by the compiled markdown body.
+
+      Right Interactive Sidebar: Hosts the interactive network graph visualization, table-of-contents
+      index, and backlinks.
+
+
+      Layout Stability &amp; Transitions (custom.scss)
+
+
+      Sidebar Alignment: Overrides on body .page &gt; .sidebar force a reset of margin-top: 0 !important
+      and add a padding-top: 1rem !important. Children components are restricted to margin-bottom: 1.5rem
+      to prevent vertical alignment mismatch and height jitter during load.
+
+      Graph Bounds: The class .graph-outer is strictly bounded to height: 200px !important; margin: 0
+      !important; to stabilize the sidebar space and prevent Cumulative Layout Shift (CLS) when the SVG
+      elements compile.
+
+      Micro-Animations:
+
+
+      Syllabus explorer directories and files shift padding (padding-left: 6px) and shift text color to
+      var(--tertiary) (Green) over a 0.2s transition on hover.
+
+      Folder child bullets (ul.tree-item-children) transition their left-border color to var(--secondary)
+      (Emerald) on hover.
+
+      Graph nodes (svg circle) expand their radius r: 6px on hover and change their colors to green fill
+      and emerald stroke over a cubic-bezier transition.
+
+
+
+
+
+      3. Content Ingestion &amp; Taxonomy Structure
+
+      Evolutionary Folder Taxonomy
+
+      The content/ files are structured into 4 folders representing an ontogenetic sequence of cognitive
+      growth:
+
+
+      01_foundations/: Contains foundational configuration blueprints.
+
+      02_early_development/: Addresses early-childhood sensory-motor portals.
+
+      03_co_agency/: Details human-AI co-agency, Socratic dialogue, and professional hybrid intelligence.
+
+      04_systemic_risks/: Covers critical cognitive risks, over-reliance, and algorithmic dependencies.
+
+
+      Semantic Nodes &amp; Handbooks
+
+      There are 14 active semantic nodes representing practices, capabilities, and risks. The files are
+      distributed as follows:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      Folder / Taxonomy RouteFile NameNode Type (kind)Title / ConceptKey Epistemic Relations02_early_developmenttoddler_book.mdpracticeThe
+      Embodied Portal (Early Handbook)Foundational Node03_co_agencyadolescent_book.mdpracticeThe Dialectic
+      Sparring Arena (Adolescent Handbook)Requires [[independent_thinking]]Contradicts [[ai_over_reliance]]03_co_agencyadult_book.mdpracticeEpistemic
+      Integration (Adult Handbook)Requires [[collaborative_thinking]]Contradicts [[ai_over_reliance]]03_co_agencyai_augmentation_stance.mdpracticeThe
+      Sovereign Augmentation StanceContradicts [[ai_over_reliance]]03_co_agencyai_cognitive_partner.mdpracticeAI
+      as Cognitive PartnerStrengthens [[independent_thinking]]03_co_agencycollaborative_thinking.mdpracticeCo-Agency
+      &amp; Collaborative PrototypingContradicts [[ai_over_reliance]]03_co_agencycreative_thinking.mdcapabilityThe
+      Generative SynthesisContradicts [[ai_over_reliance]]Requires [[ai_augmentation_stance]]03_co_agencycritical_thinking.mdcapabilityCritical
+      ThinkingThreatens [[unexamined_ai_answers]]03_co_agencygrowing_learner_autonomy.mdcapabilityGrowing
+      Learner AutonomyFoundational Node03_co_agencyindependent_thinking.mdcapabilityThe Epistemic MirrorContradicts
+      [[ai_over_reliance]]03_co_agencylearning_cycle.mdpracticeLearning Cycle (Notice, Ask, Gen, Test,
+      Reflect, Share)Foundational Node03_co_agencyreasoning_trails.mdpracticeReasoning TrailsThreatens
+      [[unexamined_ai_answers]]04_systemic_risksai_over_reliance.mdriskThe Frictionless Trap: Algorithmic
+      ComfortThreatens [[independent_thinking]]Threatens [[collaborative_thinking]]Mitigated by [[toddler_book]]04_systemic_risksunexamined_ai_answers.mdriskUnexamined
+      AI AnswersThreatens [[independent_thinking]]
+
+      (Note: content/01_foundations/blueprint.md has draft: true set and is compiled out of final production
+      output via the remove-draft plugin).
+
+      Frontmatter Schema Verification
+
+      All 14 active semantic nodes implement a uniform YAML frontmatter schema:
+
+
+      id: String matching the filename (e.g. &quot;toddler_book&quot;).
+
+      title: Full descriptive title string.
+
+      kind: Categorization (&quot;practice&quot;, &quot;capability&quot;, or &quot;risk&quot;).
+
+      ontogeny: Floating-point developmental sequence index (X-axis, e.g. 1.2 to 8.8).
+
+      praxis: Floating-point cognitive effort index (Y-axis, e.g. 0.0 to 8.5).
+
+      autonomy: Floating-point agency self-sovereignty index (Z-axis, e.g. 0.5 to 9.5).
+
+      tags: Markdown categories array (pyragogy along with its sub-category, e.g. pyragogy/practice).
+
+
+      Obsidian Wikilinks &amp; landing Page
+
+
+      Wikilinks Resolution: Quartz parses wikilinks natively through the obsidian-flavored-markdown plugin.
+      Link matching is configured with markdownLinkResolution: shortest, meaning Quartz dynamically maps
+      short wikilink structures (e.g. [[toddler_book]]) directly to their nested targets without needing
+      absolute paths.
+
+      Landing Page Structure: content/index.md serves as the entry index. It links directly to the three
+      core handbooks (toddler, adolescent, and adult books) in a “Core Bookshelf” section and features
+      an Obsidian-native Dataview block.
+
+      Dataview Compatibility: Because the dataview parsing engine is proprietary to the Obsidian application
+      ecosystem and no Quartz translation plugin is registered in quartz.config.yaml, the Dataview code
+      block will render as a raw markdown code block on the static generated site.
+
+
+
+      4. Verification and Dry-Run Build Results
+
+      A clean verification run was executed using the Quartz compiler:
+
+
+      Source files detected: 20 markdown inputs (1 index, 19 sub-notes/indexes).
+
+      Draft filtration: 1 file (blueprint.md) was successfully filtered out as expected.
+
+      Compile state: Compilation succeeded cleanly, writing 106 static assets (including JSON graph indexes
+      and HTML files) into the public deployment folder in 6 seconds.
+
+      '
+    hash: sha256:7065000c86cc5a14baf4456609a497bd560d44868be4c66b711b8d7095d3ca4f
+relations:
+  outbound:
+  - package.json
+  - quartz.config.yaml
+  - quartz/styles/custom.scss
+  inbound: []

@@ -1,0 +1,52 @@
+node_id: 04_autonomy/epistemic_mirror
+title: Epistemic Mirroring
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 04_autonomy/epistemic_mirror.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/protocol
+sectioned: true
+content_hash: sha256:49090d58fd6b33e29a42deae466af23d5fe7d675dae458f1153345c2138777d1
+sections:
+  definition:
+    text: Epistemic Mirroring is an operational protocol where the machine reflects the raw logical structure
+      and implicit assumptions of the user’s reasoning back to them, without adding any external information
+      or solution.
+    hash: sha256:3aaf00496c8ce9ec1891ad91c21e3a37e710ee534e83ae7d2b380be8288c6dbf
+  use_case:
+    text: Activated when a user submits a prompt based on poorly formulated requests, circular arguments,
+      or premises heavily flawed by cognitive biases.
+    hash: sha256:0b8b764838c7ea2b5e3b82f5a70cf5a49acae6d0057517ed03d5130bedd263b3
+  human_role:
+    text: Faced with the “mirror” of their own logical fallacies, the user must actively recognize their
+      cognitive blind spot, dismantle the flawed premise, and reformulate the inquiry on solid analytical
+      foundations.
+    hash: sha256:184619b073be7e532798ca8d5c6b119e4809ede2779ea3556382401693476600
+  ai_role:
+    text: Acts as a structural extractor. It strips the human prompt of its rhetoric and maps exclusively
+      the causal links (e.g., “You are assuming X to prove Y. If X proves false, what supports Y?“).
+    hash: sha256:7b6e3eb33c6ca97df45bbd46c79cc0ffc43d5657bd19ab02c758a7fc04fe10d5
+  friction:
+    text: Forces the user to confront the fragility of their unexamined thought process, blocking access
+      to the execution phase until the logical framework is formally coherent.
+    hash: sha256:52d3c2917a1d2a5ae66e0ca85e436c3933a9c4e383144878e77631eb811ddebe
+  risk:
+    text: 'Avoiding this protocol consolidates Confirmation Bias and endorses the Fluency Heuristic: the
+      user believes they have understood a phenomenon simply because the AI produced an elegant synthesis
+      from a wrong premise.'
+    hash: sha256:3f7932ae0632944d647a32b979a70f958e786947d7007ee2c42629610403f261
+  observable_markers:
+    text: 'The user explicitly states (vocally or in the prompt log): “I realize my starting assumption
+      was weak,” followed by a structurally different prompt that is logically purged of the original
+      bias.'
+    hash: sha256:7a90bccc46289a99a1d224902a62695633ac572f40e812eb46e84b1662de8104
+relations:
+  outbound:
+  - 05_systemic_risks/unexamined_ai_answers
+  inbound:
+  - 04_autonomy/critical_thinking
+  - 05_systemic_risks/epistemia

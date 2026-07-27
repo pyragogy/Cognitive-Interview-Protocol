@@ -1,0 +1,63 @@
+node_id: 06_protocols/friction_escalation_ladder
+title: 'Protocol: Friction Escalation Ladder'
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 06_protocols/friction_escalation_ladder.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/protocol
+sectioned: true
+content_hash: sha256:b2e7a98bd1120ba3d3a52c0e17da8f341774c05834bb2088ce307bbd5a76f879
+sections:
+  definition:
+    text: The Friction Escalation Ladder is an adaptive protocol that applies graduated levels of cognitive
+      resistance to the workflow, scaling the difficulty of the interface based on real-time detection
+      of user complacency.
+    hash: sha256:e5bb86a4ed7bd66ed1b7713e10f5c31a676ae9a4d892cff3912e3abbd6ca33b1
+  use_case:
+    text: Activated continuously in the background, intervening when behavioral metrics (such as rapid
+      copy-pasting, high frequency of “do it for me” prompts, or minimal editing) indicate a lapse into
+      passive consumption.
+    hash: sha256:df6c45f84b194efa680cccb5485c73720c02114056797dd9969228292f170cd7
+  human_role:
+    text: The learner must recognize the increasing resistance of the system as a signal of their own
+      cognitive disengagement and proactively step up their level of analytical effort to lower the friction
+      state.
+    hash: sha256:869b688c646623eccc1a307a632841399838e21cb23925f42b45f0b4058f8784
+  ai_role:
+    text: 'The AI acts as an adaptive environmental controller, escalating resistance sequentially.
+
+
+      Step 1: The AI responds with a soft clarification (e.g., “Could you specify what part of the logic
+      you want me to expand?”).
+
+      Step 2: The AI introduces a direct contradiction to the user’s premise.
+
+      Step 3: The AI forces a structured trade-off decision before continuing.
+
+      Step 4: The AI enacts a hard refusal of premature completion and imposes a forced manual synthesis
+      checkpoint, demanding the user summarize their progress without assistance before proceeding.'
+    hash: sha256:3f3ad4e6337a4be77c84ff67cf4e8ba73deb54f067bd978ca16423b367771f28
+  friction:
+    text: The mechanism dynamically interrupts the path of least resistance, forcing the user to exert
+      more raw cognitive effort to extract value from the machine the more they try to offshore their
+      thinking.
+    hash: sha256:f30db415f133c306e2c4aa1cf2e9e724e143aedb21690acf446ad07538734712
+  risk:
+    text: This protocol directly attacks cognitive_offloading and prevents the accumulation of cognitive_debt,
+      ensuring the learner’s analytical muscles remain under tension.
+    hash: sha256:f292c6a8e8d40bcdc817eb065d5791c2e9d433f79ad4f03ed86f62da3b3a4d74
+  observable_markers:
+    text: System logs show the friction level escalating and then successfully de-escalating as the user
+      returns to drafting original paragraphs, making complex edits, and formulating highly structured
+      prompts.
+    hash: sha256:4476f2328f873fca1cfcdabde863df652602f1c35deee5a73d27990a9c043f27
+relations:
+  outbound:
+  - 05_systemic_risks/cognitive_debt
+  - 05_systemic_risks/cognitive_offloading
+  inbound:
+  - 04_autonomy/growing_learner_autonomy

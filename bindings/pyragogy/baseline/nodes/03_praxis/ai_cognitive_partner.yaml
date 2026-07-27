@@ -1,0 +1,48 @@
+node_id: 03_praxis/ai_cognitive_partner
+title: AI as Cognitive Partner
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 03_praxis/ai_cognitive_partner.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/practice
+sectioned: true
+content_hash: sha256:10e971e42660e2bea1cff68cd7fedb7aba1e34fa9402dd937eec98649f4a4484
+sections:
+  definition:
+    text: AI as a Cognitive Partner defines the artificial agent not as a servile assistant (helper persona)
+      or an omniscient oracle, but as a peer function within the workflow.
+    hash: sha256:ebcd431419ed84a89bcf878ef805f0bc5fa1ef8032c948251fb6ae4ffc5033eb
+  use_case:
+    text: Activated when the learner or professional faces an ill-defined or unstructured problem requiring
+      bidirectional logical exploration before moving to execution.
+    hash: sha256:b4b63f40f1d4df3d05b10130b28b797eb428e9227399559465d29864602308f1
+  human_role:
+    text: Provides strategic intent, establishes the problem’s perimeter, and maintains exclusive accountability
+      for the final result.
+    hash: sha256:91c1c562d5592ccd17bf37655a20a9247479481c1bd2ebf563cfd551f7550a33
+  ai_role:
+    text: Operates as a relentless algorithmic reviewer. It identifies structural flaws, highlights alternative
+      angles, and questions the prompt’s assumptions, refusing to blindly accommodate poorly formulated
+      requests.
+    hash: sha256:a5a15af5ac48c5eb5fbc63f1cc81de3ab5ddd3ae3df73873480643cd65594cbb
+  friction:
+    text: Interrupts the user’s reflex to seek immediate output. The algorithm imposes an additional cognitive
+      load by demanding systematic clarifications before proceeding with processing.
+    hash: sha256:bc52ab57d4be88c1a5ca792d180bbe80719e0995e2fe69c2b93bfc70bc3bf97d
+  risk:
+    text: 'Treating AI as a passive executor accelerates short-term production but causes cognitive_offloading:
+      the human stops articulating complex problems, degrading their analytical capacity.'
+    hash: sha256:25dd3d92227e6b6ae62988928adf02152d2b3abb8b5863d8f653d24dfbc5abea
+  observable_markers:
+    text: 'Prompt logs show a real debate: the user rejects some of the AI’s objections, accepts others,
+      and explicitly adjusts their reasoning, treating the machine as a critical counter-balancing function.'
+    hash: sha256:a3c6e5ec6d0f614d10344f0cf71ba65228312217ec8ba0ee301b6c8790bf73b3
+relations:
+  outbound:
+  - 04_autonomy/independent_thinking
+  - 05_systemic_risks/cognitive_offloading
+  inbound: []

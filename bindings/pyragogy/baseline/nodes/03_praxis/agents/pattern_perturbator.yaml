@@ -1,0 +1,56 @@
+node_id: 03_praxis/agents/pattern_perturbator
+title: 'Agent Primitive: Pattern Perturbator'
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 03_praxis/agents/pattern_perturbator.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/agent
+sectioned: true
+content_hash: sha256:b0343a3220a5ed051c1f71d9fa087d4840c65c22e8b8cf6c1d7225f37effe2b7
+sections:
+  definition:
+    text: The Pattern Perturbator is a baseline cognitive agent designed to inject constructive obstacles,
+      logical conflicts, and alternative hypotheses, preventing the human-machine system from prematurely
+      crystallizing on trivial solutions.
+    hash: sha256:a675314ff422b4f3ae619b9bebc5af5e3526d6c2434486d777d1969a8a2683ad
+  use_case:
+    text: 'Activated as an operational heuristic when the system detects passive convergence: for example,
+      minimal user modifications to AI texts for multiple consecutive turns, or statements of closure
+      on a topic without having explored alternatives.'
+    hash: sha256:0064687ff486fd721d5ea0ce6d592caf56919e23fd9609fd3352ffde55180fff
+  human_role:
+    text: 'Faced with the agent’s obstacle, the user can no longer rely on their linear argumentation:
+      they must elaborate articulate defenses, seek secondary evidence, and rigorously justify counter-intuitive
+      choices.'
+    hash: sha256:2fde34fdd62a70e6aad54f221286dac99a71cc402ad642bc7fc0c6a75ae73642
+  ai_role:
+    text: Acts as a conformity switch. It generates conflicting hypothesis forks (Hypothesis Forking),
+      imposes temporary bans on customary arguments (Constraint Injection), or forces the user to defend
+      the thesis from the opposing viewpoint (Perspective Shift). The agent does not validate the problem
+      nor does it approve the thesis before the user has made their assumptions explicit by confronting
+      the contradiction.
+    hash: sha256:94ac92b6710040c5aa8e0df60f0f0ca2e29c27885a8777e5f81d5a0d2de7559c
+  friction:
+    text: Disarticulates the linearity of the “question-exact answer” dialogue, making the algorithmic
+      path of least resistance unusable and forcing the user into a state of temporary cognitive disequilibrium.
+    hash: sha256:00f282af138d3e8d9622a96b6912d55882aafe2351ebcace2c58b2c3cc8a850b
+  risk:
+    text: 'The absence of the Pattern Perturbator in stable co-design flows facilitates the lethal establishment
+      of convergence_bias: divergent thinking atrophies, producing monochromatic and poorly adaptive intellectual
+      ecosystems.'
+    hash: sha256:67c378a9a7b9649c2a4b37dba085c67948f1f4bdae81f61d8fe2b2b82409e8f7
+  observable_markers:
+    text: 'Interaction logs record a recalibration moment: after the perturbing trigger, the user introduces
+      radically new vocabulary, broadens their source base, and reformulates the original hypothesis by
+      integrating the objections introduced by the agent.'
+    hash: sha256:021a2ee6ea69f0522c5e4f922d2d27f19435b291b655b9810de08d96ba2d6f4f
+relations:
+  outbound:
+  - 05_systemic_risks/convergence_bias
+  - 06_protocols/anti_convergence_loop
+  inbound:
+  - 06_protocols/anti_convergence_loop

@@ -1,0 +1,54 @@
+node_id: 05_systemic_risks/unexamined_ai_answers
+title: Unexamined AI Answers
+source:
+  type: quartz_content_index
+  origin: /tmp/contentIndex.json
+  filePath: 05_systemic_risks/unexamined_ai_answers.md
+  imported_at: '2026-07-27T05:35:36Z'
+  importer: bindings/pyragogy/import_graph.py
+tags:
+- pyragogy
+- pyragogy/risk
+sectioned: true
+content_hash: sha256:d946966b0d2acfb916fe4586524d13046cbd88e7db329f5c928b8dad7acbbf12
+sections:
+  definition:
+    text: Unexamined AI Answers is the specific failure mode where a user accepts and integrates an algorithmic
+      response without interrogating its underlying assumptions, primary evidence, or conceptual framing.
+    hash: sha256:b5932755b888c141ad183551f3dbb7318042663345329e2fcd4d4c5bf5d4764f
+  use_case:
+    text: Activated as a diagnostic warning when a user immediately utilizes a generated fact, code snippet,
+      or argument without attempting to dissect the premise that produced it.
+    hash: sha256:bbef2c1eb4f05c487ba1f97e2588f051fb4721fc5ecc3a253187b39ccb2918a0
+  human_role:
+    text: The learner must notice their passive ingestion, interrupt the seamless copy-paste reflex, and
+      reclaim the forensic role of dissecting how and why the machine arrived at that specific conclusion.
+    hash: sha256:c3dcdde130b94f2f2593b16b4d7c137e7ecac9cb072fe579fe9bfce26c22491c
+  ai_role:
+    text: The system exposes this pattern by occasionally omitting primary sources, providing logically
+      fragile premises, or utilizing an Epistemic Mirror to force the user to identify the unstated assumptions.
+    hash: sha256:7d3f5f6ac721f56137896547daad06ff0f0a938a6ad4bbb5bf5b132711bc32c8
+  friction:
+    text: The interruption mechanism involves structural delays, demanding that the user explicitly cite
+      an independent source or verbally reconstruct the causal chain before the answer can be formally
+      integrated.
+    hash: sha256:986e1a36dd02f1fafed4d1eda3a7441f862a0ae65cf7d3a1ce5ab5dda0f88cb0
+  risk:
+    text: If this pattern continues, the user builds their knowledge base on unquestioned and potentially
+      hallucinated foundations, leaving them vulnerable to severe logical errors when the context shifts.
+    hash: sha256:61aec99f0b1a2d71beb2b9bdb36a09ad31863f392c07cd483a07d3a4d1991bb6
+  observable_markers:
+    text: Recovery is signaled when the user actively challenges the AI’s response (e.g., “What evidence
+      supports this specific framing?”), or manually tests the code/logic before accepting the output.
+    hash: sha256:38cad5c99fd53e11fe96229c91f618d2de7c9f2b725988683ff5b160a748a506
+relations:
+  outbound:
+  - 04_autonomy/independent_thinking
+  inbound:
+  - 03_praxis/reasoning_trails
+  - 04_autonomy/critical_thinking
+  - 04_autonomy/epistemic_mirror
+  - 05_systemic_risks/epistemia
+  - 05_systemic_risks/fluency_heuristic
+  - 05_systemic_risks/performative_understanding
+  - 06_protocols/assumption_reversal
